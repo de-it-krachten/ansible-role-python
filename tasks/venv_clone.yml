@@ -1,0 +1,45 @@
+---
+
+- name: Make sure all variables were provided
+  assert:
+    that:
+      - venv_source_path is defined
+      - venv_target_path is defined
+
+- name: Create directory to hold virtualenv
+  file:
+    path: "{{ venv_target_path }}"
+    state: directory
+
+- name: Install rsync package
+  package:
+    name: rsync
+    state: present
+  when: python_package_install|bool
+
+- name: Clone virtualenv '{{ venv_source_path }}' -> '{{ venv_target_path }}'
+  command: rsync -a {{ venv_source_path }}/ {{ venv_target_path }}
+  tags: skip_ansible_lint
+
+- name: Delete all *.pyc files
+  command: find {{ venv_target_path }} -name *.pyc -delete
+  register: find_delete
+  changed_when: find_delete.stdout|length > 0
+
+- name: Search for all files referencing the original venv
+  find:
+    paths: "{{ venv_target_path }}"
+    contains: ".*{{ venv_source_path }}.*"
+    recurse: yes
+  register: files_to_alter
+
+- name: Change all files referencing the old environment
+  replace:
+    path: "{{ var.path }}"
+    regexp: "{{ venv_source_path }}"
+    replace: "{{ venv_target_path }}"
+  loop: "{{ files_to_alter.files }}"
+  loop_control:
+    loop_var: var
+    label:
+      - "file: {{ var.path }}"

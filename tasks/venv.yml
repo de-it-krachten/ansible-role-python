@@ -1,0 +1,63 @@
+---
+
+- name: Test if virtualenv already exists
+  stat:
+    path: "{{ virtualenv_path }}"
+  register: venv_root
+
+- name: Delete virtualenv if recreate is required
+  file:
+    path: "{{ virtualenv_path }}"
+    state: absent
+  when:
+    - virtualenv_recreate|bool
+    - venv_root.stat.exists|bool
+    - molecule_test is not defined
+
+- name: Make path to virtualenv
+  file:
+    path: "{{ virtualenv_path }}"
+    state: directory
+    mode: '0755'
+  register: venv_root
+
+- name: Create virtualenv from scratch  # noqa 503
+  pip:
+    name:                     "pip"
+    virtualenv:               "{{ virtualenv_path }}"
+    virtualenv_command:       "{{ virtualenv_command }}"
+    virtualenv_python:        "{{ virtualenv_python }}"
+    virtualenv_site_packages: "{{ virtualenv_site_packages }}"
+  when:
+    - venv_root.changed|bool
+    - virtualenv_source == 'skip'
+
+- name: Clone virtualenv
+  include_tasks: venv_clone.yml
+  vars:
+    venv_source_path: "{{ virtualenv_source if virtualenv_source is search('^/') else virtualenv_path|dirname+'/'+virtualenv_source }}"
+    venv_target_path: "{{ virtualenv_path }}"
+  when: venv_root.changed|bool and virtualenv_source != 'skip'
+
+- name: Upgrade pip to latest version  # noqa 403
+  pip:
+    name: pip
+    state: latest
+    virtualenv: "{{ virtualenv_path }}"
+    extra_args: --upgrade
+  when: virtualenv_pip_upgrade|bool
+
+- name: Install all pip packages
+  pip:
+    name: "{{ pip_package }}"
+    virtualenv: "{{ virtualenv_path }}"
+  loop: "{{ virtualenv_packages }}"
+  loop_control:
+    loop_var: pip_package
+
+- name: Create symlink to virtualenv
+  file:
+    state: link
+    src: "{{ virtualenv_name }}"
+    dest: "{{ virtualenv_path|dirname }}/{{ virtualenv_label }}"
+  when: virtualenv_label != 'skip'

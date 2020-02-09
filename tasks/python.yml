@@ -1,0 +1,44 @@
+---
+
+- name: Get variable names that hold settings for {{ python }}
+  set_fact:
+    python_packages: "{{ python }}_packages"
+    python_command: "{{ python }}_command"
+    python_virtualenv_cmd: "{{ python }}_virtualenv"
+
+- name: Install {{ python }}
+  package:
+    name: "{{ item }}"
+    state: present
+    disablerepo: "{{ disablerepo|default(omit) }}"
+  loop: "{{ vars[python_packages] }}"
+  when: python_package_install|bool
+
+- name: Delete obsolete virtual environments
+  file:
+    path: "{{ item.path|default(python_virtualenv_root+'/'+python+'/'+item.name) }}"
+    state: absent
+  when: item.state is defined and item.state == 'absent'
+  loop: "{{ python_virtualenv|default([]) }}"
+  loop_control:
+    label:
+      - "{{ item.name }}"
+
+- name: Setup new or update existing virtual environments
+  include_tasks: venv.yml
+  vars:
+    virtualenv_name:          "{{ item.name }}"
+    virtualenv_path:          "{{ item.path|default(python_virtualenv_root+'/'+python+'/'+item.name) }}"
+    virtualenv_site_packages: "{{ item.site_packages|default(False) }}"
+    virtualenv_pip_upgrade:   "{{ item.pip_upgrade|default(False) }}"
+    virtualenv_command:       "{{ python_virtualenv_command|default(vars[python_virtualenv_cmd]) }}"
+    virtualenv_python:        "{{ vars[python_command] }}"
+    virtualenv_packages:      "{{ item.packages }}"
+    virtualenv_source:        "{{ item.source|default('skip') }}"
+    virtualenv_label:         "{{ item.label|default('skip') }}"
+    virtualenv_recreate:      "{{ item.recreate|default(False) }}"
+  when: item.state is not defined or item.state != 'absent'
+  loop: "{{ python_virtualenv|default([]) }}"
+  loop_control:
+    label:
+      - "{{ item.name }}"

@@ -1,0 +1,5 @@
+---
+
+# Python defaults
+python_virtualenv_root: /virtualenv
+python_package_install: True
