@@ -1,13 +1,28 @@
 ---
 
+- name: Define virtual environment full path 
+  set_fact:
+    _virtualenv_path: "{{ virtualenv_path }}"
+  when: virtualenv_path is search('^/')
+
+- name: Define virtual environment full path
+  set_fact:
+    _virtualenv_path: "{{ python_virtualenv_root+'/'+python+'/'+virtualenv_path }}"
+  when: virtualenv_path is not search('^/')
+
+- name: Using the following location
+  debug:
+    var: _virtualenv_path
+    verbosity: 1
+
 - name: Test if virtualenv already exists
   stat:
-    path: "{{ virtualenv_path }}"
+    path: "{{ _virtualenv_path }}"
   register: venv_root
 
 - name: Delete virtualenv if recreate is required
   file:
-    path: "{{ virtualenv_path }}"
+    path: "{{ _virtualenv_path }}"
     state: absent
   when:
     - virtualenv_recreate|bool
@@ -16,7 +31,7 @@
 
 - name: Make path to virtualenv
   file:
-    path: "{{ virtualenv_path }}"
+    path: "{{ _virtualenv_path }}"
     state: directory
     mode: '0755'
   register: venv_root
@@ -24,7 +39,7 @@
 - name: Create virtualenv from scratch  # noqa 503
   pip:
     name:                     "pip"
-    virtualenv:               "{{ virtualenv_path }}"
+    virtualenv:               "{{ _virtualenv_path }}"
     virtualenv_command:       "{{ virtualenv_command }}"
     virtualenv_python:        "{{ virtualenv_python }}"
     virtualenv_site_packages: "{{ virtualenv_site_packages }}"
@@ -35,22 +50,22 @@
 - name: Clone virtualenv
   include_tasks: venv_clone.yml
   vars:
-    venv_source_path: "{{ virtualenv_source if virtualenv_source is search('^/') else virtualenv_path|dirname+'/'+virtualenv_source }}"
-    venv_target_path: "{{ virtualenv_path }}"
+    venv_source_path: "{{ virtualenv_source if virtualenv_source is regex_search('^/') else _virtualenv_path|dirname+'/'+virtualenv_source }}"
+    venv_target_path: "{{ _virtualenv_path }}"
   when: venv_root.changed|bool and virtualenv_source != 'skip'
 
 - name: Upgrade pip to latest version  # noqa 403
   pip:
     name: pip
     state: latest
-    virtualenv: "{{ virtualenv_path }}"
+    virtualenv: "{{ _virtualenv_path }}"
     extra_args: --upgrade
   when: virtualenv_pip_upgrade|bool
 
 - name: Install all pip packages
   pip:
     name: "{{ pip_package }}"
-    virtualenv: "{{ virtualenv_path }}"
+    virtualenv: "{{ _virtualenv_path }}"
   loop: "{{ virtualenv_packages }}"
   loop_control:
     loop_var: pip_package
@@ -59,5 +74,5 @@
   file:
     state: link
     src: "{{ virtualenv_name }}"
-    dest: "{{ virtualenv_path|dirname }}/{{ virtualenv_label }}"
+    dest: "{{ _virtualenv_path|dirname }}/{{ virtualenv_label }}"
   when: virtualenv_label != 'skip'
