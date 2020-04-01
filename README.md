@@ -12,6 +12,7 @@ Platform defaults
 :--- |:--- |:---
 <sub>Fedora</sub> |<sub>False</sub> |<sub>True</sub>
 <sub>RedHat7</sub> |<sub>True</sub> |<sub>False</sub>
+<sub>RedHat8</sub> |<sub>False</sub> |<sub>True</sub>
 
 
 Role Variables
@@ -19,27 +20,28 @@ Role Variables
 
 <sub>**variable**</sub> |<sub>**required**</sub> |<sub>**type**</sub> |<sub>**default**</sub> |<sub>**description**</sub>
 :--- |:--- |:--- |:--- |:---
-<sub>python_virtualenv_root</sub> |<sub>False</sub> |<sub>string</sub> |<sub>/virtualenv</sub> |<sub>Base directory where to place virtual environments.  All virtual environments will be placed underneath</sub>
-<sub>python_package_install</sub> |<sub>False</sub> |<sub>boolean</sub> |<sub>True</sub> |<sub>If the Python OS packes should be installed</sub>
-<sub>python2</sub> |<sub>False</sub> |<sub>boolean</sub> |<sub>See vars/{{ ansible_distribution }}.yml</sub> |<sub>If Python2 should be installed</sub>
-<sub>python2_command</sub> |<sub>False</sub> |<sub>string</sub> |<sub>See vars/{{ ansible_distribution }}.yml</sub> |<sub>Full path to the python2 executable</sub>
-<sub>python2_virtualenv</sub> |<sub>False</sub> |<sub>string</sub> |<sub>See vars/{{ ansible_distribution }}.yml</sub> |<sub>Full path to the python2 virtualenv executable</sub>
-<sub>python2_packages</sub> |<sub>False</sub> |<sub>list</sub> |<sub>See vars/{{ ansible_distribution }}.yml</sub> |<sub>List of packages required to install Python</sub>
-<sub>python_virtualenv</sub> |<sub>False</sub> |<sub>list</sub> |<sub>[]</sub> |<sub>List of virtual environments to create</sub>
-<sub>python3</sub> |<sub>False</sub> |<sub>boolean</sub> |<sub>See vars/{{ ansible_distribution }}.yml</sub> |<sub>If Python3 should be installed</sub>
-<sub>python3_command</sub> |<sub>False</sub> |<sub>string</sub> |<sub>See vars/{{ ansible_distribution }}.yml</sub> |<sub>Full path to the python3 executable</sub>
-<sub>python3_virtualenv</sub> |<sub>False</sub> |<sub>string</sub> |<sub>See vars/{{ ansible_distribution }}.yml</sub> |<sub>Full path to the python3 virtualenv executable</sub>
-<sub>python3_packages</sub> |<sub>False</sub> |<sub>list</sub> |<sub>See vars/{{ ansible_distribution }}.yml</sub> |<sub>List of packages required to install Python</sub>
-<sub>python_virtualenv</sub> |<sub>False</sub> |<sub>list</sub> |<sub>[]</sub> |<sub>List of virtual environments to create</sub>
-<sub>&nbsp;&nbsp;&nbsp;&nbsp;name</sub> |<sub>True</sub> |<sub>string</sub> |<sub>N/A</sub> |<sub>Name of the virtual environment.</sub>
-<sub>&nbsp;&nbsp;&nbsp;&nbsp;path</sub> |<sub>False</sub> |<sub>string</sub> |<sub>{{ python_virtualenv_root }}/python[23]/{{ name }}</sub> |<sub>Full path to the virtual env</sub>
-<sub>&nbsp;&nbsp;&nbsp;&nbsp;packages</sub> |<sub>False</sub> |<sub>list</sub> |<sub>[]</sub> |<sub>List of pip packages to install</sub>
-<sub>&nbsp;&nbsp;&nbsp;&nbsp;site_packages</sub> |<sub>False</sub> |<sub>boolean</sub> |<sub>False</sub> |<sub>If Python site packages should be made available to the virtualenv</sub>
-<sub>&nbsp;&nbsp;&nbsp;&nbsp;pip_upgrade</sub> |<sub>False</sub> |<sub>boolean</sub> |<sub>True</sub> |<sub>Upgrade pip inside virtualenv</sub>
-<sub>&nbsp;&nbsp;&nbsp;&nbsp;source</sub> |<sub>False</sub> |<sub>string</sub> |<sub>N/A</sub> |<sub>Name of virtual environment to clone to new</sub>
-<sub>&nbsp;&nbsp;&nbsp;&nbsp;label</sub> |<sub>False</sub> |<sub>string</sub> |<sub>N/A</sub> |<sub>symlink to create to point to this virtualenv</sub>
-<sub>&nbsp;&nbsp;&nbsp;&nbsp;recreate</sub> |<sub>False</sub> |<sub>boolean</sub> |<sub>False</sub> |<sub>Force virtualenv to be recreated</sub>
-
+<sub>python_virtualenv_root<br></sub> |<sub>false<br></sub> |<sub>string<br></sub> |<sub>/virtualenv<br></sub> |<sub>Base directory where to place virtual environments.  All virtual environments will<br>    be placed underneath<br></sub>
+<sub>python_package_install<br></sub> |<sub>false<br></sub> |<sub>boolean<br></sub> |<sub>true<br></sub> |<sub>If the Python OS packes should be installed<br></sub>
+<sub>python_http_proxy<br></sub> |<sub>false<br></sub> |<sub>string<br></sub> |<sub>N/A<br></sub> |<sub>HTTP proxy to use for HTTP protocol<br></sub>
+<sub>python_https_proxy<br></sub> |<sub>false<br></sub> |<sub>string<br></sub> |<sub>N/A<br></sub> |<sub>HTTP proxy to use for HTTPS protocol<br></sub>
+<sub>python2<br></sub> |<sub>false<br></sub> |<sub>boolean<br></sub> |<sub>See vars/{{ ansible_distribution }}.yml<br></sub> |<sub>If Python2 should be installed<br></sub>
+<sub>python2_command<br></sub> |<sub>false<br></sub> |<sub>string<br></sub> |<sub>See vars/{{ ansible_distribution }}.yml<br></sub> |<sub>Full path to the python2 executable<br></sub>
+<sub>python2_virtualenv<br></sub> |<sub>false<br></sub> |<sub>string<br></sub> |<sub>See vars/{{ ansible_distribution }}.yml<br></sub> |<sub>Full path to the python2 virtualenv executable<br></sub>
+<sub>python2_packages<br></sub> |<sub>false<br></sub> |<sub>list<br></sub> |<sub>See vars/{{ ansible_distribution }}.yml<br></sub> |<sub>List of packages required to install Python<br></sub>
+<sub>python_virtualenv<br></sub> |<sub>false<br></sub> |<sub>list<br></sub> |<sub>[]<br></sub> |<sub>List of virtual environments to create<br></sub>
+<sub>python3<br></sub> |<sub>false<br></sub> |<sub>boolean<br></sub> |<sub>See vars/{{ ansible_distribution }}.yml<br></sub> |<sub>If Python3 should be installed<br></sub>
+<sub>python3_command<br></sub> |<sub>false<br></sub> |<sub>string<br></sub> |<sub>See vars/{{ ansible_distribution }}.yml<br></sub> |<sub>Full path to the python3 executable<br></sub>
+<sub>python3_virtualenv<br></sub> |<sub>false<br></sub> |<sub>string<br></sub> |<sub>See vars/{{ ansible_distribution }}.yml<br></sub> |<sub>Full path to the python3 virtualenv executable<br></sub>
+<sub>python3_packages<br></sub> |<sub>false<br></sub> |<sub>list<br></sub> |<sub>See vars/{{ ansible_distribution }}.yml<br></sub> |<sub>List of packages required to install Python<br></sub>
+<sub>python_virtualenv<br></sub> |<sub>false<br></sub> |<sub>list<br></sub> |<sub>[]<br></sub> |<sub>List of virtual environments to create<br></sub>
+<sub>&nbsp;&nbsp;&nbsp;&nbsp;name<br></sub> |<sub>&nbsp;&nbsp;&nbsp;&nbsp;true<br></sub> |<sub>&nbsp;&nbsp;&nbsp;&nbsp;string<br></sub> |<sub>&nbsp;&nbsp;&nbsp;&nbsp;N/A<br></sub> |<sub>&nbsp;&nbsp;&nbsp;&nbsp;Name of the virtual environment.<br></sub>
+<sub>&nbsp;&nbsp;&nbsp;&nbsp;path<br></sub> |<sub>&nbsp;&nbsp;&nbsp;&nbsp;false<br></sub> |<sub>&nbsp;&nbsp;&nbsp;&nbsp;string<br></sub> |<sub>&nbsp;&nbsp;&nbsp;&nbsp;{{ python_virtualenv_root }}/pythonX/{{ name }}<br></sub> |<sub>&nbsp;&nbsp;&nbsp;&nbsp;Full path to the virtual env<br></sub>
+<sub>&nbsp;&nbsp;&nbsp;&nbsp;packages<br></sub> |<sub>&nbsp;&nbsp;&nbsp;&nbsp;false<br></sub> |<sub>&nbsp;&nbsp;&nbsp;&nbsp;list<br></sub> |<sub>&nbsp;&nbsp;&nbsp;&nbsp;[]<br></sub> |<sub>&nbsp;&nbsp;&nbsp;&nbsp;List of pip packages to install<br></sub>
+<sub>&nbsp;&nbsp;&nbsp;&nbsp;site_packages<br></sub> |<sub>&nbsp;&nbsp;&nbsp;&nbsp;false<br></sub> |<sub>&nbsp;&nbsp;&nbsp;&nbsp;boolean<br></sub> |<sub>&nbsp;&nbsp;&nbsp;&nbsp;false<br></sub> |<sub>&nbsp;&nbsp;&nbsp;&nbsp;If Python site packages should be made available to the virtualenv<br></sub>
+<sub>&nbsp;&nbsp;&nbsp;&nbsp;pip_upgrade<br></sub> |<sub>&nbsp;&nbsp;&nbsp;&nbsp;false<br></sub> |<sub>&nbsp;&nbsp;&nbsp;&nbsp;boolean<br></sub> |<sub>&nbsp;&nbsp;&nbsp;&nbsp;true<br></sub> |<sub>&nbsp;&nbsp;&nbsp;&nbsp;Upgrade pip inside virtualenv<br></sub>
+<sub>&nbsp;&nbsp;&nbsp;&nbsp;source<br></sub> |<sub>&nbsp;&nbsp;&nbsp;&nbsp;false<br></sub> |<sub>&nbsp;&nbsp;&nbsp;&nbsp;string<br></sub> |<sub>&nbsp;&nbsp;&nbsp;&nbsp;N/A<br></sub> |<sub>&nbsp;&nbsp;&nbsp;&nbsp;Name of virtual environment to clone to new<br></sub>
+<sub>&nbsp;&nbsp;&nbsp;&nbsp;label<br></sub> |<sub>&nbsp;&nbsp;&nbsp;&nbsp;false<br></sub> |<sub>&nbsp;&nbsp;&nbsp;&nbsp;string<br></sub> |<sub>&nbsp;&nbsp;&nbsp;&nbsp;N/A<br></sub> |<sub>&nbsp;&nbsp;&nbsp;&nbsp;symlink to create to point to this virtualenv<br></sub>
+<sub>&nbsp;&nbsp;&nbsp;&nbsp;recreate<br></sub> |<sub>&nbsp;&nbsp;&nbsp;&nbsp;false<br></sub> |<sub>&nbsp;&nbsp;&nbsp;&nbsp;boolean<br></sub> |<sub>&nbsp;&nbsp;&nbsp;&nbsp;false<br></sub> |<sub>&nbsp;&nbsp;&nbsp;&nbsp;Force virtualenv to be recreated<br></sub>
 
 
 
