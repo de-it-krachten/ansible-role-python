@@ -43,6 +43,9 @@
     virtualenv_command:       "{{ virtualenv_command }}"
     virtualenv_python:        "{{ virtualenv_python }}"
     virtualenv_site_packages: "{{ virtualenv_site_packages }}"
+  environment:
+    HTTP_PROXY: "{{ python_http_proxy | default('') }}"
+    HTTPS_PROXY: "{{ python_https_proxy | default('') }}"
   when:
     - venv_root.changed|bool
     - virtualenv_source == 'skip'
@@ -60,12 +63,18 @@
     state: latest
     virtualenv: "{{ _virtualenv_path }}"
     extra_args: --upgrade
+  environment:
+    HTTP_PROXY: "{{ python_http_proxy | default('') }}"
+    HTTPS_PROXY: "{{ python_https_proxy | default('') }}"
   when: virtualenv_pip_upgrade|bool
 
 - name: Install all pip packages
   pip:
     name: "{{ pip_package }}"
     virtualenv: "{{ _virtualenv_path }}"
+  environment:
+    HTTP_PROXY: "{{ python_http_proxy | default('') }}"
+    HTTPS_PROXY: "{{ python_https_proxy | default('') }}"
   loop: "{{ virtualenv_packages }}"
   loop_control:
     loop_var: pip_package
