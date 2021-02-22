@@ -1,0 +1,40 @@
+---
+
+- name: Define pip clients for virtualenv
+  set_fact:
+    pip_clients: "{{ _virtualenv_path+'/bin/'+pip_executable }}"
+  when: _virtualenv_path is defined
+
+- name: Get pip version
+  shell: pip show pip | awk '/^Version:/ {print $2}'
+  register: pip_version
+    
+- name: Upgrade pip (site-packages) to latest version when version is below 19  # noqa 403
+  pip:
+    name: pip
+    state: latest
+    extra_args: --upgrade
+  environment:
+    HTTP_PROXY: "{{ python_http_proxy | default('') }}"
+    HTTPS_PROXY: "{{ python_https_proxy | default('') }}"
+  when:
+    - _virtualenv_path is not defined
+    - pip_version.stdout is version('19.0.0', '<')
+
+- name: Upgrade pip (virtualenv) to latest version  # noqa 403
+  pip:
+    name: pip
+    state: latest
+    virtualenv: "{{ _virtualenv_path }}"
+    extra_args: --upgrade
+  environment:
+    HTTP_PROXY: "{{ python_http_proxy | default('') }}"
+    HTTPS_PROXY: "{{ python_https_proxy | default('') }}"
+  when:
+    - _virtualenv_path is defined
+    - virtualenv_pip_upgrade is defined and virtualenv_pip_upgrade|bool
+
+- name: Get list of all installed pip packages
+  pip_package_info:
+    clients: "{{ pip_clients }}"
+  register: pip_packages

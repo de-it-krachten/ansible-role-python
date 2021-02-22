@@ -11,6 +11,10 @@ python2_packages:
   - python2-pip
   - python2-virtualenv
   - libselinux-python
+python2_packages_optional:
+  - gcc
+  - glibc-devel
+  - openssl-devel
 
 # Python3
 python3: true
@@ -22,3 +26,7 @@ python3_packages:
   - python3-devel
   - python3-pip
   - python3-virtualenv
+python3_packages_optional:
+  - gcc
+  - glibc-devel
+  - openssl-devel

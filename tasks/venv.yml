@@ -24,6 +24,7 @@
   file:
     path: "{{ _virtualenv_path }}"
     state: absent
+  become: "{{ python_venv_become }}"
   when:
     - virtualenv_recreate|bool
     - venv_root.stat.exists|bool
@@ -57,15 +58,8 @@
     venv_target_path: "{{ _virtualenv_path }}"
   when: venv_root.changed|bool and virtualenv_source != 'skip'
 
-- name: Upgrade pip to latest version  # noqa 403
-  pip:
-    name: pip
-    state: latest
-    virtualenv: "{{ _virtualenv_path }}"
-    extra_args: --upgrade
-  environment:
-    HTTP_PROXY: "{{ python_http_proxy | default('') }}"
-    HTTPS_PROXY: "{{ python_https_proxy | default('') }}"
+- name: Upgrade pip to latest version
+  include_tasks: pip.yml
   when: virtualenv_pip_upgrade|bool
 
 - name: Install all pip packages

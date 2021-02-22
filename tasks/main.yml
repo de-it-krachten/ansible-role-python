@@ -23,3 +23,7 @@
   vars:
     python: python3
   when: python3|bool
+
+- name: Upgrading pip (site-packages)
+  include: pip.yml
+  when: pip_upgrade|bool
