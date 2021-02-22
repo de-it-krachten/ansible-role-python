@@ -1,6 +1,6 @@
 ---
 
-- name: Define virtual environment full path 
+- name: Define virtual environment full path
   set_fact:
     _virtualenv_path: "{{ virtualenv_path }}"
   when: virtualenv_path is search('^/')
@@ -24,6 +24,7 @@
   file:
     path: "{{ _virtualenv_path }}"
     state: absent
+  become: "{{ python_venv_become }}"
   when:
     - virtualenv_recreate|bool
     - venv_root.stat.exists|bool
@@ -53,25 +54,19 @@
 - name: Clone virtualenv
   include_tasks: venv_clone.yml
   vars:
-    venv_source_path: "{{ virtualenv_source if virtualenv_source is regex_search('^/') else _virtualenv_path|dirname+'/'+virtualenv_source }}"
+    venv_source_path: "{{ virtualenv_source if virtualenv_source is search('^/') else _virtualenv_path|dirname+'/'+virtualenv_source }}"
     venv_target_path: "{{ _virtualenv_path }}"
   when: venv_root.changed|bool and virtualenv_source != 'skip'
 
-- name: Upgrade pip to latest version  # noqa 403
-  pip:
-    name: pip
-    state: latest
-    virtualenv: "{{ _virtualenv_path }}"
-    extra_args: --upgrade
-  environment:
-    HTTP_PROXY: "{{ python_http_proxy | default('') }}"
-    HTTPS_PROXY: "{{ python_https_proxy | default('') }}"
+- name: Upgrade pip to latest version
+  include_tasks: pip.yml
   when: virtualenv_pip_upgrade|bool
 
 - name: Install all pip packages
   pip:
     name: "{{ pip_package }}"
     virtualenv: "{{ _virtualenv_path }}"
+    extra_args: "{{ python_trusted_hosts if python_trust_hosts|bool else omit }}"
   environment:
     HTTP_PROXY: "{{ python_http_proxy | default('') }}"
     HTTPS_PROXY: "{{ python_https_proxy | default('') }}"

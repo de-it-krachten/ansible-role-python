@@ -1,0 +1,19 @@
+---
+
+# Python2
+python2: true
+python2_command: /usr/bin/python2
+python2_virtualenv: /usr/bin/virtualenv
+python2_packages:
+  - python
+  - python-pip-whl
+  - virtualenv
+
+# Python3
+python3: true
+python3_command: /usr/bin/python3
+python3_virtualenv: /usr/bin/virtualenv
+python3_packages:
+  - python3
+  - python3-pip
+  - python3-virtualenv

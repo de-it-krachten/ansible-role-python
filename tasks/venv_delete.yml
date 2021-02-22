@@ -19,3 +19,4 @@
   file:
     path: "{{ _virtualenv_path }}"
     state: absent
+  become: yes

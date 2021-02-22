@@ -1,5 +1,17 @@
 ---
 
 # Python defaults
-python_virtualenv_root: /virtualenv
+python_virtualenv_root: "{{ ansible_env['HOME'] }}/.virtualenv"
 python_package_install: True
+python_package_install_optional: False
+python_trust_hosts: False
+python_trusted_hosts: >
+  --trusted-host pypi.org
+  --trusted-host files.pythonhosted.org
+  --trusted-host pypi.python.org
+
+pip_executable: pip
+pip_clients:
+  - pip
+  - pip3
+pip_upgrade: false

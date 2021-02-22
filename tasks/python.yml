@@ -3,8 +3,16 @@
 - name: Get variable names that hold settings for {{ python }}
   set_fact:
     python_packages: "{{ python }}_packages"
+    python_packages_optional: "{{ python }}_packages_optional"
     python_command: "{{ python }}_command"
     python_virtualenv_cmd: "{{ python }}_virtualenv"
+
+- name: Update APT cache
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+  become: yes
+  when: ansible_os_family == 'Debian'
 
 - name: Install {{ python }}
   package:
@@ -12,13 +20,23 @@
     state: present
     disablerepo: "{{ disablerepo|default(omit) }}"
   loop: "{{ vars[python_packages] }}"
+  become: yes
   when: python_package_install|bool
+
+- name: Install {{ python }} optional packages
+  package:
+    name: "{{ item }}"
+    state: present
+    disablerepo: "{{ disablerepo|default(omit) }}"
+  loop: "{{ vars[python_packages_optional] }}"
+  become: yes
+  when: python_package_install_optional|bool
 
 - name: Delete obsolete virtual environments
   include_tasks: venv_delete.yml
   vars:
-    virtualenv_name:          "{{ item.name }}"
-    virtualenv_path:          "{{ item.path|default(item.name) }}"
+    virtualenv_name: "{{ item.name }}"
+    virtualenv_path: "{{ item.path|default(item.name) }}"
   when: item.state is defined and item.state == 'absent'
   loop: "{{ python_virtualenv|default([]) }}"
   loop_control:
@@ -29,7 +47,8 @@
   include_tasks: venv.yml
   vars:
     virtualenv_name:          "{{ item.name }}"
-    virtualenv_path:          "{{ item.path|default(item.name) }}"
+    # virtualenv_path:          "{{ item.path|default(item.name) }}"
+    virtualenv_path:          "{{ item.path|default(python_virtualenv_root+'/'+python+'/'+item.name) }}"
     virtualenv_site_packages: "{{ item.site_packages|default(False) }}"
     virtualenv_pip_upgrade:   "{{ item.pip_upgrade|default(False) }}"
     virtualenv_command:       "{{ python_virtualenv_command|default(vars[python_virtualenv_cmd]) }}"

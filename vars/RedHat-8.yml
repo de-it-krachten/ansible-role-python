@@ -7,10 +7,14 @@ python2_virtualenv: /usr/bin/virtualenv-2.7
 python2_packages:
   - python
   - python-libs
-  - python-devel
   - python-pip
   - python-virtualenv
   - libselinux-python
+python2_packages_optional:
+  - gcc
+  - python-devel
+  - glibc-devel
+  - openssl-devel
 
 # Python3
 python3: true
@@ -19,6 +23,10 @@ python3_virtualenv: /usr/bin/virtualenv-3.6
 python3_packages:
   - python36
   - python3-libs
-  - python36-devel
   - python3-pip
   - python3-virtualenv
+python3_packages_optional:
+  - gcc
+  - python36-devel
+  - glibc-devel
+  - openssl-devel
