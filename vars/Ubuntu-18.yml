@@ -1,13 +1,14 @@
 ---
 
 # Python2
-python2: true
+python2: false
 python2_command: /usr/bin/python2
 python2_virtualenv: /usr/bin/virtualenv
 python2_packages:
   - python
   - python-pip
   - python-virtualenv
+python2_packages_optional: []
 
 # Python3
 python3: true
@@ -17,3 +18,4 @@ python3_packages:
   - python3
   - python3-pip
   - python3-virtualenv
+python3_packages_optional: []

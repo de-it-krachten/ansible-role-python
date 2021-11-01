@@ -32,6 +32,13 @@
   become: yes
   when: python_package_install_optional|bool
 
+- name: Upgrade pip (site-packages) to latest version
+  pip:
+    name: pip
+    state: latest
+    extra_args: --upgrade
+  when: ansible_os_family == 'RedHat'
+
 - name: Delete obsolete virtual environments
   include_tasks: venv_delete.yml
   vars:

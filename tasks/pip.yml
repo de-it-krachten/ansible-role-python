@@ -7,6 +7,8 @@
 
 - name: Get pip version
   shell: pip show pip | awk '/^Version:/ {print $2}'
+  changed_when: false
+  check_mode: false
   register: pip_version
     
 - name: Upgrade pip (site-packages) to latest version when version is below 19  # noqa 403

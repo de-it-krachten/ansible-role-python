@@ -21,6 +21,16 @@ os_vars:
   - platform: RedHat8
     python2: False
     python3: True
+  - platform: Ubuntu 18.04
+    python2: False
+    python3: True
+  - platform: Ubuntu 20.04
+    python2: False
+    python3: True
+  - platform: Debian 10
+    python2: False
+    python3: True
+  - 
 
 role_vars_fields:
   - name: variable
