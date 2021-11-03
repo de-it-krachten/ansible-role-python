@@ -2,13 +2,12 @@
 
 - name: Define virtual environment full path
   set_fact:
-    _virtualenv_path: "{{ virtualenv_path }}"
-  when: virtualenv_path is search('^/')
-
-- name: Define virtual environment full path
-  set_fact:
-    _virtualenv_path: "{{ python_virtualenv_root+'/'+python+'/'+virtualenv_path }}"
-  when: virtualenv_path is not search('^/')
+    _virtualenv_path: >-
+      {%- if virtualenv_path is search('^/') -%}
+      {{ virtualenv_path }}
+      {%- else -%}
+      {{ python_virtualenv_root+'/'+virtualenv_path }}
+      {%- endif -%}
 
 - name: Using the following location
   debug:
@@ -24,7 +23,7 @@
   file:
     path: "{{ _virtualenv_path }}"
     state: absent
-  become: "{{ python_venv_become }}"
+  become: yes
   when:
     - virtualenv_recreate|bool
     - venv_root.stat.exists|bool

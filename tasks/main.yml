@@ -32,3 +32,13 @@
 - name: Upgrading pip (site-packages)
   include: pip.yml
   when: pip_upgrade|bool
+
+- name: Install python3 from source
+  include: source.yml
+  when:
+    - python_from_source
+    - ansible_os_family == 'RedHat'
+
+- name: Setup virtual environments
+  include: venvs.yml
+  when: python_virtualenvs is defined

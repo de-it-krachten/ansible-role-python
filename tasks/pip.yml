@@ -6,7 +6,9 @@
   when: _virtualenv_path is defined
 
 - name: Get pip version
-  shell: pip show pip | awk '/^Version:/ {print $2}'
+  shell: |
+    set -o pipefail
+    pip show pip | awk '/^Version:/ {print $2}'
   changed_when: false
   check_mode: false
   register: pip_version

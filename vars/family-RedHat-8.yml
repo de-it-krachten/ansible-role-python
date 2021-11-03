@@ -12,9 +12,10 @@ python2_packages:
   - libselinux-python
 python2_packages_optional:
   - gcc
-  - python-devel
   - glibc-devel
+  - python-devel
   - openssl-devel
+  - libffi-devel
 
 # Python3
 python3: true
@@ -25,8 +26,18 @@ python3_packages:
   - python3-libs
   - python3-pip
   - python3-virtualenv
+  - libselinux-python3
 python3_packages_optional:
   - gcc
   - python36-devel
   - glibc-devel
   - openssl-devel
+  - libffi-devel
+
+python3_packages_src:
+  - '@Development Tools'
+  - gcc
+  - openssl-devel
+  - bzip2-devel
+  - libffi-devel
+  - xz-devel

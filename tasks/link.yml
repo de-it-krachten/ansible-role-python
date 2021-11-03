@@ -12,6 +12,7 @@
 - name: Create virtualenv directory {{ python_virtualenv_data }}
   file:
     state: directory
+    mode: "0755"
     path: "{{ python_virtualenv_data }}"
 
 - name: Create symlink {{ python_virtualenv_root }} to {{ python_virtualenv_data }}

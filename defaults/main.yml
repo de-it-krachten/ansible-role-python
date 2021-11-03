@@ -10,8 +10,20 @@ python_trusted_hosts: >
   --trusted-host files.pythonhosted.org
   --trusted-host pypi.python.org
 
+python_venv_become: root
+
 pip_executable: pip
 pip_clients:
   - pip
   - pip3
 pip_upgrade: false
+
+# Python (from source)
+python_from_source: false
+python_version: 3.8.12
+python_version_minor: "{{ python_version | regex_replace('^(\\d\\.\\d)(.*)', '\\1') }}"
+
+python_binary: python{{ python_version_minor }}
+python_binary_full: /usr/local/bin/{{ python_binary }}
+
+python_url: https://www.python.org/ftp/python/{{ python_version }}/Python-{{ python_version }}.tgz

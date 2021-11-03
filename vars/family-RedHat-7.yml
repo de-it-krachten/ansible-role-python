@@ -33,3 +33,11 @@ python3_packages_optional:
   - glibc-devel
   - openssl-devel
   - libffi-devel
+
+python3_packages_src:
+  - '@Development Tools'
+  - gcc
+  - openssl-devel
+  - bzip2-devel
+  - libffi-devel
+  - xz-devel

@@ -10,6 +10,7 @@
   file:
     path: "{{ venv_target_path }}"
     state: directory
+    mode: "0755"
 
 - name: Install rsync package
   package:

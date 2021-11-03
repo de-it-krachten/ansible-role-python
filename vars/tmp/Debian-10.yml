@@ -24,3 +24,15 @@ python3_packages:
 python3_packages_optional:
   - gcc
   - libffi-dev
+python3_packages_src:
+  - build-essential
+  - zlib1g-dev
+  - libncurses5-dev
+  - libgdbm-dev
+  - libnss3-dev
+  - libssl-dev
+  - libsqlite3-dev
+  - libreadline-dev
+  - libffi-dev
+  - curl
+  - libbz2-dev
