@@ -34,6 +34,7 @@ python3_packages_optional:
   - openssl-devel
   - libffi-devel
 
+# Python from source
 python3_packages_src:
   - '@Development Tools'
   - gcc

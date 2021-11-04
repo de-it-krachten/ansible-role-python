@@ -16,21 +16,35 @@
 
 - name: Install {{ python }} packages
   package:
-    name: "{{ item }}"
+    name: "{{ vars[python_packages] }}"
     state: present
     disablerepo: "{{ disablerepo|default(omit) }}"
-  loop: "{{ vars[python_packages] }}"
   become: yes
   when: python_package_install|bool
+  register: _package_result
+
+- name: Show packaged installed and/or updated
+  ansible.builtin.debug:
+    var: _package_result.results
+  when:
+    - _packages_result.results is defined
+    - _packages_result.results|length > 0
 
 - name: Install {{ python }} optional packages
   package:
-    name: "{{ item }}"
+    name: "{{ vars[python_packages_optional] }}"
     state: present
     disablerepo: "{{ disablerepo|default(omit) }}"
-  loop: "{{ vars[python_packages_optional] }}"
   become: yes
   when: python_package_install_optional|bool
+  register: _package_result
+
+- name: Show packaged installed and/or updated
+  ansible.builtin.debug:
+    var: _package_result.results
+  when:
+    - _packages_result.results is defined
+    - _packages_result.results|length > 0
 
 - name: Upgrade pip (site-packages) to latest version
   pip:

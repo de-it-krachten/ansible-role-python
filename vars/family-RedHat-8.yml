@@ -42,6 +42,7 @@ python38_packages:
   - python38
   - python38-libs
   - python38-pip
+  - python3-virtualenv
 python38_packages_optional:
   - python38-devel
 
@@ -53,6 +54,7 @@ python39_packages:
   - python39
   - python39-libs
   - python39-pip
+  - python3-virtualenv
 python39_packages_optional:
   - python39-devel
 
