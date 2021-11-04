@@ -30,7 +30,6 @@ os_vars:
   - platform: Debian 10
     python2: False
     python3: True
-  - 
 
 role_vars_fields:
   - name: variable
@@ -49,7 +48,7 @@ role_vars:
     required: no
     type: string
     default: /virtualenv
-    description: Base directory where to place virtual environments.  All virtual environments will be placed underneath
+    description: Base directory where to place virtual environments. All virtual environments will be placed underneath
   - variable: python_package_install
     required: no
     type: boolean

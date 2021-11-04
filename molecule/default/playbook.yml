@@ -2,12 +2,11 @@
 - name: Converge
   hosts: all
   vars:
-    python_from_source: true
     python_virtualenv_root: /tmp/venv
     python_virtualenvs:
-      - name: ansible47
+      - name: sample
         recreate: false
-        python: "{{ '/usr/local/bin/python3.8' if ansible_os_family == 'RedHat' else '/usr/bin/python3' }}"
+        python: /usr/bin/python3
         site_packages: false
         packages:
           - lxml
@@ -18,7 +17,7 @@
     - name: Update APT cache
       apt:
         update_cache: yes
-        cache_valid_time: 1
+        cache_valid_time: 900
       become: yes
       when: ansible_os_family == 'Debian'
 

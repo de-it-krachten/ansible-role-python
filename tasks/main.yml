@@ -17,27 +17,31 @@
   include_tasks: link.yml
   when: python_virtualenv_data is defined
 
-- name: Including 'python2.yml'
+- name: Including 'python2'
   include: python.yml
   vars:
     python: python2
   when: python2|bool
 
-- name: Including 'python3.yml'
+- name: Including 'python3'
   include: python.yml
   vars:
     python: python3
   when: python3|bool
 
+- name: Including 'python38'
+  include: python.yml
+  vars:
+    python: python38
+  when: python38|bool
+
 - name: Upgrading pip (site-packages)
   include: pip.yml
   when: pip_upgrade|bool
 
-- name: Install python3 from source
+- name: Install python from source
   include: source.yml
-  when:
-    - python_from_source
-    - ansible_os_family == 'RedHat'
+  when: python_from_source
 
 - name: Setup virtual environments
   include: venvs.yml

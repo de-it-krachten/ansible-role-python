@@ -37,3 +37,9 @@ python3_packages_src:
   - libffi-dev
   - curl
   - libbz2-dev
+
+# Python 3.8
+python38: false
+
+# Python 3.9
+python39: false

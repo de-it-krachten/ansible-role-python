@@ -41,3 +41,9 @@ python3_packages_src:
   - bzip2-devel
   - libffi-devel
   - xz-devel
+
+# Python 3.8
+python38: false
+
+# Python 3.9
+python39: false
