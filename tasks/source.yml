@@ -32,8 +32,8 @@
       ansible.builtin.debug:
         var: _package_result.results
       when:
-        - _packages_result.results is defined
-        - _packages_result.results|length > 0
+        - _package_result.results is defined
+        - _package_result.results|length > 0
 
     - name: Download python
       unarchive:
