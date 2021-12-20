@@ -1,7 +1,10 @@
 ---
+
 - name: Converge
   hosts: all
   vars:
+    python2: false
+    python3: true
     python_virtualenv_root: /tmp/venv
     python_virtualenvs:
       - name: sample
@@ -11,16 +14,7 @@
         packages:
           - lxml
           - dnspython
-
   tasks:
-
-    - name: Update APT cache
-      apt:
-        update_cache: yes
-        cache_valid_time: 900
-      become: yes
-      when: ansible_os_family == 'Debian'
-
-    - name: "Include ansible-role-python"
+    - name: Include role 'ansible-role-python'
       include_role:
-        name: "ansible-role-python"
+        name: ansible-role-python
