@@ -1,21 +1,35 @@
 ---
 
-# Python defaults
+# Default root-directory for virtual environments
 python_virtualenv_root: "{{ ansible_env['HOME'] }}/.virtualenv"
+
+# Install default python packages
 python_package_install: True
+
+# Install additional python packages (might be required when compilation is required)
 python_package_install_optional: False
+
+# Use list of trusted hosts as defined under python_trusted_hosts
 python_trust_hosts: False
+
+# List of trusted hosts
 python_trusted_hosts: >
   --trusted-host pypi.org
   --trusted-host files.pythonhosted.org
   --trusted-host pypi.python.org
 
+# Use to become when setting up virtual environments
 python_venv_become: root
 
+# Define pip executable
 pip_executable: pip
+
+# List of additional pip clients
 pip_clients:
   - pip
   - pip3
+
+# Upgrade pip when out-dated
 pip_upgrade: false
 
 # Python (from source)
