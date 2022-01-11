@@ -73,8 +73,24 @@ Example Playbook
 <pre><code>
 - name: Converge
   hosts: all
-  vars: null
+  vars:
+    python2: false
+    python3: true
+    python_virtualenv_root: /tmp/venv
+    python_virtualenvs:
+      - name: sample
+        user: sample
+        recreate: false
+        python: /usr/bin/python3
+        site_packages: false
+        packages:
+          - lxml
+          - dnspython
   tasks:
+    - name: Create user sample
+      user:
+        name: sample
+
     - name: Include role 'ansible-role-python'
       include_role:
         name: ansible-role-python
