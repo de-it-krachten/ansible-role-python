@@ -18,31 +18,31 @@
   when: python_virtualenv_data is defined
 
 - name: Including 'python2'
-  include: python.yml
+  include_tasks: python.yml
   vars:
     python: python2
   when: python2|bool
 
 - name: Including 'python3'
-  include: python.yml
+  include_tasks: python.yml
   vars:
     python: python3
   when: python3|bool
 
 - name: Including 'python38'
-  include: python.yml
+  include_tasks: python.yml
   vars:
     python: python38
   when: python38|bool
 
 - name: Upgrading pip (site-packages)
-  include: pip.yml
+  include_tasks: pip.yml
   when: pip_upgrade|bool
 
 - name: Install python from source
-  include: source.yml
+  include_tasks: source.yml
   when: python_from_source
 
 - name: Setup virtual environments
-  include: venvs.yml
+  include_tasks: venvs.yml
   when: python_virtualenvs is defined
