@@ -8,6 +8,7 @@
     python_virtualenv_root: /tmp/venv
     python_virtualenvs:
       - name: sample
+        user: adm
         recreate: false
         python: /usr/bin/python3
         site_packages: false

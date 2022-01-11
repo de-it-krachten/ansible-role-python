@@ -24,6 +24,7 @@
     path: "{{ _virtualenv_path }}"
     state: absent
   become: yes
+  become_user: root
   when:
     - virtualenv_recreate|bool
     - venv_root.stat.exists|bool
@@ -34,6 +35,8 @@
     path: "{{ _virtualenv_path }}"
     state: directory
     mode: '0755'
+  become: yes
+  become_user: "{{ virtualenv_user }}"
   register: venv_root
 
 - name: Create virtualenv from scratch  # noqa 503
@@ -46,6 +49,8 @@
   environment:
     HTTP_PROXY: "{{ python_http_proxy | default('') }}"
     HTTPS_PROXY: "{{ python_https_proxy | default('') }}"
+  become: yes
+  become_user: "{{ virtualenv_user }}"
   when:
     - venv_root.changed|bool
     - virtualenv_source == 'skip'
@@ -55,10 +60,18 @@
   vars:
     venv_source_path: "{{ virtualenv_source if virtualenv_source is search('^/') else _virtualenv_path|dirname+'/'+virtualenv_source }}"
     venv_target_path: "{{ _virtualenv_path }}"
+  args:
+    apply:
+      become: yes
+      become_user: "{{ virtualenv_user }}"
   when: venv_root.changed|bool and virtualenv_source != 'skip'
 
 - name: Upgrade pip to latest version
   include_tasks: pip.yml
+  args:
+    apply:
+      become: yes
+      become_user: "{{ virtualenv_user }}"
   when: virtualenv_pip_upgrade|bool
 
 - name: Install all pip packages
@@ -69,6 +82,8 @@
   environment:
     HTTP_PROXY: "{{ python_http_proxy | default('') }}"
     HTTPS_PROXY: "{{ python_https_proxy | default('') }}"
+  become: yes
+  become_user: "{{ virtualenv_user }}"
   loop: "{{ virtualenv_packages }}"
   loop_control:
     loop_var: pip_package
@@ -78,4 +93,6 @@
     state: link
     src: "{{ virtualenv_name }}"
     dest: "{{ _virtualenv_path|dirname }}/{{ virtualenv_label }}"
+  become: yes
+  become_user: "{{ virtualenv_user }}"
   when: virtualenv_label != 'skip'

@@ -24,5 +24,6 @@
     virtualenv_source:        "{{ item.source|default('skip') }}"
     virtualenv_label:         "{{ item.label|default('skip') }}"
     virtualenv_recreate:      "{{ item.recreate|default(False) }}"
+    virtualenv_user:          "{{ item.user|default('root') }}"
   when: item.state is not defined or item.state != 'absent'
   loop: "{{ python_virtualenvs|default([]) }}"
