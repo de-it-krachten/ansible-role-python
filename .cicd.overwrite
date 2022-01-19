@@ -1,0 +1,20 @@
+generic:
+  role_description: |
+    Installs python2/python3 from repository
+molecule:
+  converge:
+    vars:
+      python2: false
+      python3: true
+      python_virtualenv_root: /tmp/venv
+      python_virtualenvs:
+        - name: sample
+          packages:
+            - lxml
+            - dnspython
+          python: /usr/bin/python3
+          recreate: false
+          site_packages: false
+ci_templates:
+  converge.yml:
+    force: false
