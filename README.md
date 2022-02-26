@@ -12,12 +12,12 @@ Platforms
 Supported platforms
 
 - CentOS 7
-- CentOS 8
+- RockyLinux 8
+- AlmaLinux 8
 - Debian 10 (Buster)
 - Debian 11 (Bullseye)
 - Ubuntu 18.04 LTS
 - Ubuntu 20.04 LTS
-- Fedora 34
 
 
 
@@ -55,6 +55,16 @@ pip_clients:
 
 # Upgrade pip when out-dated
 pip_upgrade: false
+
+# Python (from source)
+python_from_source: false
+python_version: 3.8.12
+python_version_minor: "{{ python_version | regex_replace('^(\\d\\.\\d)(.*)', '\\1') }}"
+
+python_binary: python{{ python_version_minor }}
+python_binary_full: /usr/local/bin/{{ python_binary }}
+
+python_url: https://www.python.org/ftp/python/{{ python_version }}/Python-{{ python_version }}.tgz
 </pre></code>
 
 
@@ -62,7 +72,7 @@ Example Playbook
 ----------------
 
 <pre><code>
-- name: Converge
+- name: sample playbook for role 'python'
   hosts: all
   vars:
     python2: false
@@ -82,7 +92,7 @@ Example Playbook
       user:
         name: sample
 
-    - name: Include role 'ansible-role-python'
+    - name: Include role 'python'
       include_role:
-        name: ansible-role-python
+        name: python
 </pre></code>
