@@ -15,7 +15,9 @@
 
 - name: Move and symlink virtual environment location
   include_tasks: link.yml
-  when: python_virtualenv_data is defined
+  when:
+    - python_virtualenv_data is defined
+    - python_virtualenv_data|length > 0
 
 - name: Including 'python2'
   include_tasks: python.yml
