@@ -56,7 +56,10 @@ pip_clients:
   - pip
   - pip3
 
-# Upgrade pip when out-dated
+# Upgrade pip (site-packages) when out-dated
+pip_site_upgrade: false
+
+# Upgrade pip (venv) when out-dated
 pip_upgrade: false
 
 # Python (from source)
