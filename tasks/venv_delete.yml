@@ -2,20 +2,18 @@
 
 - name: Define virtual environment full path
   set_fact:
-    _virtualenv_path: "{{ virtualenv_path }}"
-  when: virtualenv_path is search('^/')
+    _virtualenv_path: >-
+      {%- if virtualenv_path is search('^/') -%}
+      {{ virtualenv_path }}
+      {%- else -%}
+      {{ python_virtualenv_root+'/'+virtualenv_path }}
+      {%- endif -%}
 
-- name: Define virtual environment full path
-  set_fact:
-    _virtualenv_path: "{{ python_virtualenv_root+'/'+python+'/'+virtualenv_path }}"
-  when: virtualenv_path is not search('^/')
-
-- name: Using the following location
+- name: Show virtual environment path to be deleted
   debug:
     var: _virtualenv_path
-    verbosity: 1
 
-- name: Delete obsolete virtual environments
+- name: Delete virtual environment
   file:
     path: "{{ _virtualenv_path }}"
     state: absent

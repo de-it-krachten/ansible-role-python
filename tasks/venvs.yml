@@ -6,7 +6,7 @@
     virtualenv_name: "{{ item.name }}"
     virtualenv_path: "{{ item.path|default(item.name) }}"
   when: item.state is defined and item.state == 'absent'
-  loop: "{{ python_virtualenvs|default([]) }}"
+  loop: "{{ python_virtualenvs }}"
   loop_control:
     label:
       - "{{ item.name }}"
@@ -26,4 +26,4 @@
     virtualenv_recreate:      "{{ item.recreate|default(False) }}"
     virtualenv_user:          "{{ item.user|default('root') }}"
   when: item.state is not defined or item.state != 'absent'
-  loop: "{{ python_virtualenvs|default([]) }}"
+  loop: "{{ python_virtualenvs }}"

@@ -35,6 +35,10 @@ pip_site_upgrade: false
 # Upgrade pip (venv) when out-dated
 pip_upgrade: false
 
+# virtual environments to set-up
+python_virtualenvs: []
+
+
 # Python (from source)
 python_from_source: false
 python_version: 3.8.12

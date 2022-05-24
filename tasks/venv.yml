@@ -9,10 +9,9 @@
       {{ python_virtualenv_root+'/'+virtualenv_path }}
       {%- endif -%}
 
-- name: Using the following location
+- name: Show virtual environment path
   debug:
     var: _virtualenv_path
-    verbosity: 1
 
 - name: Test if virtualenv already exists
   stat:
