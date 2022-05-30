@@ -3,11 +3,10 @@
 
 # ansible-role-python
 
-Installs python2/python3 from repository
+Installs python from repository
 
 
-Platforms
---------------
+## Platforms
 
 Supported platforms
 
@@ -20,12 +19,14 @@ Supported platforms
 - Debian 11 (Bullseye)
 - Ubuntu 18.04 LTS
 - Ubuntu 20.04 LTS
+- Ubuntu 22.04 LTS
+- Alpine 3
 
 Note:
 <sup>1</sup> : no automated testing is performed on these platforms
 
-Role Variables
---------------
+## Role Variables
+### defaults/main.yml
 <pre><code>
 # Default root-directory for virtual environments
 python_virtualenv_root: "{{ ansible_env['HOME'] }}/.virtualenv"
@@ -62,6 +63,10 @@ pip_site_upgrade: false
 # Upgrade pip (venv) when out-dated
 pip_upgrade: false
 
+# virtual environments to set-up
+python_virtualenvs: []
+
+
 # Python (from source)
 python_from_source: false
 python_version: 3.8.12
@@ -73,16 +78,254 @@ python_binary_full: /usr/local/bin/{{ python_binary }}
 python_url: https://www.python.org/ftp/python/{{ python_version }}/Python-{{ python_version }}.tgz
 </pre></code>
 
+### vars/Fedora.yml
+<pre><code>
+# Python2
+python2: false
+python2_command: /usr/bin/python2
+python2_virtualenv: /usr/bin/virtualenv
+python2_packages:
+  - python2
+  - python2-libs
+  - python2-devel
+  - python2-pip
+  - python2-virtualenv
+  - libselinux-python
+python2_packages_optional:
+  - gcc
+  - glibc-devel
+  - openssl-devel
 
-Example Playbook
-----------------
+# Python3
+python3: true
+python3_command: /usr/bin/python3
+python3_virtualenv: /usr/bin/virtualenv
+python3_packages:
+  - python3
+  - python3-libs
+  - python3-pip
+  - python3-virtualenv
+  - python3-libselinux
+python3_packages_optional:
+  - gcc
+  - python3-devel
+  - glibc-devel
+  - openssl-devel
+  - libffi-devel
 
+python38: false
+python39: false
+</pre></code>
+
+### vars/family-Alpine.yml
+<pre><code>
+# Python2
+python2: false
+python2_command: /usr/bin/python2
+python2_virtualenv: /usr/bin/virtualenv
+python2_packages:
+  - python2
+python2_packages_optional: []
+
+# Python3
+python3: true
+python3_command: /usr/bin/python3
+python3_virtualenv: /usr/bin/virtualenv
+python3_packages:
+  - python3
+  - py3-pip
+  - py3-virtualenv
+python3_packages_optional:
+  - build-base
+  - gcc
+  - g++
+  - libffi-dev
+  - openssl-dev
+  - python3-dev
+</pre></code>
+
+### vars/family-Debian.yml
+<pre><code>
+# Python2
+python2: false
+python2_command: /usr/bin/python2
+python2_virtualenv: /usr/bin/virtualenv
+python2_packages:
+  - python
+  - python-pip
+  - python-virtualenv
+python2_packages_optional: []
+
+# Python3
+python3: true
+python3_command: /usr/bin/python3
+python3_virtualenv: /usr/bin/virtualenv
+python3_packages:
+  - python3
+  - python3-pip
+  - python3-virtualenv
+  - python3-venv
+  - python3-setuptools
+  - virtualenv
+  - python3-virtualenv
+python3_packages_optional:
+  - gcc
+  - libffi-dev
+  - python3-dev
+
+python3_packages_src:
+  - build-essential
+  - zlib1g-dev
+  - libncurses5-dev
+  - libgdbm-dev
+  - libnss3-dev
+  - libssl-dev
+  - libsqlite3-dev
+  - libreadline-dev
+  - libffi-dev
+  - curl
+  - libbz2-dev
+
+# Python 3.8
+python38: false
+
+# Python 3.9
+python39: false
+</pre></code>
+
+### vars/family-RedHat-8.yml
+<pre><code>
+# Python2
+python2: false
+python2_command: /usr/bin/python2
+python2_virtualenv: /usr/bin/virtualenv-2.7
+python2_packages:
+  - python
+  - python-libs
+  - python-pip
+  - python-virtualenv
+  - libselinux-python
+python2_packages_optional:
+  - gcc
+  - glibc-devel
+  - python-devel
+  - openssl-devel
+  - libffi-devel
+
+# Python3
+python3: true
+python3_command: /usr/bin/python3
+python3_virtualenv: /usr/bin/virtualenv-3.6
+python3_packages:
+  - python36
+  - python3-libs
+  - python3-pip
+  - python3-virtualenv
+  - libselinux-python3
+python3_packages_optional:
+  - gcc
+  - python36-devel
+  - glibc-devel
+  - openssl-devel
+  - libffi-devel
+
+# Python 3.8
+python38: true
+python38_command: /usr/bin/python38
+python38_virtualenv: /usr/bin/virtualenv
+python38_packages:
+  - python38
+  - python38-libs
+  - python38-pip
+  - python3-virtualenv
+python38_packages_optional:
+  - python38-devel
+
+# Python 3.9
+python39: false
+python39_command: /usr/bin/python39
+python39_virtualenv: /usr/bin/virtualenv
+python39_packages:
+  - python39
+  - python39-libs
+  - python39-pip
+  - python3-virtualenv
+python39_packages_optional:
+  - python39-devel
+
+# Python from source
+python3_packages_src:
+  - '@Development Tools'
+  - gcc
+  - openssl-devel
+  - bzip2-devel
+  - libffi-devel
+  - xz-devel
+</pre></code>
+
+### vars/family-RedHat-7.yml
+<pre><code>
+# Python2
+python2: false
+python2_command: /usr/bin/python2
+python2_virtualenv: /usr/bin/virtualenv-2.7
+python2_packages:
+  - python
+  - python-libs
+  - python-pip
+  - python-virtualenv
+  - libselinux-python
+python2_packages_optional:
+  - gcc
+  - glibc-devel
+  - python-devel
+  - openssl-devel
+  - libffi-devel
+
+# Python3
+python3: true
+python3_command: /usr/bin/python3
+python3_virtualenv: /usr/bin/virtualenv-3.6
+python3_packages:
+  - python36
+  - python36-libs
+  - python36-pip
+  - python36-virtualenv
+  - libselinux-python3
+python3_packages_optional:
+  - gcc
+  - python36-devel
+  - glibc-devel
+  - openssl-devel
+  - libffi-devel
+
+# Python from source
+python3_packages_src:
+  - '@Development Tools'
+  - gcc
+  - openssl-devel
+  - bzip2-devel
+  - libffi-devel
+  - xz-devel
+
+# Python 3.8
+python38: false
+
+# Python 3.9
+python39: false
+</pre></code>
+
+
+
+## Example Playbook
+### molecule/default/converge.yml
 <pre><code>
 - name: sample playbook for role 'python'
   hosts: all
   vars:
     python2: false
     python3: true
+    python_package_install_optional: true
     python_virtualenv_root: /tmp/venv
     python_virtualenvs:
       - name: sample
@@ -91,8 +334,8 @@ Example Playbook
         python: /usr/bin/python3
         site_packages: false
         packages:
-          - lxml
           - dnspython
+          - jq
   tasks:
     - name: Create user sample
       user:
