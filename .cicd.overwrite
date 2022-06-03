@@ -1,6 +1,13 @@
+---
+
 generic:
   role_description: |
-    Installs python2/python3 from repository
+    Installs python from repository
+
+platforms_add:
+  - name: Alpine 3
+    image: alpine3
+
 molecule:
   converge:
     vars:
@@ -15,6 +22,11 @@ molecule:
           python: /usr/bin/python3
           recreate: false
           site_packages: false
+  platforms_add:
+    - name: alpine3
+      image: robertdebock/alpine:latest
+      pre_build_image: false
+
 ci_templates:
   converge.yml:
     force: false

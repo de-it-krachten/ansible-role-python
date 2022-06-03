@@ -18,7 +18,7 @@
     msg:
       python2: "{{ python2 }}"
       python3: "{{ python3 }}"
-      python38: "{{ python38 }}"
+      python38: "{{ python38 | default('N/A') }}"
       python_virtualenvs: "{{ python_virtualenvs }}"
 #    verbosity: 1
 
@@ -44,7 +44,7 @@
   include_tasks: python.yml
   vars:
     python: python38
-  when: python38|bool
+  when: python38 is defined and python38|bool
 
 - name: Upgrading pip (site-packages)
   include_tasks: pip.yml
@@ -52,7 +52,7 @@
 
 - name: Install python from source
   include_tasks: source.yml
-  when: python_from_source
+  when: python_from_source is defined and python_from_source|bool
 
 - name: Setup virtual environments
   include_tasks: venvs.yml
