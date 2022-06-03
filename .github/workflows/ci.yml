@@ -105,15 +105,12 @@ jobs:
         run: |
           sudo modprobe ip6table_filter
 
-      - name: Create molecule.yml from template
+      - name: Retrieve wrapper molecule script
         run: |
-          if [[ -f molecule/default/molecule.yml.j2 ]]
-          then
-            export MOLECULE_DISTROS="json:[\"$MOLECULE_DISTRO\"]"
-            e2j2 -f molecule/default/molecule.yml.j2 || exit 1
-          fi
-        env:
-          MOLECULE_DISTRO: ${{ matrix.distro }}
+          sudo apt install curl
+          sudo curl -o /usr/local/bin/molecule-test.sh \
+            https://github.com/de-it-krachten/ansible-role-molecule/blob/dev/files/molecule-test.sh
+          sudo chmod 755 /usr/local/bin/molecule-test.sh
 
       - name: Run Molecule tests.
         run: molecule test
