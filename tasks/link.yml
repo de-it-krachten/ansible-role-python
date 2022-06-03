@@ -7,7 +7,10 @@
 
 - name: Move data from {{ python_virtualenv_root }} -> {{ python_virtualenv_data }}
   command: mv {{ python_virtualenv_root }} {{ python_virtualenv_data }}
-  when:  virtenv.stat.exists and virtenv.stat.isdir and not virtenv.stat.islnk
+  when:
+    - virtenv.stat.exists
+    - virtenv.stat.isdir and not virtenv.stat.islnk
+    - python_virtualenv_root != python_virtualenv_data
 
 - name: Create virtualenv directory {{ python_virtualenv_data }}
   file:
