@@ -1,3 +1,11 @@
+# [1.1.0](https://github.com/de-it-krachten/ansible-role-python/compare/v1.0.2...v1.1.0) (2022-06-03)
+
+
+### Features
+
+* Add support for Alpine 3.x ([ca6bfcc](https://github.com/de-it-krachten/ansible-role-python/commit/ca6bfcc07b803ee520c8ebdb5511de8b1866ea24))
+* Add support for Ubuntu 22.04 LTS ([7483a95](https://github.com/de-it-krachten/ansible-role-python/commit/7483a954689d1531303feba7fb21886e08a7940b))
+
 ## [1.0.2](https://github.com/de-it-krachten/ansible-role-python/compare/v1.0.1...v1.0.2) (2022-05-24)
 
 
