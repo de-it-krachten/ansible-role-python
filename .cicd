@@ -99,6 +99,7 @@ molecule:
     - name: ubuntu2204
       image: "geerlingguy/docker-ubuntu2204-ansible:latest"
   platforms_skip: []
+  platforms_add: []
   converge:
     playbooks: []
     vars: {}

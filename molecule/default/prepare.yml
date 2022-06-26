@@ -7,8 +7,13 @@
     proxy_url: "{{ lookup('env', 'HTTPS_PROXY') | default('') }}"
     proxy_use: "{{ True if ( proxy_url is defined and proxy_url|length > 0 ) else False }}"
     systemctl_alternative: False
-    update_all: false
   tasks:
+
+    - name: Create remote_tmp
+      file:
+        path: /root/.ansible/tmp
+        state: directory
+        mode: "0700"
 
     - name: Define molecule distro (Ubuntu)
       set_fact:
