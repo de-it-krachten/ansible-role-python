@@ -7,6 +7,7 @@
     proxy_url: "{{ lookup('env', 'HTTPS_PROXY') | default('') }}"
     proxy_use: "{{ True if ( proxy_url is defined and proxy_url|length > 0 ) else False }}"
     systemctl_alternative: False
+    update_all: false
   tasks:
 
     - name: Define molecule distro (Ubuntu)

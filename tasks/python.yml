@@ -7,6 +7,15 @@
     python_command: "{{ python }}_command"
     python_virtualenv_cmd: "{{ python }}_virtualenv"
 
+- name: Show settings
+  debug:
+    msg:
+      python: "{{ python }}"
+      python_packages: "{{ vars[python_packages] }}"
+      python_packages_optional: "{{ vars[python_packages_optional] }}"
+      python_command: "{{ vars[python_command] }}"
+      python_virtualenv_cmd: "{{ vars[python_virtualenv_cmd] }}"
+
 - name: Update APT cache
   apt:
     update_cache: yes
