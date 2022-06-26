@@ -1,3 +1,11 @@
+# [1.2.0](https://github.com/de-it-krachten/ansible-role-python/compare/v1.1.0...v1.2.0) (2022-06-26)
+
+
+### Features
+
+* Add support for Fedora 35/36 ([706c01c](https://github.com/de-it-krachten/ansible-role-python/commit/706c01cf56df3cd6af0f3b22724c719d0f0ef08d))
+* Add support for Ubuntu 22.04 LTS ([7f19e9b](https://github.com/de-it-krachten/ansible-role-python/commit/7f19e9ba98c861f15a3e872a7a16fcf8b74dd014))
+
 # [1.1.0](https://github.com/de-it-krachten/ansible-role-python/compare/v1.0.2...v1.1.0) (2022-06-03)
 
 
