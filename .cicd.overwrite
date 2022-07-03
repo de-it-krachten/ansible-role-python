@@ -4,22 +4,23 @@ generic:
   role_description: |
     Installs python from repository
 
-github:
-  fail_fast: false
-
-platforms_add:
-  - name: Alpine 3
-    image: alpine3
-  - name: Fedora 35
-    image: fedora35
-  - name: Fedora 36
-    image: fedora36
+platforms:
+  alpine:
+    name: Alpine 3
+    ci: true
+    supported: true
+    image: "robertdebock/alpine:latest"
+    galaxy:
+      name: Alpine
+      version: all
 
 molecule:
   converge:
+    pre: converge-pre.yml
     vars:
       python2: false
       python3: true
+      python_package_install_optional: true
       python_virtualenv_root: /tmp/venv
       python_virtualenvs:
         - name: sample
@@ -29,15 +30,4 @@ molecule:
           python: /usr/bin/python3
           recreate: false
           site_packages: false
-  platforms_add:
-    - name: alpine3
-      image: robertdebock/alpine:latest
-      pre_build_image: false
-    - name: fedora35
-      image: "geerlingguy/docker-fedora35-ansible:latest"
-    - name: fedora36
-      image: "geerlingguy/docker-fedora36-ansible:latest"
-
-ci_templates:
-  converge.yml:
-    force: false
+          user: sample
