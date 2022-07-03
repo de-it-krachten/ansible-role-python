@@ -335,7 +335,7 @@ python39: false
     python3: True
     python_package_install_optional: True
     python_virtualenv_root: /tmp/venv
-    python_virtualenvs: [{'name': 'sample', 'packages': ['lxml', 'dnspython'], 'python': '/usr/bin/python3', 'recreate': False, 'site_packages': False, 'user': 'sample'}]
+    python_virtualenvs: [{'name': 'sample', 'packages': ['dnspython'], 'python': '/usr/bin/python3', 'recreate': False, 'site_packages': False, 'user': 'sample'}]
   tasks:
     - name: Include role 'python'
       include_role:

@@ -10,6 +10,7 @@ platforms:
     ci: true
     supported: true
     image: "robertdebock/alpine:latest"
+    pre_build_image: false
     galaxy:
       name: Alpine
       version: all
@@ -25,7 +26,6 @@ molecule:
       python_virtualenvs:
         - name: sample
           packages:
-            - lxml
             - dnspython
           python: /usr/bin/python3
           recreate: false
