@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/de-it-krachten/ansible-role-python/compare/v1.2.0...v1.3.0) (2022-07-04)
+
+
+### Features
+
+* Add support for RHEL9 ([51ad792](https://github.com/de-it-krachten/ansible-role-python/commit/51ad7922b15f5f3e72dca13bce55ff66f7d5ad7b))
+
 # [1.2.0](https://github.com/de-it-krachten/ansible-role-python/compare/v1.1.0...v1.2.0) (2022-06-26)
 
 
