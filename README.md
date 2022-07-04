@@ -12,17 +12,21 @@ Supported platforms
 
 - Red Hat Enterprise Linux 7<sup>1</sup>
 - Red Hat Enterprise Linux 8<sup>1</sup>
+- Red Hat Enterprise Linux 9<sup>1</sup>
 - CentOS 7
+- CentOS 8
 - RockyLinux 8
-- AlmaLinux 8<sup>1</sup>
+- OracleLinux 8
+- AlmaLinux 8
+- AlmaLinux 9
 - Debian 10 (Buster)
 - Debian 11 (Bullseye)
 - Ubuntu 18.04 LTS
 - Ubuntu 20.04 LTS
 - Ubuntu 22.04 LTS
-- Alpine 3
 - Fedora 35
 - Fedora 36
+- Alpine 3
 
 Note:
 <sup>1</sup> : no automated testing is performed on these platforms
@@ -322,27 +326,17 @@ python39: false
 ## Example Playbook
 ### molecule/default/converge.yml
 <pre><code>
+- import_playbook: converge-pre.yml
+
 - name: sample playbook for role 'python'
   hosts: all
   vars:
-    python2: false
-    python3: true
-    python_package_install_optional: true
+    python2: False
+    python3: True
+    python_package_install_optional: True
     python_virtualenv_root: /tmp/venv
-    python_virtualenvs:
-      - name: sample
-        user: sample
-        recreate: false
-        python: /usr/bin/python3
-        site_packages: false
-        packages:
-          - dnspython
-          - jq
+    python_virtualenvs: [{'name': 'sample', 'packages': ['dnspython'], 'python': '/usr/bin/python3', 'recreate': False, 'site_packages': False, 'user': 'sample'}]
   tasks:
-    - name: Create user sample
-      user:
-        name: sample
-
     - name: Include role 'python'
       include_role:
         name: python

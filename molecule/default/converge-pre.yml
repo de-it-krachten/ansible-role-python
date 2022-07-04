@@ -1,0 +1,8 @@
+---
+
+- name: Converge - pre
+  hosts: all
+  tasks:
+    - name: Create user sample
+      user:
+        name: sample

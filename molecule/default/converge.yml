@@ -1,26 +1,16 @@
 ---
 
+- import_playbook: converge-pre.yml
+
 - name: Converge
   hosts: all
   vars:
-    python2: false
-    python3: true
-    python_package_install_optional: true
+    python2: False
+    python3: True
+    python_package_install_optional: True
     python_virtualenv_root: /tmp/venv
-    python_virtualenvs:
-      - name: sample
-        user: sample
-        recreate: false
-        python: /usr/bin/python3
-        site_packages: false
-        packages:
-          - dnspython
-          - jq
+    python_virtualenvs: [{'name': 'sample', 'packages': ['dnspython'], 'python': '/usr/bin/python3', 'recreate': False, 'site_packages': False, 'user': 'sample'}]
   tasks:
-    - name: Create user sample
-      user:
-        name: sample
-
     - name: Include role 'ansible-role-python'
       include_role:
         name: ansible-role-python
