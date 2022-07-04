@@ -14,7 +14,6 @@ Supported platforms
 - Red Hat Enterprise Linux 8<sup>1</sup>
 - Red Hat Enterprise Linux 9<sup>1</sup>
 - CentOS 7
-- CentOS 8
 - RockyLinux 8
 - OracleLinux 8
 - AlmaLinux 8
@@ -197,6 +196,43 @@ python38: false
 
 # Python 3.9
 python39: false
+</pre></code>
+
+### vars/family-RedHat-9.yml
+<pre><code>
+# Python2
+python2: false
+python2_command: /usr/bin/python2
+python2_virtualenv: /usr/bin/virtualenv-2.7
+python2_packages:
+  - python
+  - python-libs
+  - python-pip
+  - python-virtualenv
+  - libselinux-python
+python2_packages_optional:
+  - gcc
+  - glibc-devel
+  - python-devel
+  - openssl-devel
+  - libffi-devel
+
+# Python3
+python3: true
+python3_command: /usr/bin/python3
+python3_virtualenv: /usr/bin/virtualenv
+python3_packages:
+  - python3
+  - python3-libs
+  - python3-pip
+  - python3-virtualenv
+  - libselinux-python3
+python3_packages_optional:
+  - gcc
+  - python3-devel
+  - glibc-devel
+  - openssl-devel
+  - libffi-devel
 </pre></code>
 
 ### vars/family-RedHat-8.yml
