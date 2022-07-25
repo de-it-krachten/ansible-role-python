@@ -5,17 +5,14 @@ generic:
     Installs python from repository
 
 platforms:
-  alpine:
-    name: Alpine 3
+  alpine3:
     ci: true
     supported: true
-    image: "robertdebock/alpine:latest"
-    pre_build_image: false
-    galaxy:
-      name: Alpine
-      version: all
 
 molecule:
+  prepare:
+    vars:
+      activate_epel: true
   converge:
     pre: converge-pre.yml
     vars:
