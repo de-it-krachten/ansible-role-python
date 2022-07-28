@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/de-it-krachten/ansible-role-python/compare/v1.3.0...v1.4.0) (2022-07-28)
+
+
+### Features
+
+* Implement ansible-lint v6 support ([06d30d1](https://github.com/de-it-krachten/ansible-role-python/commit/06d30d1abb878c969a4eb142e6ce054d66cce08d))
+
 # [1.3.0](https://github.com/de-it-krachten/ansible-role-python/compare/v1.2.0...v1.3.0) (2022-07-04)
 
 
