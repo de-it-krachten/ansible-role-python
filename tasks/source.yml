@@ -20,7 +20,8 @@
       - "python {{ python_version_minor }} version installed : {{ python_installed }}"
       - "python {{ python_version_minor }} version required  : {{ python_version }}"
 
-- block:
+- name:  Install from source
+  block:
 
     - name: Install all required packages
       package:

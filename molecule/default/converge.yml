@@ -4,6 +4,7 @@
 
 - name: Converge
   hosts: all
+  become: "{{ molecule['converge']['become'] | default('yes') }}"
   vars:
     python2: False
     python3: True
