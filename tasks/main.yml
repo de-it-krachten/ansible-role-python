@@ -46,6 +46,12 @@
     python: python38
   when: python38 is defined and python38|bool
 
+- name: Including 'python39'
+  include_tasks: python.yml
+  vars:
+    python: python39
+  when: python39 is defined and python39|bool
+
 - name: Upgrading pip (site-packages)
   include_tasks: pip.yml
   when: pip_upgrade|bool
