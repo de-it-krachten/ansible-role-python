@@ -15,7 +15,7 @@
   check_mode: false
   register: pip_version
     
-- name: Upgrade pip (site-packages) to latest version when version is below 19  # noqa 403
+- name: Upgrade pip (site-packages) to latest version when version is below 19  # noqa package-latest
   pip:
     name: pip
     state: latest
@@ -27,7 +27,7 @@
     - _virtualenv_path is not defined
     - pip_version.stdout is version('19.0.0', '<')
 
-- name: Upgrade pip (virtualenv) to latest version  # noqa 403
+- name: Upgrade pip (virtualenv) to latest version  # noqa package-latest
   pip:
     name: pip
     state: latest

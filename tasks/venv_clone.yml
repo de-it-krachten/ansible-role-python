@@ -19,7 +19,7 @@
   become: yes
   when: python_package_install|bool
 
-- name: Clone virtualenv '{{ venv_source_path }}' -> '{{ venv_target_path }}'
+- name: Clone virtualenv '{{ venv_source_path }}' -> '{{ venv_target_path }}'  # noqa command-instead-of-module  no-changed-when
   command: rsync -a {{ venv_source_path }}/ {{ venv_target_path }}
   tags: skip_ansible_lint
 
