@@ -39,8 +39,13 @@ provisioner:
   inventory:
     group_vars: {}
     host_vars:
+      python-fedora36-node1:
+        reset_vars:
+          python38: 'true'
+          python39: 'true'
       python-rockylinux8-node1:
-        __reset_python39: 'true'
+        reset_vars:
+          python39: 'true'
 
 scenario:
   name: default

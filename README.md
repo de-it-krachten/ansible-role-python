@@ -119,8 +119,21 @@ python3_packages_optional:
   - openssl-devel
   - libffi-devel
 
+# Python 3.8
 python38: false
+python38_command: /usr/bin/python3.8
+python38_virtualenv: /usr/bin/virtualenv
+python38_packages:
+  - python3.8
+python38_packages_optional: []
+
+# Python 3.9
 python39: false
+python39_command: /usr/bin/python3.9
+python39_virtualenv: /usr/bin/virtualenv
+python39_packages:
+  - python3.9
+python39_packages_optional: []
 </pre></code>
 
 ### vars/family-Alpine.yml
@@ -274,7 +287,7 @@ python3_packages_optional:
 
 # Python 3.8
 python38: true
-python38_command: /usr/bin/python38
+python38_command: /usr/bin/python3.8
 python38_virtualenv: /usr/bin/virtualenv
 python38_packages:
   - python38
@@ -286,7 +299,7 @@ python38_packages_optional:
 
 # Python 3.9
 python39: false
-python39_command: /usr/bin/python39
+python39_command: /usr/bin/python3.9
 python39_virtualenv: /usr/bin/virtualenv
 python39_packages:
   - python39

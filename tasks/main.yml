@@ -15,11 +15,11 @@
 
 - name: Reset all variables that require resetting  # noqa var-naming
   set_fact:
-    "{{ item | regex_replace('__reset_') }}": "{{ vars[item] }}"
-  loop: "{{ vars | dict2items | json_query('[].key') | map('regex_search', '^__reset_.*') | select('string') | list }}"
+    "{{ item }}": "{{ vars['reset_vars'][item] }}"
+  loop: "{{ (reset_vars|default({})) | dict2items | json_query('[].key') }}"
   loop_control:
-     label:
-       - "{{ item | regex_replace('__reset_') }}"
+    label:
+      - "{{ item }}"
 
 - name: Show debug settings
   debug:
