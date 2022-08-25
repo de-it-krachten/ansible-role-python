@@ -30,4 +30,5 @@ molecule:
           user: sample
   host_vars_static:
     python-rockylinux8-node1:
-      __reset_python39: 'true'
+      reset_vars:
+        python39: 'true'

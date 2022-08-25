@@ -40,7 +40,8 @@ provisioner:
     group_vars: {}
     host_vars:
       python-rockylinux8-node1:
-        __reset_python39: 'true'
+        reset_vars:
+          python39: 'true'
 
 scenario:
   name: default
