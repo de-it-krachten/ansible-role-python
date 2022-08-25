@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/de-it-krachten/ansible-role-python/compare/v1.4.0...v1.4.1) (2022-08-25)
+
+
+### Bug Fixes
+
+* add missing python 3.9 code ([c240d22](https://github.com/de-it-krachten/ansible-role-python/commit/c240d2257d413914a91f11995443d1210a833170))
+
 # [1.4.0](https://github.com/de-it-krachten/ansible-role-python/compare/v1.3.0...v1.4.0) (2022-07-28)
 
 
