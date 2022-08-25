@@ -13,7 +13,7 @@
       paths:
         - 'vars'
 
-- name: Reset all variables that require resetting
+- name: Reset all variables that require resetting  # noqa var-naming
   set_fact:
     "{{ item | regex_replace('__reset_') }}": "{{ vars[item] }}"
   loop: "{{ vars | dict2items | json_query('[].key') | map('regex_search', '^__reset_.*') | select('string') | list }}"
