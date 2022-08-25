@@ -1,3 +1,11 @@
+## [1.4.2](https://github.com/de-it-krachten/ansible-role-python/compare/v1.4.1...v1.4.2) (2022-08-25)
+
+
+### Bug Fixes
+
+* Add support for Python 3.8/3.9 on Fedora ([7ab1b87](https://github.com/de-it-krachten/ansible-role-python/commit/7ab1b879cbefeeee1d0319a6a06a44e743bc859f))
+* Rename '__reset__<var>' into dict 'reset_vars' ([a3da94f](https://github.com/de-it-krachten/ansible-role-python/commit/a3da94f553548e875b60f56d1817c6c6aa787af2))
+
 ## [1.4.1](https://github.com/de-it-krachten/ansible-role-python/compare/v1.4.0...v1.4.1) (2022-08-25)
 
 
