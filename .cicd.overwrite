@@ -28,3 +28,10 @@ molecule:
           recreate: false
           site_packages: false
           user: sample
+  host_vars_static:
+    python-rockylinux8-node1:
+      __reset_python39: 'true'
+
+ansible_lint:
+  skip_list:
+    - var-naming

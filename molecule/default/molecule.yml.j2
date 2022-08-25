@@ -7,7 +7,9 @@ driver:
 lint: |
   set -e
   yamllint .
+  ln -fs molecule/default/requirements.yml
   ansible-lint
+  rm -f requirements.yml
 platforms:
 {% for platform in MOLECULE_DISTROS %}
   - name: python-{{ platform.name }}-node1
@@ -36,7 +38,10 @@ provisioner:
     converge: ${MOLECULE_PLAYBOOK:-converge.yml}
   inventory:
     group_vars: {}
-    host_vars: {}
+    host_vars:
+      python-rockylinux8-node1:
+        __reset_python39: 'true'
+
 scenario:
   name: default
 verifier:

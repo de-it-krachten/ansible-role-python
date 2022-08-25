@@ -38,7 +38,7 @@
   become_user: "{{ virtualenv_user }}"
   register: venv_root
 
-- name: Create virtualenv from scratch  # noqa 503
+- name: Create virtualenv from scratch  # noqa no-handler
   pip:
     name:                     "pip"
     virtualenv:               "{{ _virtualenv_path }}"
