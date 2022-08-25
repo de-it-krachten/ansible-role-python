@@ -16,7 +16,7 @@
 - name: Reset all variables that require resetting  # noqa var-naming
   set_fact:
     "{{ item }}": "{{ vars['reset_vars'][item] }}"
-  loop: "{{ reset_vars | dict2items | json_query('[].key') }}"
+  loop: "{{ (reset_vars|default({})) | dict2items | json_query('[].key') }}"
   loop_control:
     label:
       - "{{ item }}"
