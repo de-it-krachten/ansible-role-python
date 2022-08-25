@@ -13,12 +13,21 @@
       paths:
         - 'vars'
 
+- name: Reset all variables that require resetting
+  set_fact:
+    "{{ item | regex_replace('__reset_') }}": "{{ vars[item] }}"
+  loop: "{{ vars | dict2items | json_query('[].key') | map('regex_search', '^__reset_.*') | select('string') | list }}"
+  loop_control:
+     label:
+       - "{{ item | regex_replace('__reset_') }}"
+
 - name: Show debug settings
   debug:
     msg:
       python2: "{{ python2 }}"
       python3: "{{ python3 }}"
       python38: "{{ python38 | default('N/A') }}"
+      python39: "{{ python39 | default('N/A') }}"
       python_virtualenvs: "{{ python_virtualenvs }}"
 #    verbosity: 1
 
