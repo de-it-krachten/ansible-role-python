@@ -69,6 +69,27 @@
   include_tasks: source.yml
   when: python_from_source is defined and python_from_source|bool
 
+- name: Backward compatibility for RedHat/CentOS 7
+  block:
+
+    - name: Check if /usr/bin/virtualenv exists
+      stat:
+        path: /usr/bin/virtualenv
+      register: _virtualenv
+
+    - name: Backward compatibility for RedHat/CentOS 7
+      file:
+        src: "{{ python3_virtualenv if python3|bool else python2_virtualenv }}"
+        dest: /usr/bin/virtualenv
+        owner: root
+        group: root
+        state: link
+      when: not _virtualenv.stat.exists
+
+  when:
+    - ansible_os_family == 'RedHat'
+    - ansible_distribution_major_version == '7'
+
 - name: Setup virtual environments
   include_tasks: venvs.yml
   when: python_virtualenvs is defined and python_virtualenvs|length > 0
