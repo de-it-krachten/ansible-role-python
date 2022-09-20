@@ -4,7 +4,7 @@
   include_tasks: venv_delete.yml
   vars:
     virtualenv_name: "{{ item.name }}"
-    virtualenv_path: "{{ item.path|default(item.name) }}"
+    virtualenv_path: "{{ item.path | default(item.name) }}"
   when: item.state is defined and item.state == 'absent'
   loop: "{{ python_virtualenvs }}"
   loop_control:
@@ -15,15 +15,16 @@
   include_tasks: venv.yml
   vars:
     virtualenv_name:          "{{ item.name }}"
-    virtualenv_path:          "{{ item.path|default(item.name) }}"
-    virtualenv_site_packages: "{{ item.site_packages|default(False) }}"
-    virtualenv_pip_upgrade:   "{{ item.pip_upgrade|default(False) }}"
-    virtualenv_command:       "{{ python_virtualenv_command|default(vars[python_virtualenv_cmd]) }}"
+    virtualenv_path:          "{{ item.path | default(item.name) }}"
+    virtualenv_site_packages: "{{ item.site_packages | default(False) }}"
+    virtualenv_pip_upgrade:   "{{ item.pip_upgrade | default(False) }}"
+    # virtualenv_command:       "{{ item.virtualenv | default(vars[python_virtualenv_cmd]) | default(python_virtualenv_command) }}"
+    virtualenv_command:       "{{ item.virtualenv | default(python_virtualenv_command) }}"
     virtualenv_python:        "{{ item.python }}"
     virtualenv_packages:      "{{ item.packages }}"
-    virtualenv_source:        "{{ item.source|default('skip') }}"
-    virtualenv_label:         "{{ item.label|default('skip') }}"
-    virtualenv_recreate:      "{{ item.recreate|default(False) }}"
-    virtualenv_user:          "{{ item.user|default('root') }}"
+    virtualenv_source:        "{{ item.source | default('skip') }}"
+    virtualenv_label:         "{{ item.label | default('skip') }}"
+    virtualenv_recreate:      "{{ item.recreate | default(False) }}"
+    virtualenv_user:          "{{ item.user | default('root') }}"
   when: item.state is not defined or item.state != 'absent'
   loop: "{{ python_virtualenvs }}"

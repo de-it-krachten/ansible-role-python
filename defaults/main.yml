@@ -38,6 +38,8 @@ pip_upgrade: false
 # virtual environments to set-up
 python_virtualenvs: []
 
+# virtual env command
+python_virtualenv_command: /usr/bin/virtualenv
 
 # Python (from source)
 python_from_source: false
