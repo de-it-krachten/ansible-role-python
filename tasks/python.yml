@@ -5,7 +5,7 @@
     python_packages: "{{ python }}_packages"
     python_packages_optional: "{{ python }}_packages_optional"
     python_command: "{{ python }}_command"
-    python_virtualenv_cmd: "{{ python }}_virtualenv"
+    python_virtualenv: "{{ python }}_virtualenv"
 
 - name: Show settings
   debug:
@@ -14,7 +14,7 @@
       python_packages: "{{ vars[python_packages] }}"
       python_packages_optional: "{{ vars[python_packages_optional] }}"
       python_command: "{{ vars[python_command] }}"
-      python_virtualenv_cmd: "{{ vars[python_virtualenv_cmd] }}"
+      python_virtualenv: "{{ vars[python_virtualenv] }}"
 
 - name: Update APT cache
   apt:
