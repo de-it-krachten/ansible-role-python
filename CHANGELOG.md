@@ -1,3 +1,10 @@
+## [1.4.3](https://github.com/de-it-krachten/ansible-role-python/compare/v1.4.2...v1.4.3) (2022-09-20)
+
+
+### Bug Fixes
+
+* fallback on default virtualenv command ([4bcfb2f](https://github.com/de-it-krachten/ansible-role-python/commit/4bcfb2f32de02a9f1973e31cb13a231917839b4a))
+
 ## [1.4.2](https://github.com/de-it-krachten/ansible-role-python/compare/v1.4.1...v1.4.2) (2022-08-25)
 
 
