@@ -6,7 +6,7 @@ generic:
 
 platforms:
   alpine3:
-    ci: true
+    ci: false
     supported: true
 
 molecule:
