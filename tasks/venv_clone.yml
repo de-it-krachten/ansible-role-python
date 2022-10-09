@@ -1,42 +1,42 @@
 ---
 
 - name: Make sure all variables were provided
-  assert:
+  ansible.builtin.assert:
     that:
       - venv_source_path is defined
       - venv_target_path is defined
 
 - name: Create directory to hold virtualenv
-  file:
+  ansible.builtin.file:
     path: "{{ venv_target_path }}"
     state: directory
     mode: "0755"
 
 - name: Install rsync package
-  package:
+  ansible.builtin.package:
     name: rsync
     state: present
   become: yes
-  when: python_package_install|bool
+  when: python_package_install | bool
 
-- name: Clone virtualenv '{{ venv_source_path }}' -> '{{ venv_target_path }}'  # noqa command-instead-of-module  no-changed-when
-  command: rsync -a {{ venv_source_path }}/ {{ venv_target_path }}
+- name: Clone virtualenv '{{ venv_source_path }}' -> '{{ venv_target_path }}'  # noqa command-instead-of-module no-changed-when name[template]
+  ansible.builtin.command: rsync -a {{ venv_source_path }}/ {{ venv_target_path }}
   tags: skip_ansible_lint
 
 - name: Delete all *.pyc files
-  command: find {{ venv_target_path }} -name *.pyc -delete
+  ansible.builtin.command: find {{ venv_target_path }} -name *.pyc -delete
   register: find_delete
-  changed_when: find_delete.stdout|length > 0
+  changed_when: find_delete.stdout | length > 0
 
 - name: Search for all files referencing the original venv
-  find:
+  ansible.builtin.find:
     paths: "{{ venv_target_path }}"
     contains: ".*{{ venv_source_path }}.*"
     recurse: yes
   register: files_to_alter
 
 - name: Change all files referencing the old environment
-  replace:
+  ansible.builtin.replace:
     path: "{{ var.path }}"
     regexp: "{{ venv_source_path }}"
     replace: "{{ venv_target_path }}"

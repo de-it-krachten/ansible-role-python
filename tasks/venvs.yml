@@ -1,7 +1,7 @@
 ---
 
 - name: Delete obsolete virtual environments
-  include_tasks: venv_delete.yml
+  ansible.builtin.include_tasks: venv_delete.yml
   vars:
     virtualenv_name: "{{ item.name }}"
     virtualenv_path: "{{ item.path | default(item.name) }}"
@@ -12,7 +12,7 @@
       - "{{ item.name }}"
 
 - name: Setup new or update existing virtual environments
-  include_tasks: venv.yml
+  ansible.builtin.include_tasks: venv.yml
   vars:
     virtualenv_name:          "{{ item.name }}"
     virtualenv_path:          "{{ item.path | default(item.name) }}"

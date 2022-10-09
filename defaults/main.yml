@@ -4,13 +4,13 @@
 python_virtualenv_root: "{{ ansible_env['HOME'] }}/.virtualenv"
 
 # Install default python packages
-python_package_install: True
+python_package_install: true
 
 # Install additional python packages (might be required when compilation is required)
-python_package_install_optional: False
+python_package_install_optional: false
 
 # Use list of trusted hosts as defined under python_trusted_hosts
-python_trust_hosts: False
+python_trust_hosts: false
 
 # List of trusted hosts
 python_trusted_hosts: >

@@ -1,14 +1,14 @@
 ---
 
 - name: Get variable names that hold settings for {{ python }}
-  set_fact:
+  ansible.builtin.set_fact:
     python_packages: "{{ python }}_packages"
     python_packages_optional: "{{ python }}_packages_optional"
     python_command: "{{ python }}_command"
     python_virtualenv: "{{ python }}_virtualenv"
 
 - name: Show settings
-  debug:
+  ansible.builtin.debug:
     msg:
       python: "{{ python }}"
       python_packages: "{{ vars[python_packages] }}"
@@ -17,19 +17,19 @@
       python_virtualenv: "{{ vars[python_virtualenv] }}"
 
 - name: Update APT cache
-  apt:
+  ansible.builtin.apt:
     update_cache: yes
     cache_valid_time: 3600
   become: yes
   when: ansible_os_family == 'Debian'
 
-- name: Install {{ python }} packages
-  package:
+- name: Install {{ python }} packages  # noqa name[template]
+  ansible.builtin.package:
     name: "{{ vars[python_packages] }}"
     state: present
-    disablerepo: "{{ disablerepo|default(omit) }}"
+    disablerepo: "{{ disablerepo | default(omit) }}"
   become: yes
-  when: python_package_install|bool
+  when: python_package_install | bool
   register: _package_result
 
 - name: Show packaged installed and/or updated
@@ -37,15 +37,15 @@
     var: _package_result.results
   when:
     - _package_result.results is defined
-    - _package_result.results|length > 0
+    - _package_result.results | length > 0
 
-- name: Install {{ python }} optional packages
-  package:
+- name: Install {{ python }} optional packages  # noqa name[template]
+  ansible.builtin.package:
     name: "{{ vars[python_packages_optional] }}"
     state: present
-    disablerepo: "{{ disablerepo|default(omit) }}"
+    disablerepo: "{{ disablerepo | default(omit) }}"
   become: yes
-  when: python_package_install_optional|bool
+  when: python_package_install_optional | bool
   register: _package_result
 
 - name: Show packaged installed and/or updated
@@ -53,12 +53,12 @@
     var: _package_result.results
   when:
     - _package_result.results is defined
-    - _package_result.results|length > 0
+    - _package_result.results | length > 0
 
 - name: Upgrade pip (site-packages) to latest version
-  pip:
+  ansible.builtin.pip:
     name: pip
     state: latest  # noqa package-latest
     extra_args: --upgrade
-    executable: "{{ 'pip' if python == 'python2' else 'pip3' }}" 
-  when: pip_site_upgrade|bool
+    executable: "{{ 'pip' if python == 'python2' else 'pip3' }}"
+  when: pip_site_upgrade | bool
