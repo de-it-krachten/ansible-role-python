@@ -1,12 +1,12 @@
 ---
 
 - name: Define pip clients for virtualenv
-  set_fact:
-    pip_clients: "{{ _virtualenv_path+'/bin/'+pip_executable }}"
+  ansible.builtin.set_fact:
+    pip_clients: "{{ _virtualenv_path + '/bin/' + pip_executable }}"
   when: _virtualenv_path is defined
 
 - name: Get pip version
-  shell: |
+  ansible.builtin.shell: |
     set -o pipefail
     pip show pip | awk '/^Version:/ {print $2}'
   args:
@@ -14,9 +14,9 @@
   changed_when: false
   check_mode: false
   register: pip_version
-    
+
 - name: Upgrade pip (site-packages) to latest version when version is below 19  # noqa package-latest
-  pip:
+  ansible.builtin.pip:
     name: pip
     state: latest
     extra_args: --upgrade
@@ -28,7 +28,7 @@
     - pip_version.stdout is version('19.0.0', '<')
 
 - name: Upgrade pip (virtualenv) to latest version  # noqa package-latest
-  pip:
+  ansible.builtin.pip:
     name: pip
     state: latest
     virtualenv: "{{ _virtualenv_path }}"
@@ -38,9 +38,9 @@
     HTTPS_PROXY: "{{ python_https_proxy | default('') }}"
   when:
     - _virtualenv_path is defined
-    - virtualenv_pip_upgrade is defined and virtualenv_pip_upgrade|bool
+    - virtualenv_pip_upgrade is defined and virtualenv_pip_upgrade | bool
 
 - name: Get list of all installed pip packages
-  pip_package_info:
+  community.general.pip_package_info:
     clients: "{{ pip_clients }}"
   register: pip_packages

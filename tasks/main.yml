@@ -1,7 +1,7 @@
 ---
 
 - name: Load variables based on OS type
-  include_vars: "{{ lookup('first_found', params) }}"
+  ansible.builtin.include_vars: "{{ lookup('first_found', params) }}"
   vars:
     params:
       files:
@@ -14,15 +14,15 @@
         - 'vars'
 
 - name: Reset all variables that require resetting  # noqa var-naming
-  set_fact:
+  ansible.builtin.set_fact:
     "{{ item }}": "{{ vars['reset_vars'][item] }}"
-  loop: "{{ (reset_vars|default({})) | dict2items | json_query('[].key') }}"
+  loop: "{{ (reset_vars | default({})) | dict2items | json_query('[].key') }}"
   loop_control:
     label:
       - "{{ item }}"
 
 - name: Show debug settings
-  debug:
+  ansible.builtin.debug:
     msg:
       python2: "{{ python2 }}"
       python3: "{{ python3 }}"
@@ -32,64 +32,63 @@
 #    verbosity: 1
 
 - name: Move and symlink virtual environment location
-  include_tasks: link.yml
+  ansible.builtin.include_tasks: link.yml
   when:
     - python_virtualenv_data is defined
-    - python_virtualenv_data|length > 0
+    - python_virtualenv_data | length > 0
 
 - name: Including 'python2'
-  include_tasks: python.yml
+  ansible.builtin.include_tasks: python.yml
   vars:
     python: python2
-  when: python2|bool
+  when: python2 | bool
 
 - name: Including 'python3'
-  include_tasks: python.yml
+  ansible.builtin.include_tasks: python.yml
   vars:
     python: python3
-  when: python3|bool
+  when: python3 | bool
 
 - name: Including 'python38'
-  include_tasks: python.yml
+  ansible.builtin.include_tasks: python.yml
   vars:
     python: python38
-  when: python38 is defined and python38|bool
+  when: python38 is defined and python38 | bool
 
 - name: Including 'python39'
-  include_tasks: python.yml
+  ansible.builtin.include_tasks: python.yml
   vars:
     python: python39
-  when: python39 is defined and python39|bool
+  when: python39 is defined and python39 | bool
 
 - name: Upgrading pip (site-packages)
-  include_tasks: pip.yml
-  when: pip_upgrade|bool
+  ansible.builtin.include_tasks: pip.yml
+  when: pip_upgrade | bool
 
 - name: Install python from source
-  include_tasks: source.yml
-  when: python_from_source is defined and python_from_source|bool
+  ansible.builtin.include_tasks: source.yml
+  when: python_from_source is defined and python_from_source | bool
 
 - name: Backward compatibility for RedHat/CentOS 7
+  when:
+    - ansible_os_family == 'RedHat'
+    - ansible_distribution_major_version == '7'
   block:
 
     - name: Check if /usr/bin/virtualenv exists
-      stat:
+      ansible.builtin.stat:
         path: /usr/bin/virtualenv
       register: _virtualenv
 
     - name: Backward compatibility for RedHat/CentOS 7
-      file:
-        src: "{{ python3_virtualenv if python3|bool else python2_virtualenv }}"
+      ansible.builtin.file:
+        src: "{{ python3_virtualenv if python3 | bool else python2_virtualenv }}"
         dest: /usr/bin/virtualenv
         owner: root
         group: root
         state: link
       when: not _virtualenv.stat.exists
 
-  when:
-    - ansible_os_family == 'RedHat'
-    - ansible_distribution_major_version == '7'
-
 - name: Setup virtual environments
-  include_tasks: venvs.yml
-  when: python_virtualenvs is defined and python_virtualenvs|length > 0
+  ansible.builtin.include_tasks: venvs.yml
+  when: python_virtualenvs is defined and python_virtualenvs | length > 0
