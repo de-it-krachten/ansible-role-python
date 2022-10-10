@@ -1,7 +1,7 @@
 ---
 
-- name: Test if python {{ python_version_minor }} is installed
-  command: "{{ python_binary }} --version"
+- name: Test if python {{ python_version_minor }} is installed  # noqa name[template]
+  ansible.builtin.command: "{{ python_binary }} --version"
   register: python_bin
   changed_when: no
   failed_when: no
@@ -10,21 +10,22 @@
     PATH: /usr/local/bin:{{ ansible_env.PATH }}
 
 - name: Set python version installed
-  set_fact:
-    python_installed: "{{ python_bin.stdout.split(' ')[1] if (python_bin.stdout is defined and python_bin.stdout|length > 0) else 'none' }}"
+  ansible.builtin.set_fact:
+    python_installed: "{{ python_bin.stdout.split(' ')[1] if (python_bin.stdout is defined and python_bin.stdout | length > 0) else 'none' }}"
 
 
 - name: Display python version found
-  debug:
+  ansible.builtin.debug:
     msg:
       - "python {{ python_version_minor }} version installed : {{ python_installed }}"
       - "python {{ python_version_minor }} version required  : {{ python_version }}"
 
-- name:  Install from source
+- name: Install from source
+  when: python_installed == 'none' or python_installed is version(python_version, '<')
   block:
 
     - name: Install all required packages
-      package:
+      ansible.builtin.package:
         name: "{{ python3_packages_src }}"
         state: present
       register: _package_result
@@ -34,18 +35,16 @@
         var: _package_result.results
       when:
         - _package_result.results is defined
-        - _package_result.results|length > 0
+        - _package_result.results | length > 0
 
     - name: Download python
-      unarchive:
+      ansible.builtin.unarchive:
         src: "{{ python_url }}"
         dest: /opt
         remote_src: true
 
     - name: Compile python  # noqa no-changed-when
-      shell: |
+      ansible.builtin.shell: |
         cd /opt/Python-{{ python_version }}
         ./configure --enable-optimizations
         make altinstall
-
-  when: python_installed == 'none' or python_installed is version(python_version, '<')

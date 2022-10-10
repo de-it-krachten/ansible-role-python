@@ -6,6 +6,16 @@
 Installs python from repository
 
 
+
+## Dependencies
+
+#### Roles
+None
+
+#### Collections
+- community.general
+- community.general
+
 ## Platforms
 
 Supported platforms
@@ -38,13 +48,13 @@ Note:
 python_virtualenv_root: "{{ ansible_env['HOME'] }}/.virtualenv"
 
 # Install default python packages
-python_package_install: True
+python_package_install: true
 
 # Install additional python packages (might be required when compilation is required)
-python_package_install_optional: False
+python_package_install_optional: false
 
 # Use list of trusted hosts as defined under python_trusted_hosts
-python_trust_hosts: False
+python_trust_hosts: false
 
 # List of trusted hosts
 python_trusted_hosts: >
@@ -72,6 +82,8 @@ pip_upgrade: false
 # virtual environments to set-up
 python_virtualenvs: []
 
+# virtual env command
+python_virtualenv_command: /usr/bin/virtualenv
 
 # Python (from source)
 python_from_source: false
@@ -83,6 +95,7 @@ python_binary_full: /usr/local/bin/{{ python_binary }}
 
 python_url: https://www.python.org/ftp/python/{{ python_version }}/Python-{{ python_version }}.tgz
 </pre></code>
+
 
 ### vars/Fedora.yml
 <pre><code>
@@ -157,7 +170,7 @@ python3_packages:
 python3_packages_optional:
   - build-base
   - gcc
-  - g++
+  - g ++
   - libffi-dev
   - openssl-dev
   - python3-dev
@@ -376,7 +389,7 @@ python39: false
 ## Example Playbook
 ### molecule/default/converge.yml
 <pre><code>
-- import_playbook: converge-pre.yml
+- ansible.builtin.import_playbook: converge-pre.yml
 
 - name: sample playbook for role 'python'
   hosts: all
@@ -389,6 +402,6 @@ python39: false
     python_virtualenvs: [{'name': 'sample', 'packages': ['dnspython'], 'python': '/usr/bin/python3', 'recreate': False, 'site_packages': False, 'user': 'sample'}]
   tasks:
     - name: Include role 'python'
-      include_role:
+      ansible.builtin.include_role:
         name: python
 </pre></code>
