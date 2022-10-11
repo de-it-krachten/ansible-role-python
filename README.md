@@ -170,7 +170,7 @@ python3_packages:
 python3_packages_optional:
   - build-base
   - gcc
-  - g ++
+  - g++
   - libffi-dev
   - openssl-dev
   - python3-dev
