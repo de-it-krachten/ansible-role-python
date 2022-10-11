@@ -1,36 +1,36 @@
 ---
 
-- name: Define virtual environment full path
-  set_fact:
+- name: Define virtual environment full path  # noqa jinja[spacing]
+  ansible.builtin.set_fact:
     _virtualenv_path: >-
       {%- if virtualenv_path is search('^/') -%}
       {{ virtualenv_path }}
       {%- else -%}
-      {{ python_virtualenv_root+'/'+virtualenv_path }}
+      {{ python_virtualenv_root + '/' + virtualenv_path }}
       {%- endif -%}
 
 - name: Show virtual environment path
-  debug:
+  ansible.builtin.debug:
     var: _virtualenv_path
 
 - name: Test if virtualenv already exists
-  stat:
+  ansible.builtin.stat:
     path: "{{ _virtualenv_path }}"
   register: venv_root
 
 - name: Delete virtualenv if recreate is required
-  file:
+  ansible.builtin.file:
     path: "{{ _virtualenv_path }}"
     state: absent
   become: yes
   become_user: root
   when:
-    - virtualenv_recreate|bool
-    - venv_root.stat.exists|bool
+    - virtualenv_recreate | bool
+    - venv_root.stat.exists | bool
     - molecule_test is not defined
 
 - name: Make path to virtualenv
-  file:
+  ansible.builtin.file:
     path: "{{ _virtualenv_path }}"
     state: directory
     mode: '0755'
@@ -39,11 +39,11 @@
   register: venv_root
 
 - name: Create virtualenv from scratch  # noqa no-handler
-  pip:
-    name:                     "pip"
-    virtualenv:               "{{ _virtualenv_path }}"
-    virtualenv_command:       "{{ virtualenv_command }}"
-    virtualenv_python:        "{{ virtualenv_python }}"
+  ansible.builtin.pip:
+    name: "pip"
+    virtualenv: "{{ _virtualenv_path }}"
+    virtualenv_command: "{{ virtualenv_command }}"
+    virtualenv_python: "{{ virtualenv_python }}"
     virtualenv_site_packages: "{{ virtualenv_site_packages }}"
   environment:
     HTTP_PROXY: "{{ python_http_proxy | default('') }}"
@@ -51,33 +51,33 @@
   become: yes
   become_user: "{{ virtualenv_user }}"
   when:
-    - venv_root.changed|bool
+    - venv_root.changed | bool
     - virtualenv_source == 'skip'
 
 - name: Clone virtualenv
-  include_tasks: venv_clone.yml
+  ansible.builtin.include_tasks: venv_clone.yml
   vars:
-    venv_source_path: "{{ virtualenv_source if virtualenv_source is search('^/') else _virtualenv_path|dirname+'/'+virtualenv_source }}"
+    venv_source_path: "{{ virtualenv_source if virtualenv_source is search('^/') else _virtualenv_path | dirname + '/' + virtualenv_source }}"
     venv_target_path: "{{ _virtualenv_path }}"
   args:
     apply:
       become: yes
       become_user: "{{ virtualenv_user }}"
-  when: venv_root.changed|bool and virtualenv_source != 'skip'
+  when: venv_root.changed | bool and virtualenv_source != 'skip'
 
 - name: Upgrade pip to latest version
-  include_tasks: pip.yml
+  ansible.builtin.include_tasks: pip.yml
   args:
     apply:
       become: yes
       become_user: "{{ virtualenv_user }}"
-  when: virtualenv_pip_upgrade|bool
+  when: virtualenv_pip_upgrade | bool
 
 - name: Install all pip packages
-  pip:
+  ansible.builtin.pip:
     name: "{{ pip_package }}"
     virtualenv: "{{ _virtualenv_path }}"
-    extra_args: "{{ python_trusted_hosts if python_trust_hosts|bool else omit }}"
+    extra_args: "{{ python_trusted_hosts if python_trust_hosts | bool else omit }}"
   environment:
     HTTP_PROXY: "{{ python_http_proxy | default('') }}"
     HTTPS_PROXY: "{{ python_https_proxy | default('') }}"
@@ -88,10 +88,10 @@
     loop_var: pip_package
 
 - name: Create symlink to virtualenv
-  file:
+  ansible.builtin.file:
     state: link
     src: "{{ virtualenv_name }}"
-    dest: "{{ _virtualenv_path|dirname }}/{{ virtualenv_label }}"
+    dest: "{{ _virtualenv_path | dirname }}/{{ virtualenv_label }}"
   become: yes
   become_user: "{{ virtualenv_user }}"
   when: virtualenv_label != 'skip'
