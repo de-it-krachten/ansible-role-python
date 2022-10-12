@@ -1,25 +1,25 @@
 ---
 
 - name: Check file type for {{ python_virtualenv_root }}
-  stat:
+  ansible.builtin.stat:
     path: "{{ python_virtualenv_root }}"
   register: virtenv
 
-- name: Move data from {{ python_virtualenv_root }} -> {{ python_virtualenv_data }}
-  command: mv {{ python_virtualenv_root }} {{ python_virtualenv_data }}
+- name: Move data from {{ python_virtualenv_root }} -> {{ python_virtualenv_data }}  # noqa name[template]
+  ansible.builtin.command: mv {{ python_virtualenv_root }} {{ python_virtualenv_data }}
   when:
     - virtenv.stat.exists
     - virtenv.stat.isdir and not virtenv.stat.islnk
     - python_virtualenv_root != python_virtualenv_data
 
 - name: Create virtualenv directory {{ python_virtualenv_data }}
-  file:
+  ansible.builtin.file:
     state: directory
     mode: "0755"
     path: "{{ python_virtualenv_data }}"
 
-- name: Create symlink {{ python_virtualenv_root }} to {{ python_virtualenv_data }}
-  file:
+- name: Create symlink {{ python_virtualenv_root }} to {{ python_virtualenv_data }}  # noqa name[template]
+  ansible.builtin.file:
     state: link
     dest: "{{ python_virtualenv_root }}"
     src: "{{ python_virtualenv_data }}"
