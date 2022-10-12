@@ -1,3 +1,11 @@
+# [1.5.0](https://github.com/de-it-krachten/ansible-role-python/compare/v1.4.3...v1.5.0) (2022-10-12)
+
+
+### Features
+
+* Move to FQCN ([96d26a4](https://github.com/de-it-krachten/ansible-role-python/commit/96d26a4a3adc91103828b78a8084d8618486c284))
+* Update CI to latest standards ([d482a4c](https://github.com/de-it-krachten/ansible-role-python/commit/d482a4c1d77578b35ad1d9513bfe761a3ddf2b3d))
+
 ## [1.4.3](https://github.com/de-it-krachten/ansible-role-python/compare/v1.4.2...v1.4.3) (2022-09-20)
 
 
