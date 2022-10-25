@@ -285,6 +285,22 @@ platforms:
         pre_build_image: false
       vagrant:
         box: "generic/alpine312"
+  docker:
+    name: Docker dind (CI only)
+    ci: false
+    supported: false
+    molecule:
+      docker:
+        image: docker:dind
+        pre_build_image: false
+        volumes:
+          - certs-ca
+          - certs-client
+        networks:
+          - network
+        privileged: true
+        environment:
+          DOCKER_TLS_CERTDIR: /certs
 
 # List of platform deviations
 platforms_overwrite: {}
@@ -362,6 +378,7 @@ molecule:
   requirements:
     roles:
       - epel
+      - facts
       - firewall
       - firewalld
       - iptables
@@ -444,6 +461,7 @@ ci_templates:
   molecule-platforms.yml:
     src: molecule/templates/molecule-platforms.yml
     dest: .molecule-platforms.yml
+    regex_replace: "s/^\\d+</</"
     force: true
 
 # Ansible-lint

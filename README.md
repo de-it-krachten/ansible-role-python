@@ -96,8 +96,7 @@ python_binary_full: /usr/local/bin/{{ python_binary }}
 python_url: https://www.python.org/ftp/python/{{ python_version }}/Python-{{ python_version }}.tgz
 </pre></code>
 
-
-### vars/Fedora.yml
+### defaults/Fedora.yml
 <pre><code>
 # Python2
 python2: false
@@ -149,7 +148,7 @@ python39_packages:
 python39_packages_optional: []
 </pre></code>
 
-### vars/family-Alpine.yml
+### defaults/family-Alpine.yml
 <pre><code>
 # Python2
 python2: false
@@ -176,7 +175,7 @@ python3_packages_optional:
   - python3-dev
 </pre></code>
 
-### vars/family-Debian.yml
+### defaults/family-Debian.yml
 <pre><code>
 # Python2
 python2: false
@@ -225,7 +224,7 @@ python38: false
 python39: false
 </pre></code>
 
-### vars/family-RedHat-9.yml
+### defaults/family-RedHat-9.yml
 <pre><code>
 # Python2
 python2: false
@@ -262,7 +261,7 @@ python3_packages_optional:
   - libffi-devel
 </pre></code>
 
-### vars/family-RedHat-8.yml
+### defaults/family-RedHat-8.yml
 <pre><code>
 # Python2
 python2: false
@@ -332,7 +331,7 @@ python3_packages_src:
   - xz-devel
 </pre></code>
 
-### vars/family-RedHat-7.yml
+### defaults/family-RedHat-7.yml
 <pre><code>
 # Python2
 python2: false
@@ -386,6 +385,7 @@ python39: false
 
 
 
+
 ## Example Playbook
 ### molecule/default/converge.yml
 <pre><code>
@@ -393,7 +393,7 @@ python39: false
 
 - name: sample playbook for role 'python'
   hosts: all
-  become: "{{ molecule['converge']['become'] | default('yes') }}"
+  become: "yes"
   vars:
     python2: False
     python3: True
