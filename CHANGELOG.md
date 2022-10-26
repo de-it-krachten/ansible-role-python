@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/de-it-krachten/ansible-role-python/compare/v1.5.0...v1.6.0) (2022-10-26)
+
+
+### Features
+
+* Update default settings to new method ([0464899](https://github.com/de-it-krachten/ansible-role-python/commit/046489902a1688103804997862c8839a0a4b72ea))
+
 # [1.5.0](https://github.com/de-it-krachten/ansible-role-python/compare/v1.4.3...v1.5.0) (2022-10-12)
 
 
