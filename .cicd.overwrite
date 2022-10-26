@@ -28,11 +28,11 @@ molecule:
           recreate: false
           site_packages: false
           user: sample
-  host_vars_static:
-    python-rockylinux8-node1:
-      reset_vars:
-        python39: 'true'
-    python-fedora36-node1:
-      reset_vars:
-        python38: 'true'
-        python39: 'true'
+#  host_vars_static:
+#    python-rockylinux8-node1:
+#      reset_vars:
+#        python39: 'true'
+#    python-fedora36-node1:
+#      reset_vars:
+#        python38: 'true'
+#        python39: 'true'
