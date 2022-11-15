@@ -146,6 +146,18 @@ platforms:
         image: "dropveter/oraclelinux8-ansible"
       vagrant:
         box: "generic/oracle8"
+  oraclelinux9:
+    name: OracleLinux 9
+    ci: true
+    supported: true
+    galaxy:
+      name: EL
+      version: 9
+    molecule:
+      docker:
+        image: "dropveter/oraclelinux9-ansible"
+      vagrant:
+        box: "generic/oracle9"
   almalinux8:
     name: AlmaLinux 8
     ci: true
@@ -291,7 +303,7 @@ platforms:
     supported: false
     molecule:
       docker:
-        image: docker:dind
+        image: "dropveter/docker-dind-ansible:latest"
         pre_build_image: false
         volumes:
           - certs-ca
@@ -383,6 +395,7 @@ molecule:
       - firewalld
       - iptables
       - reboot
+      - showinfo
       - ufw
       - unbound
   nodes:
@@ -457,11 +470,9 @@ ci_templates:
     src: ansible-lint/templates/ansible-lint
     dest: .ansible-lint
     # force: no
-
   molecule-platforms.yml:
     src: molecule/templates/molecule-platforms.yml
     dest: .molecule-platforms.yml
-    regex_replace: "s/^\\d+</</"
     force: true
 
 # Ansible-lint
