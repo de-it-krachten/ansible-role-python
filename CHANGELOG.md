@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/de-it-krachten/ansible-role-python/compare/v1.6.0...v1.7.0) (2022-11-17)
+
+
+### Features
+
+* Add support for OracleLinux 9 ([ca2c863](https://github.com/de-it-krachten/ansible-role-python/commit/ca2c8636c34e03fd5985ee0f3be4c8aec5f26249))
+
 # [1.6.0](https://github.com/de-it-krachten/ansible-role-python/compare/v1.5.0...v1.6.0) (2022-10-26)
 
 
