@@ -21,5 +21,6 @@ python3_packages_optional:
   - gcc
   - g++
   - libffi-dev
+  - musl-dev
   - openssl-dev
   - python3-dev
