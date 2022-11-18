@@ -1,3 +1,10 @@
+## [1.7.1](https://github.com/de-it-krachten/ansible-role-python/compare/v1.7.0...v1.7.1) (2022-11-18)
+
+
+### Bug Fixes
+
+* Add additional package 'musl-dev' for Alpine 3.x ([5bcc0eb](https://github.com/de-it-krachten/ansible-role-python/commit/5bcc0eb53e54558e08ceb71479c9eaa907fb695c))
+
 # [1.7.0](https://github.com/de-it-krachten/ansible-role-python/compare/v1.6.0...v1.7.0) (2022-11-17)
 
 
