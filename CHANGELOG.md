@@ -1,3 +1,10 @@
+## [1.7.3](https://github.com/de-it-krachten/ansible-role-python/compare/v1.7.2...v1.7.3) (2022-12-21)
+
+
+### Bug Fixes
+
+* Disable python2 by default on all platforms ([6359627](https://github.com/de-it-krachten/ansible-role-python/commit/63596278a318164cbeab39151eed6efd44d4eb91))
+
 ## [1.7.2](https://github.com/de-it-krachten/ansible-role-python/compare/v1.7.1...v1.7.2) (2022-12-21)
 
 
