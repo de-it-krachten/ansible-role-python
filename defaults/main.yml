@@ -1,5 +1,9 @@
 ---
 
+# Python versions to install
+python2: false
+python3: true
+
 # Default root-directory for virtual environments
 python_virtualenv_root: "{{ ansible_env['HOME'] }}/.virtualenv"
 

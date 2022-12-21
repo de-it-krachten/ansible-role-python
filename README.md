@@ -44,6 +44,10 @@ Note:
 ## Role Variables
 ### defaults/main.yml
 <pre><code>
+# Python versions to install
+python2: false
+python3: true
+
 # Default root-directory for virtual environments
 python_virtualenv_root: "{{ ansible_env['HOME'] }}/.virtualenv"
 
@@ -397,8 +401,6 @@ python39: false
   hosts: all
   become: "yes"
   vars:
-    python2: False
-    python3: True
     python_package_install_optional: True
     python_virtualenv_root: /tmp/venv
     python_virtualenvs: [{'name': 'sample', 'packages': ['dnspython'], 'python': '/usr/bin/python3', 'recreate': False, 'site_packages': False, 'user': 'sample'}]
