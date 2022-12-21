@@ -9,9 +9,13 @@
       {{ python_virtualenv_root + '/' + virtualenv_path }}
       {%- endif -%}
 
-- name: Show virtual environment path
+- name: Show virtual environment settings
   ansible.builtin.debug:
-    var: _virtualenv_path
+    msg:
+      virtualenv: "{{ _virtualenv_path }}"
+      virtualenv_command: "{{ virtualenv_command }}"
+      virtualenv_python: "{{ virtualenv_python }}"
+      virtualenv_site_packages: "{{ virtualenv_site_packages }}"
 
 - name: Test if virtualenv already exists
   ansible.builtin.stat:
