@@ -11,7 +11,7 @@
       python38: "{{ python38 | default('N/A') }}"
       python39: "{{ python39 | default('N/A') }}"
       python_virtualenvs: "{{ python_virtualenvs }}"
-#    verbosity: 1
+    verbosity: 1
 
 - name: Move and symlink virtual environment location
   ansible.builtin.include_tasks: link.yml
@@ -23,13 +23,13 @@
   ansible.builtin.include_tasks: python.yml
   vars:
     python: python2
-  when: python2 | bool
+  when: python2 is defined and python2 | bool
 
 - name: Including 'python3'
   ansible.builtin.include_tasks: python.yml
   vars:
     python: python3
-  when: python3 | bool
+  when: python3 is defined and python3 | bool
 
 - name: Including 'python38'
   ansible.builtin.include_tasks: python.yml
