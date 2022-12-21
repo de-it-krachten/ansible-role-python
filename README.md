@@ -14,7 +14,6 @@ None
 
 #### Collections
 - community.general
-- community.general
 
 ## Platforms
 
@@ -172,6 +171,7 @@ python3_packages_optional:
   - gcc
   - g++
   - libffi-dev
+  - musl-dev
   - openssl-dev
   - python3-dev
 </pre></code>
@@ -390,7 +390,8 @@ python39: false
 ## Example Playbook
 ### molecule/default/converge.yml
 <pre><code>
-- ansible.builtin.import_playbook: converge-pre.yml
+- name: sample playbook for role 'python' pre playbook
+  ansible.builtin.import_playbook: converge-pre.yml
 
 - name: sample playbook for role 'python'
   hosts: all
