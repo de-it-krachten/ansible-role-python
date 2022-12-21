@@ -1,3 +1,10 @@
+## [1.7.2](https://github.com/de-it-krachten/ansible-role-python/compare/v1.7.1...v1.7.2) (2022-12-21)
+
+
+### Bug Fixes
+
+* Add method for skipping virtual environment ([6e0c81c](https://github.com/de-it-krachten/ansible-role-python/commit/6e0c81cba0d57915379433a36b5e51a38d58b484))
+
 ## [1.7.1](https://github.com/de-it-krachten/ansible-role-python/compare/v1.7.0...v1.7.1) (2022-11-18)
 
 
