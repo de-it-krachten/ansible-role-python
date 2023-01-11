@@ -10,7 +10,7 @@
 
 - name: Load defaults based on OS type
   ansible.builtin.set_fact:
-    __defaults_vars: "{{  __defaults_vars | combine((lookup('template', item, errors='ignore') | from_yaml)) }}"
+    __defaults_vars: "{{ __defaults_vars | combine((lookup('template', item, errors='ignore') | from_yaml)) }}"
   loop:
     - "defaults/defaults.yml"
     - "defaults/family-{{ ansible_os_family }}.yml"
