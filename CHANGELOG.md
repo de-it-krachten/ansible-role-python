@@ -1,3 +1,10 @@
+## [1.7.4](https://github.com/de-it-krachten/ansible-role-python/compare/v1.7.3...v1.7.4) (2023-01-11)
+
+
+### Bug Fixes
+
+* Fix for variable definition from inventory/group vars ([91ea1d5](https://github.com/de-it-krachten/ansible-role-python/commit/91ea1d56989f3c8d4f7a154600834ceda2d9ad16))
+
 ## [1.7.3](https://github.com/de-it-krachten/ansible-role-python/compare/v1.7.2...v1.7.3) (2022-12-21)
 
 
