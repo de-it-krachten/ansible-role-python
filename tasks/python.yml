@@ -13,6 +13,7 @@
       python: "{{ python }}"
       python_packages: "{{ vars[python_packages] }}"
       python_packages_optional: "{{ vars[python_packages_optional] }}"
+      python_package_install_optional: "{{ python_package_install_optional }}"
       python_command: "{{ vars[python_command] }}"
       python_virtualenv: "{{ vars[python_virtualenv] }}"
 
