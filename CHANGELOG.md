@@ -1,3 +1,10 @@
+## [1.7.5](https://github.com/de-it-krachten/ansible-role-python/compare/v1.7.4...v1.7.5) (2023-04-28)
+
+
+### Bug Fixes
+
+* Add pyton3-setuptools for Redhat family ([f12d8d9](https://github.com/de-it-krachten/ansible-role-python/commit/f12d8d98ebd227f500f9b6c4804478fefe24ec44))
+
 ## [1.7.4](https://github.com/de-it-krachten/ansible-role-python/compare/v1.7.3...v1.7.4) (2023-01-11)
 
 
