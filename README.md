@@ -100,58 +100,6 @@ python_binary_full: /usr/local/bin/{{ python_binary }}
 python_url: https://www.python.org/ftp/python/{{ python_version }}/Python-{{ python_version }}.tgz
 </pre></code>
 
-### defaults/Fedora.yml
-<pre><code>
-# Python2
-python2: false
-python2_command: /usr/bin/python2
-python2_virtualenv: /usr/bin/virtualenv
-python2_packages:
-  - python2
-  - python2-libs
-  - python2-devel
-  - python2-pip
-  - python2-virtualenv
-  - libselinux-python
-python2_packages_optional:
-  - gcc
-  - glibc-devel
-  - openssl-devel
-
-# Python3
-python3: true
-python3_command: /usr/bin/python3
-python3_virtualenv: /usr/bin/virtualenv
-python3_packages:
-  - python3
-  - python3-libs
-  - python3-pip
-  - python3-virtualenv
-  - python3-libselinux
-python3_packages_optional:
-  - gcc
-  - python3-devel
-  - glibc-devel
-  - openssl-devel
-  - libffi-devel
-
-# Python 3.8
-python38: false
-python38_command: /usr/bin/python3.8
-python38_virtualenv: /usr/bin/virtualenv
-python38_packages:
-  - python3.8
-python38_packages_optional: []
-
-# Python 3.9
-python39: false
-python39_command: /usr/bin/python3.9
-python39_virtualenv: /usr/bin/virtualenv
-python39_packages:
-  - python3.9
-python39_packages_optional: []
-</pre></code>
-
 ### defaults/family-Alpine.yml
 <pre><code>
 # Python2
@@ -257,6 +205,7 @@ python3_packages:
   - python3-libs
   - python3-pip
   - python3-virtualenv
+  - python3-setuptools
   - libselinux-python3
 python3_packages_optional:
   - gcc
@@ -294,6 +243,7 @@ python3_packages:
   - python3-libs
   - python3-pip
   - python3-virtualenv
+  - python3-setuptools
   - libselinux-python3
 python3_packages_optional:
   - gcc
@@ -388,6 +338,58 @@ python38: false
 python39: false
 </pre></code>
 
+### defaults/Fedora.yml
+<pre><code>
+# Python2
+python2: false
+python2_command: /usr/bin/python2
+python2_virtualenv: /usr/bin/virtualenv
+python2_packages:
+  - python2
+  - python2-libs
+  - python2-devel
+  - python2-pip
+  - python2-virtualenv
+  - libselinux-python
+python2_packages_optional:
+  - gcc
+  - glibc-devel
+  - openssl-devel
+
+# Python3
+python3: true
+python3_command: /usr/bin/python3
+python3_virtualenv: /usr/bin/virtualenv
+python3_packages:
+  - python3
+  - python3-libs
+  - python3-pip
+  - python3-virtualenv
+  - python3-libselinux
+python3_packages_optional:
+  - gcc
+  - python3-devel
+  - glibc-devel
+  - openssl-devel
+  - libffi-devel
+
+# Python 3.8
+python38: false
+python38_command: /usr/bin/python3.8
+python38_virtualenv: /usr/bin/virtualenv
+python38_packages:
+  - python3.8
+python38_packages_optional: []
+
+# Python 3.9
+python39: false
+python39_command: /usr/bin/python3.9
+python39_virtualenv: /usr/bin/virtualenv
+python39_packages:
+  - python3.9
+python39_packages_optional: []
+</pre></code>
+
 
 
 
@@ -396,6 +398,7 @@ python39: false
 <pre><code>
 - name: sample playbook for role 'python' pre playbook
   ansible.builtin.import_playbook: converge-pre.yml
+  when: molecule_converge_pre is undefined or molecule_converge_pre | bool
 
 - name: sample playbook for role 'python'
   hosts: all
@@ -404,6 +407,8 @@ python39: false
     python_package_install_optional: True
     python_virtualenv_root: /tmp/venv
     python_virtualenvs: [{'name': 'sample', 'packages': ['dnspython'], 'python': '/usr/bin/python3', 'recreate': False, 'site_packages': False, 'user': 'sample'}]
+  roles:
+    - deitkrachten.showinfo
   tasks:
     - name: Include role 'python'
       ansible.builtin.include_role:

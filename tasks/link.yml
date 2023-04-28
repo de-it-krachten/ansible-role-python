@@ -7,6 +7,7 @@
 
 - name: Move data from {{ python_virtualenv_root }} -> {{ python_virtualenv_data }}  # noqa name[template]
   ansible.builtin.command: mv {{ python_virtualenv_root }} {{ python_virtualenv_data }}
+  changed_when: true
   when:
     - virtenv.stat.exists
     - virtenv.stat.isdir and not virtenv.stat.islnk
