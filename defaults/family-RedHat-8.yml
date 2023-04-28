@@ -26,6 +26,7 @@ python3_packages:
   - python3-libs
   - python3-pip
   - python3-virtualenv
+  - python3-setuptools
   - libselinux-python3
 python3_packages_optional:
   - gcc
