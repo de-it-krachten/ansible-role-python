@@ -1,3 +1,10 @@
+## [1.7.6](https://github.com/de-it-krachten/ansible-role-python/compare/v1.7.5...v1.7.6) (2023-05-01)
+
+
+### Bug Fixes
+
+* Restrict additional Python 3.8/3.9 to RHEL8 ([69d508a](https://github.com/de-it-krachten/ansible-role-python/commit/69d508a66846c90a860cccd20e57dc261d60b6e7))
+
 ## [1.7.5](https://github.com/de-it-krachten/ansible-role-python/compare/v1.7.4...v1.7.5) (2023-04-28)
 
 
