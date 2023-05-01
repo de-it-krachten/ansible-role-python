@@ -407,8 +407,6 @@ python39_packages_optional: []
     python_package_install_optional: True
     python_virtualenv_root: /tmp/venv
     python_virtualenvs: [{'name': 'sample', 'packages': ['dnspython'], 'python': '/usr/bin/python3', 'recreate': False, 'site_packages': False, 'user': 'sample'}]
-  roles:
-    - deitkrachten.showinfo
   tasks:
     - name: Include role 'python'
       ansible.builtin.include_role:

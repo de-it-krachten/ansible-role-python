@@ -31,17 +31,23 @@
     python: python3
   when: python3 is defined and python3 | bool
 
-- name: Including 'python38'
-  ansible.builtin.include_tasks: python.yml
-  vars:
-    python: python38
-  when: python38 is defined and python38 | bool
+- name: Install python 3.8/3.9 for RHEL8 (alike)
+  when:
+    - ansible_os_family == 'RedHat'
+    - ansible_distribution_major_version == '8'
+  block:
 
-- name: Including 'python39'
-  ansible.builtin.include_tasks: python.yml
-  vars:
-    python: python39
-  when: python39 is defined and python39 | bool
+    - name: Including 'python38'
+      ansible.builtin.include_tasks: python.yml
+      vars:
+        python: python38
+      when: python38 is defined and python38 | bool
+
+    - name: Including 'python39'
+      ansible.builtin.include_tasks: python.yml
+      vars:
+        python: python39
+      when: python39 is defined and python39 | bool
 
 - name: Upgrading pip (site-packages)
   ansible.builtin.include_tasks: pip.yml
