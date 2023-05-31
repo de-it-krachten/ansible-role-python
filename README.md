@@ -213,6 +213,19 @@ python3_packages_optional:
   - glibc-devel
   - openssl-devel
   - libffi-devel
+
+# Python 3.11
+python311: false
+python311_command: /usr/bin/python3.11
+python311_virtualenv: /usr/bin/virtualenv
+python311_packages:
+  - python3.11
+  - python3.11-libs
+  - python3.11-pip
+  - python3.11-setuptools
+  - python3-virtualenv
+python311_packages_optional:
+  - python3.11-devel
 </pre></code>
 
 ### defaults/family-RedHat-8.yml
@@ -275,6 +288,19 @@ python39_packages:
   - python3-virtualenv
 python39_packages_optional:
   - python39-devel
+
+# Python 3.11
+python311: false
+python311_command: /usr/bin/python3.11
+python311_virtualenv: /usr/bin/virtualenv
+python311_packages:
+  - python3.11
+  - python3.11-libs
+  - python3.11-pip
+  - python3.11-setuptools
+  - python3-virtualenv
+python311_packages_optional:
+  - python3.11-devel
 
 # Python from source
 python3_packages_src:
@@ -404,9 +430,10 @@ python39_packages_optional: []
   hosts: all
   become: "yes"
   vars:
+    python311: True
     python_package_install_optional: True
     python_virtualenv_root: /tmp/venv
-    python_virtualenvs: [{'name': 'sample', 'packages': ['dnspython'], 'python': '/usr/bin/python3', 'recreate': False, 'site_packages': False, 'user': 'sample'}]
+    python_virtualenvs: [{'name': 'sample', 'packages': ['dnspython'], 'python': '/usr/bin/python3', 'recreate': False, 'site_packages': False, 'user': 'sample', 'pip_upgrade': True}]
   tasks:
     - name: Include role 'python'
       ansible.builtin.include_role:

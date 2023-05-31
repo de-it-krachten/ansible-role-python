@@ -16,6 +16,7 @@ molecule:
   converge:
     pre: converge-pre.yml
     vars:
+      python311: true
       python_package_install_optional: true
       python_virtualenv_root: /tmp/venv
       python_virtualenvs:
@@ -26,6 +27,7 @@ molecule:
           recreate: false
           site_packages: false
           user: sample
+          pip_upgrade: true
 #  host_vars_static:
 #    python-rockylinux8-node1:
 #      reset_vars:

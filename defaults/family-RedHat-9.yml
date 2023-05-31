@@ -34,3 +34,16 @@ python3_packages_optional:
   - glibc-devel
   - openssl-devel
   - libffi-devel
+
+# Python 3.11
+python311: false
+python311_command: /usr/bin/python3.11
+python311_virtualenv: /usr/bin/virtualenv
+python311_packages:
+  - python3.11
+  - python3.11-libs
+  - python3.11-pip
+  - python3.11-setuptools
+  - python3-virtualenv
+python311_packages_optional:
+  - python3.11-devel

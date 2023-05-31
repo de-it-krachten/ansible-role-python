@@ -8,7 +8,8 @@
 - name: Get pip version
   ansible.builtin.shell: |
     set -o pipefail
-    pip show pip | awk '/^Version:/ {print $2}'
+    pip={{ 'pip3' if virtualenv_python is search('python3') else 'pip' }}
+    $pip show pip | awk '/^Version:/ {print $2}'
   args:
     executable: /bin/bash
   changed_when: false
@@ -26,6 +27,19 @@
   when:
     - _virtualenv_path is not defined
     - pip_version.stdout is version('19.0.0', '<')
+
+- name: Upgrade setuptools (virtualenv) to latest version  # noqa package-latest
+  ansible.builtin.pip:
+    name: setuptools
+    state: latest
+    virtualenv: "{{ _virtualenv_path }}"
+    extra_args: --upgrade
+  environment:
+    HTTP_PROXY: "{{ python_http_proxy | default('') }}"
+    HTTPS_PROXY: "{{ python_https_proxy | default('') }}"
+  when:
+    - _virtualenv_path is defined
+    - virtualenv_pip_upgrade is defined and virtualenv_pip_upgrade | bool
 
 - name: Upgrade pip (virtualenv) to latest version  # noqa package-latest
   ansible.builtin.pip:

@@ -3,3 +3,5 @@
 exclude_paths:
   - molecule/
 
+skip_list:
+  - warning[outdated-tag]
