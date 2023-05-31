@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/de-it-krachten/ansible-role-python/compare/v1.7.6...v1.8.0) (2023-05-31)
+
+
+### Features
+
+* Add support for Python 3.11 on RHEL 8/9 ([e9eed6a](https://github.com/de-it-krachten/ansible-role-python/commit/e9eed6a2cbe95ff492f170107b3a4b1968319dba))
+
 ## [1.7.6](https://github.com/de-it-krachten/ansible-role-python/compare/v1.7.5...v1.7.6) (2023-05-01)
 
 
