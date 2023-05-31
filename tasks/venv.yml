@@ -16,6 +16,8 @@
       virtualenv_command: "{{ virtualenv_command }}"
       virtualenv_python: "{{ virtualenv_python }}"
       virtualenv_site_packages: "{{ virtualenv_site_packages }}"
+      virtualenv_pip_upgrade: "{{ virtualenv_pip_upgrade }}"
+      virtualenv_packages: "{{ virtualenv_packages }}"
 
 - name: Test if virtualenv already exists
   ansible.builtin.stat:
@@ -79,7 +81,7 @@
 
 - name: Install all pip packages
   ansible.builtin.pip:
-    name: "{{ pip_package }}"
+    name: "{{ virtualenv_packages }}"
     virtualenv: "{{ _virtualenv_path }}"
     extra_args: "{{ python_trusted_hosts if python_trust_hosts | bool else omit }}"
   environment:
@@ -87,9 +89,6 @@
     HTTPS_PROXY: "{{ python_https_proxy | default('') }}"
   become: yes
   become_user: "{{ virtualenv_user }}"
-  loop: "{{ virtualenv_packages }}"
-  loop_control:
-    loop_var: pip_package
 
 - name: Create symlink to virtualenv
   ansible.builtin.file:
