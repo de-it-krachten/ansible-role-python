@@ -61,6 +61,13 @@
         python: python311
       when: python311 is defined and python311 | bool
 
+- name: Use a custom pip configuration
+  ansible.builtin.template:
+    src: "{{ python_custom_pip_conf }}"
+    dest: /etc/pip.conf
+    mode: "0644"
+  when: python_custom_pip_conf is defined and python_custom_pip_conf | length > 0
+
 - name: Upgrading pip (site-packages)
   ansible.builtin.include_tasks: pip.yml
   when: pip_upgrade | bool
