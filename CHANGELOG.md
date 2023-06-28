@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/de-it-krachten/ansible-role-python/compare/v1.8.0...v1.9.0) (2023-06-28)
+
+
+### Features
+
+* Add support for alternative pip repository configuration ([45f9259](https://github.com/de-it-krachten/ansible-role-python/commit/45f92593bd583d5641bb50e68c69ec8168a28c4a))
+
 # [1.8.0](https://github.com/de-it-krachten/ansible-role-python/compare/v1.7.6...v1.8.0) (2023-05-31)
 
 
