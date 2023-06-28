@@ -25,6 +25,9 @@ python_trusted_hosts: >
 # Use to become when setting up virtual environments
 python_venv_become: root
 
+# Custom template for /etc/pip.conf file
+# python_custom_pip_conf: templates/pip.conf.j2
+
 # Define pip executable
 pip_executable: pip
 
