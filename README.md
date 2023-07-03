@@ -29,13 +29,14 @@ Supported platforms
 - OracleLinux 9
 - AlmaLinux 8
 - AlmaLinux 9
+- SUSE Linux Enterprise<sup>1</sup>
+- openSUSE Leap 15
 - Debian 10 (Buster)
 - Debian 11 (Bullseye)
-- Ubuntu 18.04 LTS
 - Ubuntu 20.04 LTS
 - Ubuntu 22.04 LTS
-- Fedora 36
 - Fedora 37
+- Fedora 38
 - Alpine 3
 
 Note:
@@ -68,6 +69,9 @@ python_trusted_hosts: >
 
 # Use to become when setting up virtual environments
 python_venv_become: root
+
+# Custom template for /etc/pip.conf file
+# python_custom_pip_conf: templates/pip.conf.j2
 
 # Define pip executable
 pip_executable: pip
@@ -226,6 +230,92 @@ python311_packages:
   - python3-virtualenv
 python311_packages_optional:
   - python3.11-devel
+</pre></code>
+
+### defaults/family-Suse.yml
+<pre><code>
+# Python2
+python2: false
+python2_command: /usr/bin/python2
+python2_virtualenv: /usr/bin/virtualenv-2.7
+python2_packages:
+  - python
+  - python-libs
+  - python-pip
+  - python-virtualenv
+  - libselinux-python
+python2_packages_optional:
+  - gcc
+  - glibc-devel
+  - python-devel
+  - openssl-devel
+  - libffi-devel
+
+# Python3
+python3: true
+python3_command: /usr/bin/python3
+python3_virtualenv: /usr/bin/virtualenv
+python3_packages:
+  - python3
+  - python3-base
+  - python3-setuptools
+  - python3-pip
+  - python3-virtualenv
+  - python3-devel
+
+python3_packages_optional:
+  - gcc
+  - python3-devel
+  - glibc-devel
+  - openssl-devel
+  - libffi-devel
+
+# Python from source
+python3_packages_src:
+  - '@Development Tools'
+  - gcc
+  - openssl-devel
+  - bzip2-devel
+  - libffi-devel
+  - xz-devel
+
+# Python 3.8
+python38: false
+
+# Python 3.9
+python39: false
+python39_command: /usr/bin/python3.9
+python39_virtualenv: /usr/bin/virtualenv
+python39_packages:
+  - python39
+  - python39-pip
+  - python3-virtualenv
+python39_packages_optional:
+  - python39-devel
+
+# Python 3.10
+python310: false
+python310_command: /usr/bin/python3.10
+python310_virtualenv: /usr/bin/virtualenv
+python310_packages:
+  - python310
+  - python310-pip
+  - python310-setuptools
+  - python3-virtualenv
+python310_packages_optional:
+  - python310-devel
+
+# Python 3.11
+python311: false
+python311_command: /usr/bin/python3.11
+python311_virtualenv: /usr/bin/virtualenv
+python311_packages:
+  - python311
+  - python311-pip
+  - python311-setuptools
+  - python3-virtualenv
+python311_packages_optional:
+  - python311-devel
 </pre></code>
 
 ### defaults/family-RedHat-8.yml
