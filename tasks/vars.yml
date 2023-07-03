@@ -8,6 +8,11 @@
   ansible.builtin.set_fact:
     var_list: "{{ lookup('fileglob', 'defaults/*', wantlist=True) | regex_replace(role_path + '/') }}"
 
+- name: Show all defaults found
+  ansible.builtin.debug:
+    var: var_list
+    verbosity: 1
+
 - name: Load defaults based on OS type
   ansible.builtin.set_fact:
     __defaults_vars: "{{ __defaults_vars | combine((lookup('template', item, errors='ignore') | from_yaml)) }}"
