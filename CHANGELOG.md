@@ -1,3 +1,10 @@
+# [1.11.0](https://github.com/de-it-krachten/ansible-role-python/compare/v1.10.0...v1.11.0) (2023-08-14)
+
+
+### Features
+
+* Update supported platforms & CI ([5b9049e](https://github.com/de-it-krachten/ansible-role-python/commit/5b9049efd2d63f1e8813bdab8a39c15c6364203b))
+
 # [1.10.0](https://github.com/de-it-krachten/ansible-role-python/compare/v1.9.0...v1.10.0) (2023-07-03)
 
 
