@@ -44,7 +44,7 @@
   become_user: "{{ virtualenv_user }}"
   register: venv_root
 
-- name: Create virtualenv from scratch  # noqa no-handler 503
+- name: Create virtualenv from scratch  # noqa no-handler
   ansible.builtin.pip:
     name: "pip"
     virtualenv: "{{ _virtualenv_path }}"
@@ -60,7 +60,7 @@
     - venv_root.changed | bool
     - virtualenv_source == 'skip'
 
-- name: Clone virtualenv  # noqa no-handler 503
+- name: Clone virtualenv
   ansible.builtin.include_tasks: venv_clone.yml
   vars:
     venv_source_path: "{{ virtualenv_source if virtualenv_source is search('^/') else _virtualenv_path | dirname + '/' + virtualenv_source }}"
