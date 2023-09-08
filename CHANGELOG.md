@@ -1,3 +1,10 @@
+## [1.11.1](https://github.com/de-it-krachten/ansible-role-python/compare/v1.11.0...v1.11.1) (2023-09-08)
+
+
+### Bug Fixes
+
+* Fix loop label to string ([794ae09](https://github.com/de-it-krachten/ansible-role-python/commit/794ae09f64910ce96dc89ed35be792503c300760))
+
 # [1.11.0](https://github.com/de-it-krachten/ansible-role-python/compare/v1.10.0...v1.11.0) (2023-08-14)
 
 
