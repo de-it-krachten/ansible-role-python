@@ -18,6 +18,7 @@
       virtualenv_site_packages: "{{ virtualenv_site_packages }}"
       virtualenv_pip_upgrade: "{{ virtualenv_pip_upgrade }}"
       virtualenv_packages: "{{ virtualenv_packages }}"
+      virtualenv_user: "{{ virtualenv_user }}"
 
 - name: Test if virtualenv already exists
   ansible.builtin.stat:
@@ -49,7 +50,7 @@
     name: "pip"
     virtualenv: "{{ _virtualenv_path }}"
     virtualenv_command: "{{ virtualenv_command }}"
-    virtualenv_python: "{{ virtualenv_python }}"
+    virtualenv_python: "{{ virtualenv_python if virtualenv_python is not search('python3') else omit }}"
     virtualenv_site_packages: "{{ virtualenv_site_packages }}"
   environment:
     HTTP_PROXY: "{{ python_http_proxy | default('') }}"

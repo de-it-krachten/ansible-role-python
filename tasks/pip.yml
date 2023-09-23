@@ -8,7 +8,7 @@
 - name: Get pip version
   ansible.builtin.shell: |
     set -o pipefail
-    pip={{ 'pip3' if virtualenv_python is search('python3') else 'pip' }}
+    pip={{ 'pip' if virtualenv_python is search('(python|python2)$') else 'pip3' }}
     $pip show pip | awk '/^Version:/ {print $2}'
   args:
     executable: /bin/bash

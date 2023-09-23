@@ -8,17 +8,21 @@
   when: item.state is defined and item.state == 'absent'
   loop: "{{ python_virtualenvs }}"
   loop_control:
-    label:
-      - "{{ item.name }}"
+    label: "{{ item.name }}"
 
-- name: Setup new or update existing virtual environments
+- name: Setup new or update existing virtual environments  # noqa jinja[spacing]
   ansible.builtin.include_tasks: venv.yml
   vars:
     virtualenv_name: "{{ item.name }}"
     virtualenv_path: "{{ item.path | default(item.name) }}"
     virtualenv_site_packages: "{{ item.site_packages | default(False) }}"
     virtualenv_pip_upgrade: "{{ item.pip_upgrade | default(False) }}"
-    virtualenv_command: "{{ item.virtualenv | default(python_virtualenv_command) }}"
+    virtualenv_command: >-
+      {%- if item.python is search('python3') -%}
+      {{ item.python }} -m venv
+      {%- else -%}
+      {{ item.virtualenv | default(python_virtualenv_command) }}
+      {%- endif -%}
     virtualenv_python: "{{ item.python }}"
     virtualenv_packages: "{{ item.packages }}"
     virtualenv_source: "{{ item.source | default('skip') }}"
