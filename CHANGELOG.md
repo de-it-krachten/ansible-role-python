@@ -1,3 +1,11 @@
+## [1.11.2](https://github.com/de-it-krachten/ansible-role-python/compare/v1.11.1...v1.11.2) (2023-09-23)
+
+
+### Bug Fixes
+
+* Change loop/label for latest ansible ([1d50ae3](https://github.com/de-it-krachten/ansible-role-python/commit/1d50ae30dc71a15c0c632689515ecbc8d77fdef1))
+* Python3 now uses 'python3 -m venv' over 'virtualenv' ([44ea3c4](https://github.com/de-it-krachten/ansible-role-python/commit/44ea3c4dcf12c22ed0d4f8e8683921ff20a774ec))
+
 ## [1.11.1](https://github.com/de-it-krachten/ansible-role-python/compare/v1.11.0...v1.11.1) (2023-09-08)
 
 
