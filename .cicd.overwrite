@@ -8,12 +8,6 @@ platforms:
   alpine3:
     ci: true
     supported: true
-  opensuse15:
-    ci: true
-    supported: true
-  sles15:
-    ci: false
-    supported: true
 
 molecule:
   prepare:

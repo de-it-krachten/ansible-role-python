@@ -8,8 +8,7 @@
   when: item.state is defined and item.state == 'absent'
   loop: "{{ python_virtualenvs }}"
   loop_control:
-    label:
-      - "{{ item.name }}"
+    label: "{{ item.name }}"
 
 - name: Setup new or update existing virtual environments
   ansible.builtin.include_tasks: venv.yml

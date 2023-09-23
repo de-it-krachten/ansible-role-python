@@ -43,5 +43,4 @@
   loop: "{{ files_to_alter.files }}"
   loop_control:
     loop_var: var
-    label:
-      - "file: {{ var.path }}"
+    label: "file: {{ var.path }}"
