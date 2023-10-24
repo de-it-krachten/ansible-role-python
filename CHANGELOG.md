@@ -1,3 +1,10 @@
+# [1.12.0](https://github.com/de-it-krachten/ansible-role-python/compare/v1.11.2...v1.12.0) (2023-10-24)
+
+
+### Features
+
+* Add setuptools/wheel to virtual environments ([84178b1](https://github.com/de-it-krachten/ansible-role-python/commit/84178b1d805fea70912d7bb8970fc9d0c111df05))
+
 ## [1.11.2](https://github.com/de-it-krachten/ansible-role-python/compare/v1.11.1...v1.11.2) (2023-09-23)
 
 
