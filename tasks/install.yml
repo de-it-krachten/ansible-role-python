@@ -1,0 +1,117 @@
+---
+
+- name: Show debug settings
+  ansible.builtin.debug:
+    msg:
+      python2: "{{ python2 }}"
+      python3: "{{ python3 }}"
+      python38: "{{ python38 | default('N/A') }}"
+      python39: "{{ python39 | default('N/A') }}"
+      python_virtualenvs: "{{ python_virtualenvs }}"
+    verbosity: 1
+
+- name: Move and symlink virtual environment location
+  ansible.builtin.include_tasks: link.yml
+  when:
+    - python_virtualenv_data is defined
+    - python_virtualenv_data | length > 0
+
+- name: Including 'python2'
+  ansible.builtin.include_tasks: python.yml
+  vars:
+    python: python2
+  when: python2 is defined and python2 | bool
+
+- name: Including 'python3'
+  ansible.builtin.include_tasks: python.yml
+  vars:
+    python: python3
+  when: python3 is defined and python3 | bool
+
+- name: Install python 3.9/3.10/3.11 for SLES/OpenSUSE
+  when:
+    - ansible_os_family == 'Suse'
+  block:
+
+    - name: Including 'python39'
+      ansible.builtin.include_tasks: python.yml
+      vars:
+        python: python39
+      when: python39 is defined and python39 | bool
+
+    - name: Including 'python310'
+      ansible.builtin.include_tasks: python.yml
+      vars:
+        python: python310
+      when: python310 is defined and python310 | bool
+
+    - name: Including 'python311'
+      ansible.builtin.include_tasks: python.yml
+      vars:
+        python: python311
+      when: python311 is defined and python311 | bool
+
+- name: Install python 3.8/3.9 for RHEL8
+  when:
+    - ansible_os_family == 'RedHat'
+    - ansible_distribution_major_version == '8'
+  block:
+
+    - name: Including 'python38'
+      ansible.builtin.include_tasks: python.yml
+      vars:
+        python: python38
+      when: python38 is defined and python38 | bool
+
+    - name: Including 'python39'
+      ansible.builtin.include_tasks: python.yml
+      vars:
+        python: python39
+      when: python39 is defined and python39 | bool
+
+- name: Install python 3.11 for RHEL 8/9
+  when:
+    - ansible_os_family == 'RedHat'
+    - ansible_distribution_major_version is search('^(8|9)$')
+  block:
+
+    - name: Including 'python311'
+      ansible.builtin.include_tasks: python.yml
+      vars:
+        python: python311
+      when: python311 is defined and python311 | bool
+
+- name: Use a custom pip configuration
+  ansible.builtin.template:
+    src: "{{ python_custom_pip_conf }}"
+    dest: /etc/pip.conf
+    mode: "0644"
+  when: python_custom_pip_conf is defined and python_custom_pip_conf | length > 0
+
+- name: Upgrading pip (site-packages)
+  ansible.builtin.include_tasks: pip.yml
+  when: pip_upgrade | bool
+
+- name: Install python from source
+  ansible.builtin.include_tasks: source.yml
+  when: python_from_source is defined and python_from_source | bool
+
+- name: Backward compatibility for RedHat/CentOS 7
+  when:
+    - ansible_os_family == 'RedHat'
+    - ansible_distribution_major_version == '7'
+  block:
+
+    - name: Check if /usr/bin/virtualenv exists
+      ansible.builtin.stat:
+        path: /usr/bin/virtualenv
+      register: _virtualenv
+
+    - name: Backward compatibility for RedHat/CentOS 7
+      ansible.builtin.file:
+        src: "{{ python3_virtualenv if python3 | bool else python2_virtualenv }}"
+        dest: /usr/bin/virtualenv
+        owner: root
+        group: root
+        state: link
+      when: not _virtualenv.stat.exists

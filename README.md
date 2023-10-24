@@ -31,7 +31,6 @@ Supported platforms
 - AlmaLinux 9
 - SUSE Linux Enterprise 15<sup>1</sup>
 - openSUSE Leap 15
-- Debian 10 (Buster)<sup>1</sup>
 - Debian 11 (Bullseye)
 - Debian 12 (Bookworm)
 - Ubuntu 20.04 LTS
@@ -58,6 +57,18 @@ python_package_install: true
 
 # Install additional python packages (might be required when compilation is required)
 python_package_install_optional: false
+
+# List of pypi packages that should exist in the virtualenv
+python_virtualenv_packages:
+  - pip
+  - setuptools
+  - wheel
+
+# Upgrade main package for new virtual environments
+python_virtualenv_upgrade: true
+
+# Execute code for venv creation only
+python_virtualenv_only: false
 
 # Use list of trusted hosts as defined under python_trusted_hosts
 python_trust_hosts: false

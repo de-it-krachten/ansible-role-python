@@ -47,11 +47,12 @@
 
 - name: Create virtualenv from scratch  # noqa no-handler
   ansible.builtin.pip:
-    name: "pip"
+    name: "{{ python_virtualenv_packages }}"
     virtualenv: "{{ _virtualenv_path }}"
     virtualenv_command: "{{ virtualenv_command }}"
     virtualenv_python: "{{ virtualenv_python if virtualenv_python is not search('python3') else omit }}"
     virtualenv_site_packages: "{{ virtualenv_site_packages }}"
+    extra_args: "{{ '--upgrade' if (python_virtualenv_upgrade | bool) else omit }}"
   environment:
     HTTP_PROXY: "{{ python_http_proxy | default('') }}"
     HTTPS_PROXY: "{{ python_https_proxy | default('') }}"
