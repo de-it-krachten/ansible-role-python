@@ -81,6 +81,19 @@
         python: python311
       when: python311 is defined and python311 | bool
 
+- name: Install python 3.9 for Ubuntu 20.04 LTS
+  when:
+    - ansible_distribution == 'Ubuntu'
+    - ansible_distribution_major_version == '20'
+  block:
+
+    - name: Including 'python39'
+      ansible.builtin.include_tasks: python.yml
+      vars:
+        python: python39
+      when: python39 is defined and python39 | bool
+
+
 - name: Use a custom pip configuration
   ansible.builtin.template:
     src: "{{ python_custom_pip_conf }}"
