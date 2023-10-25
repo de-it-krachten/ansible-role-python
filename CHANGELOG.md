@@ -1,3 +1,10 @@
+# [1.13.0](https://github.com/de-it-krachten/ansible-role-python/compare/v1.12.0...v1.13.0) (2023-10-25)
+
+
+### Features
+
+* Add support for python 3.9 on Ubuntu 20.04 LTS ([31989a9](https://github.com/de-it-krachten/ansible-role-python/commit/31989a90e5d7d4d1753f4c9e46bc34595f3f530d))
+
 # [1.12.0](https://github.com/de-it-krachten/ansible-role-python/compare/v1.11.2...v1.12.0) (2023-10-24)
 
 
