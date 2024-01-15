@@ -25,7 +25,8 @@
       {%- endif -%}
     virtualenv_python: "{{ item.python }}"
     virtualenv_packages: "{{ item.packages }}"
-    virtualenv_packages_remove: "{{ item.packages_rm | default([]) }}"
+    virtualenv_packages_update: "{{ item.packages_update | default([]) }}"
+    virtualenv_packages_remove: "{{ item.packages_remove | default([]) }}"
     virtualenv_source: "{{ item.source | default('skip') }}"
     virtualenv_label: "{{ item.label | default('skip') }}"
     virtualenv_recreate: "{{ item.recreate | default(False) }}"
