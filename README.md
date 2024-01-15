@@ -13,7 +13,7 @@ Installs python from repository
 None
 
 #### Collections
-- {'name': 'community.general'}
+- community.general
 
 ## Platforms
 
