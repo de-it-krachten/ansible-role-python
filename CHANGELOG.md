@@ -1,3 +1,10 @@
+## [1.13.1](https://github.com/de-it-krachten/ansible-role-python/compare/v1.13.0...v1.13.1) (2024-04-12)
+
+
+### Bug Fixes
+
+* Add support for package removal ([f146130](https://github.com/de-it-krachten/ansible-role-python/commit/f146130b5187fcc916c0a9668d8a0770b8322a7b))
+
 # [1.13.0](https://github.com/de-it-krachten/ansible-role-python/compare/v1.12.0...v1.13.0) (2023-10-25)
 
 
