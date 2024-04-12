@@ -92,6 +92,29 @@
   become: yes
   become_user: "{{ virtualenv_user }}"
 
+- name: Update specific packages
+  ansible.builtin.pip:
+    name: "{{ virtualenv_packages_update }}"
+    virtualenv: "{{ _virtualenv_path }}"
+    extra_args: "{{ python_trusted_hosts if python_trust_hosts | bool else omit }}"
+  environment:
+    HTTP_PROXY: "{{ python_http_proxy | default('') }}"
+    HTTPS_PROXY: "{{ python_https_proxy | default('') }}"
+  become: yes
+  become_user: "{{ virtualenv_user }}"
+
+- name: Remove specific packages
+  ansible.builtin.pip:
+    name: "{{ virtualenv_packages_remove }}"
+    state: absent
+    virtualenv: "{{ _virtualenv_path }}"
+    extra_args: "{{ python_trusted_hosts if python_trust_hosts | bool else omit }}"
+  environment:
+    HTTP_PROXY: "{{ python_http_proxy | default('') }}"
+    HTTPS_PROXY: "{{ python_https_proxy | default('') }}"
+  become: yes
+  become_user: "{{ virtualenv_user }}"
+
 - name: Create symlink to virtualenv
   ansible.builtin.file:
     state: link
