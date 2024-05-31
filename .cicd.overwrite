@@ -34,7 +34,7 @@ molecule:
 #    python-rockylinux8-node1:
 #      reset_vars:
 #        python39: 'true'
-#    python-fedora38-node1:
+#    python-fedora40-node1:
 #      reset_vars:
 #        python38: 'true'
 #        python39: 'true'
