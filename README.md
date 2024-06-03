@@ -35,8 +35,9 @@ Supported platforms
 - Debian 12 (Bookworm)
 - Ubuntu 20.04 LTS
 - Ubuntu 22.04 LTS
-- Fedora 37
-- Fedora 38
+- Ubuntu 24.04 LTS
+- Fedora 39
+- Fedora 40
 - Alpine 3
 
 Note:
@@ -116,21 +117,7 @@ python_binary_full: /usr/local/bin/{{ python_binary }}
 python_url: https://www.python.org/ftp/python/{{ python_version }}/Python-{{ python_version }}.tgz
 </pre></code>
 
-### defaults/Ubuntu-20.yml
-<pre><code>
-# Python 3.9
-python39: false
-python39_command: /usr/bin/python3.9
-python39_virtualenv: /usr/bin/virtualenv
-python39_packages:
-  - python3.9
-  - python3.9-venv
-
-python39_packages_optional:
-  - python3.9-dev
-</pre></code>
-
-### defaults/Fedora.yml
+### defaults/family-Alpine.yml
 <pre><code>
 # Python2
 python2: false
@@ -138,15 +125,7 @@ python2_command: /usr/bin/python2
 python2_virtualenv: /usr/bin/virtualenv
 python2_packages:
   - python2
-  - python2-libs
-  - python2-devel
-  - python2-pip
-  - python2-virtualenv
-  - libselinux-python
-python2_packages_optional:
-  - gcc
-  - glibc-devel
-  - openssl-devel
+python2_packages_optional: []
 
 # Python3
 python3: true
@@ -154,32 +133,65 @@ python3_command: /usr/bin/python3
 python3_virtualenv: /usr/bin/virtualenv
 python3_packages:
   - python3
-  - python3-libs
+  - py3-pip
+  - py3-virtualenv
+python3_packages_optional:
+  - build-base
+  - gcc
+  - g++
+  - libffi-dev
+  - musl-dev
+  - openssl-dev
+  - python3-dev
+</pre></code>
+
+### defaults/family-Debian.yml
+<pre><code>
+# Python2
+python2: false
+python2_command: /usr/bin/python2
+python2_virtualenv: /usr/bin/virtualenv
+python2_packages:
+  - python
+  - python-pip
+  - python-virtualenv
+python2_packages_optional: []
+
+# Python3
+python3: true
+python3_command: /usr/bin/python3
+python3_virtualenv: /usr/bin/virtualenv
+python3_packages:
+  - python3
   - python3-pip
   - python3-virtualenv
-  - python3-libselinux
+  - python3-venv
+  - python3-setuptools
+  - virtualenv
+  - python3-virtualenv
 python3_packages_optional:
   - gcc
-  - python3-devel
-  - glibc-devel
-  - openssl-devel
-  - libffi-devel
+  - libffi-dev
+  - python3-dev
+
+python3_packages_src:
+  - build-essential
+  - zlib1g-dev
+  - libncurses5-dev
+  - libgdbm-dev
+  - libnss3-dev
+  - libssl-dev
+  - libsqlite3-dev
+  - libreadline-dev
+  - libffi-dev
+  - curl
+  - libbz2-dev
 
 # Python 3.8
 python38: false
-python38_command: /usr/bin/python3.8
-python38_virtualenv: /usr/bin/virtualenv
-python38_packages:
-  - python3.8
-python38_packages_optional: []
 
 # Python 3.9
 python39: false
-python39_command: /usr/bin/python3.9
-python39_virtualenv: /usr/bin/virtualenv
-python39_packages:
-  - python3.9
-python39_packages_optional: []
 </pre></code>
 
 ### defaults/family-RedHat-7.yml
@@ -318,6 +330,57 @@ python3_packages_src:
   - xz-devel
 </pre></code>
 
+### defaults/family-RedHat-9.yml
+<pre><code>
+# Python2
+python2: false
+python2_command: /usr/bin/python2
+python2_virtualenv: /usr/bin/virtualenv-2.7
+python2_packages:
+  - python
+  - python-libs
+  - python-pip
+  - python-virtualenv
+  - libselinux-python
+python2_packages_optional:
+  - gcc
+  - glibc-devel
+  - python-devel
+  - openssl-devel
+  - libffi-devel
+
+# Python3
+python3: true
+python3_command: /usr/bin/python3
+python3_virtualenv: /usr/bin/virtualenv
+python3_packages:
+  - python3
+  - python3-libs
+  - python3-pip
+  - python3-virtualenv
+  - python3-setuptools
+  - libselinux-python3
+python3_packages_optional:
+  - gcc
+  - python3-devel
+  - glibc-devel
+  - openssl-devel
+  - libffi-devel
+
+# Python 3.11
+python311: false
+python311_command: /usr/bin/python3.11
+python311_virtualenv: /usr/bin/virtualenv
+python311_packages:
+  - python3.11
+  - python3.11-libs
+  - python3.11-pip
+  - python3.11-setuptools
+  - python3-virtualenv
+python311_packages_optional:
+  - python3.11-devel
+</pre></code>
+
 ### defaults/family-Suse.yml
 <pre><code>
 # Python2
@@ -404,24 +467,23 @@ python311_packages_optional:
   - python311-devel
 </pre></code>
 
-### defaults/family-RedHat-9.yml
+### defaults/Fedora.yml
 <pre><code>
 # Python2
 python2: false
 python2_command: /usr/bin/python2
-python2_virtualenv: /usr/bin/virtualenv-2.7
+python2_virtualenv: /usr/bin/virtualenv
 python2_packages:
-  - python
-  - python-libs
-  - python-pip
-  - python-virtualenv
+  - python2
+  - python2-libs
+  - python2-devel
+  - python2-pip
+  - python2-virtualenv
   - libselinux-python
 python2_packages_optional:
   - gcc
   - glibc-devel
-  - python-devel
   - openssl-devel
-  - libffi-devel
 
 # Python3
 python3: true
@@ -432,8 +494,7 @@ python3_packages:
   - python3-libs
   - python3-pip
   - python3-virtualenv
-  - python3-setuptools
-  - libselinux-python3
+  - python3-libselinux
 python3_packages_optional:
   - gcc
   - python3-devel
@@ -441,95 +502,35 @@ python3_packages_optional:
   - openssl-devel
   - libffi-devel
 
-# Python 3.11
-python311: false
-python311_command: /usr/bin/python3.11
-python311_virtualenv: /usr/bin/virtualenv
-python311_packages:
-  - python3.11
-  - python3.11-libs
-  - python3.11-pip
-  - python3.11-setuptools
-  - python3-virtualenv
-python311_packages_optional:
-  - python3.11-devel
-</pre></code>
-
-### defaults/family-Debian.yml
-<pre><code>
-# Python2
-python2: false
-python2_command: /usr/bin/python2
-python2_virtualenv: /usr/bin/virtualenv
-python2_packages:
-  - python
-  - python-pip
-  - python-virtualenv
-python2_packages_optional: []
-
-# Python3
-python3: true
-python3_command: /usr/bin/python3
-python3_virtualenv: /usr/bin/virtualenv
-python3_packages:
-  - python3
-  - python3-pip
-  - python3-virtualenv
-  - python3-venv
-  - python3-setuptools
-  - virtualenv
-  - python3-virtualenv
-python3_packages_optional:
-  - gcc
-  - libffi-dev
-  - python3-dev
-
-python3_packages_src:
-  - build-essential
-  - zlib1g-dev
-  - libncurses5-dev
-  - libgdbm-dev
-  - libnss3-dev
-  - libssl-dev
-  - libsqlite3-dev
-  - libreadline-dev
-  - libffi-dev
-  - curl
-  - libbz2-dev
-
 # Python 3.8
 python38: false
+python38_command: /usr/bin/python3.8
+python38_virtualenv: /usr/bin/virtualenv
+python38_packages:
+  - python3.8
+python38_packages_optional: []
 
 # Python 3.9
 python39: false
+python39_command: /usr/bin/python3.9
+python39_virtualenv: /usr/bin/virtualenv
+python39_packages:
+  - python3.9
+python39_packages_optional: []
 </pre></code>
 
-### defaults/family-Alpine.yml
+### defaults/Ubuntu-20.yml
 <pre><code>
-# Python2
-python2: false
-python2_command: /usr/bin/python2
-python2_virtualenv: /usr/bin/virtualenv
-python2_packages:
-  - python2
-python2_packages_optional: []
+# Python 3.9
+python39: false
+python39_command: /usr/bin/python3.9
+python39_virtualenv: /usr/bin/virtualenv
+python39_packages:
+  - python3.9
+  - python3.9-venv
 
-# Python3
-python3: true
-python3_command: /usr/bin/python3
-python3_virtualenv: /usr/bin/virtualenv
-python3_packages:
-  - python3
-  - py3-pip
-  - py3-virtualenv
-python3_packages_optional:
-  - build-base
-  - gcc
-  - g++
-  - libffi-dev
-  - musl-dev
-  - openssl-dev
-  - python3-dev
+python39_packages_optional:
+  - python3.9-dev
 </pre></code>
 
 
