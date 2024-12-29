@@ -2,5 +2,5 @@ molecule/default/tests/__pycache__
 *.bak
 .converted
 /var/tmp/
-molecule/default/molecule.yml
+#molecule/default/molecule.yml
 defaults/defaults-*
