@@ -1,3 +1,10 @@
+# [1.17.0](https://github.com/de-it-krachten/ansible-role-python/compare/v1.16.0...v1.17.0) (2025-03-14)
+
+
+### Features
+
+* Support all python versions ([1e8f008](https://github.com/de-it-krachten/ansible-role-python/commit/1e8f0081e9268beabd4c559e4cb571931832a5ff))
+
 # [1.16.0](https://github.com/de-it-krachten/ansible-role-python/compare/v1.15.0...v1.16.0) (2025-03-14)
 
 
