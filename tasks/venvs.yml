@@ -24,7 +24,7 @@
       {{ item.virtualenv | default(python_virtualenv_command) }}
       {%- endif -%}
     virtualenv_python: "{{ item.python }}"
-    virtualenv_packages: "{{ item.packages }}"
+    virtualenv_packages: "{{ [] if python_virtualenv_empty | bool else item.packages }}"
     virtualenv_packages_update: "{{ item.packages_update | default([]) }}"
     virtualenv_packages_remove: "{{ item.packages_remove | default([]) }}"
     virtualenv_source: "{{ item.source | default('skip') }}"
