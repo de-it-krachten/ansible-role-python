@@ -1,3 +1,10 @@
+# [1.16.0](https://github.com/de-it-krachten/ansible-role-python/compare/v1.15.0...v1.16.0) (2025-03-14)
+
+
+### Features
+
+* Add option to create empty venv ([d57ff31](https://github.com/de-it-krachten/ansible-role-python/commit/d57ff312940643629b4cf806160d701049a21335))
+
 # [1.15.0](https://github.com/de-it-krachten/ansible-role-python/compare/v1.14.0...v1.15.0) (2024-12-29)
 
 
