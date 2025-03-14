@@ -25,6 +25,9 @@ python_virtualenv_upgrade: true
 # Execute code for venv creation only
 python_virtualenv_only: false
 
+# Create empty venv
+python_virtualenv_empty: false
+
 # Use list of trusted hosts as defined under python_trusted_hosts
 python_trust_hosts: false
 
