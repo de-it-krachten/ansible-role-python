@@ -28,71 +28,29 @@
     python: python3
   when: python3 is defined and python3 | bool
 
-- name: Install python 3.9/3.10/3.11 for SLES/OpenSUSE
-  when:
-    - ansible_os_family == 'Suse'
-  block:
+- name: Including 'python38'
+  ansible.builtin.include_tasks: python.yml
+  vars:
+    python: python38
+  when: python38 is defined and python38 | bool
 
-    - name: Including 'python39'
-      ansible.builtin.include_tasks: python.yml
-      vars:
-        python: python39
-      when: python39 is defined and python39 | bool
+- name: Including 'python39'
+  ansible.builtin.include_tasks: python.yml
+  vars:
+    python: python39
+  when: python39 is defined and python39 | bool
 
-    - name: Including 'python310'
-      ansible.builtin.include_tasks: python.yml
-      vars:
-        python: python310
-      when: python310 is defined and python310 | bool
+- name: Including 'python310'
+  ansible.builtin.include_tasks: python.yml
+  vars:
+    python: python310
+  when: python310 is defined and python310 | bool
 
-    - name: Including 'python311'
-      ansible.builtin.include_tasks: python.yml
-      vars:
-        python: python311
-      when: python311 is defined and python311 | bool
-
-- name: Install python 3.8/3.9 for RHEL8
-  when:
-    - ansible_os_family == 'RedHat'
-    - ansible_distribution_major_version == '8'
-  block:
-
-    - name: Including 'python38'
-      ansible.builtin.include_tasks: python.yml
-      vars:
-        python: python38
-      when: python38 is defined and python38 | bool
-
-    - name: Including 'python39'
-      ansible.builtin.include_tasks: python.yml
-      vars:
-        python: python39
-      when: python39 is defined and python39 | bool
-
-- name: Install python 3.11 for RHEL 8/9
-  when:
-    - ansible_os_family == 'RedHat'
-    - ansible_distribution_major_version is search('^(8|9)$')
-  block:
-
-    - name: Including 'python311'
-      ansible.builtin.include_tasks: python.yml
-      vars:
-        python: python311
-      when: python311 is defined and python311 | bool
-
-- name: Install python 3.9 for Ubuntu 20.04 LTS
-  when:
-    - ansible_distribution == 'Ubuntu'
-    - ansible_distribution_major_version == '20'
-  block:
-
-    - name: Including 'python39'
-      ansible.builtin.include_tasks: python.yml
-      vars:
-        python: python39
-      when: python39 is defined and python39 | bool
-
+- name: Including 'python311'
+  ansible.builtin.include_tasks: python.yml
+  vars:
+    python: python311
+  when: python311 is defined and python311 | bool
 
 - name: Use a custom pip configuration
   ansible.builtin.template:

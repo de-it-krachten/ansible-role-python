@@ -45,3 +45,14 @@ python38: false
 
 # Python 3.9
 python39: false
+
+# Python 3.11
+python311: false
+python311_command: /usr/bin/python3.11
+python311_virtualenv: /usr/bin/virtualenv
+python311_packages:
+  - python3.11
+  - python3.11-venv
+
+python311_packages_optional:
+  - python3.11-dev
