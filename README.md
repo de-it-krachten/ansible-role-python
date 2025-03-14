@@ -193,6 +193,17 @@ python38: false
 
 # Python 3.9
 python39: false
+
+# Python 3.11
+python311: false
+python311_command: /usr/bin/python3.11
+python311_virtualenv: /usr/bin/virtualenv
+python311_packages:
+  - python3.11
+  - python3.11-venv
+
+python311_packages_optional:
+  - python3.11-dev
 </pre></code>
 
 ### defaults/family-RedHat-7.yml
@@ -521,6 +532,20 @@ python39_packages_optional: []
 </pre></code>
 
 ### defaults/Ubuntu-20.yml
+<pre><code>
+# Python 3.9
+python39: false
+python39_command: /usr/bin/python3.9
+python39_virtualenv: /usr/bin/virtualenv
+python39_packages:
+  - python3.9
+  - python3.9-venv
+
+python39_packages_optional:
+  - python3.9-dev
+</pre></code>
+
+### defaults/Ubuntu.yml
 <pre><code>
 # Python 3.9
 python39: false
