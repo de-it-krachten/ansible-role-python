@@ -28,7 +28,6 @@ python3_packages:
   - python3-pip
   - python3-virtualenv
   - python3-devel
-
 python3_packages_optional:
   - gcc
   - python3-devel
@@ -45,16 +44,13 @@ python3_packages_src:
   - libffi-devel
   - xz-devel
 
-# Python 3.8
-python38: false
-
 # Python 3.9
 python39: false
 python39_command: /usr/bin/python3.9
-python39_virtualenv: /usr/bin/virtualenv
+python39_virtualenv: '/usr/bin/python3.9 -m venv'
 python39_packages:
   - python39
-  - python39-pip
+#  - python39-pip
   - python3-virtualenv
 python39_packages_optional:
   - python39-devel
@@ -62,10 +58,10 @@ python39_packages_optional:
 # Python 3.10
 python310: false
 python310_command: /usr/bin/python3.10
-python310_virtualenv: /usr/bin/virtualenv
+python310_virtualenv: '/usr/bin/python3.10 -m venv'
 python310_packages:
   - python310
-  - python310-pip
+#  - python310-pip
   - python310-setuptools
   - python3-virtualenv
 python310_packages_optional:
@@ -74,7 +70,7 @@ python310_packages_optional:
 # Python 3.11
 python311: false
 python311_command: /usr/bin/python3.11
-python311_virtualenv: /usr/bin/virtualenv
+python311_virtualenv: '/usr/bin/python3.11 -m venv'
 python311_packages:
   - python311
   - python311-pip

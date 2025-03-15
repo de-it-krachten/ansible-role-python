@@ -1,0 +1,6 @@
+---
+
+# Default python3 version
+python3_default: 3.12
+python3_available:
+  - 3.12
