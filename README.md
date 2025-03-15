@@ -118,6 +118,22 @@ python_binary_full: /usr/local/bin/{{ python_binary }}
 python_url: https://www.python.org/ftp/python/{{ python_version }}/Python-{{ python_version }}.tgz
 </pre></code>
 
+### defaults/Debian-11.yml
+<pre><code>
+# Supported versions
+python_default: '3.9'
+python_supported:
+      - '3.9'
+</pre></code>
+
+### defaults/Debian-12.yml
+<pre><code>
+# Supported versions
+python_default: '3.11'
+python_supported:
+      - '3.11'
+</pre></code>
+
 ### defaults/family-Alpine.yml
 <pre><code>
 # Python2
@@ -229,28 +245,16 @@ python311_packages_optional:
   - python3.11-dev
 </pre></code>
 
-### defaults/family-RedHat-7.yml
-<pre><code>
-# Python3
-python3: true
-python3_command: /usr/bin/python3
-python3_virtualenv: /usr/bin/virtualenv-3.6
-python3_packages:
-  - python36
-  - python36-libs
-  - python36-pip
-  - python36-virtualenv
-  - libselinux-python3
-python3_packages_optional:
-  - gcc
-  - python36-devel
-  - glibc-devel
-  - openssl-devel
-  - libffi-devel
-</pre></code>
-
 ### defaults/family-RedHat-8.yml
 <pre><code>
+# Supported versions
+python_default: '3.6'
+python_supported:
+      - '3.6'
+      - '3.8'
+      - '3.9'
+      - '3.11'
+
 # Python3
 python3: true
 python3_command: /usr/bin/python3
@@ -272,6 +276,13 @@ python3_packages_optional:
 
 ### defaults/family-RedHat-9.yml
 <pre><code>
+# Supported versions
+python_default: '3.9'
+python_supported:
+      - '3.9'
+      - '3.11'
+      - '3.12'
+
 # Python3
 python3: true
 python3_command: /usr/bin/python3
@@ -293,42 +304,6 @@ python3_packages_optional:
 
 ### defaults/family-RedHat.yml
 <pre><code>
-# Python 2.7
-python2: false
-python2_command: /usr/bin/python2
-python2_virtualenv: /usr/bin/virtualenv-2.7
-python2_packages:
-  - python
-  - python-libs
-  - python-pip
-  - python-virtualenv
-  - libselinux-python
-python2_packages_optional:
-  - gcc
-  - glibc-devel
-  - python-devel
-  - openssl-devel
-  - libffi-devel
-
-# Python 3.6
-python3: true
-python3_command: /usr/bin/python3
-python3_version: 3.6
-python3_virtualenv: /usr/bin/virtualenv-3.6
-python3_packages:
-  - python36
-  - python3-libs
-  - python3-pip
-  - python3-virtualenv
-  - python3-setuptools
-  - libselinux-python3
-python3_packages_optional:
-  - gcc
-  - python36-devel
-  - glibc-devel
-  - openssl-devel
-  - libffi-devel
-
 # Python 3.8
 python38: false
 python38_command: /usr/bin/python3.8
@@ -400,6 +375,18 @@ python3_packages_src:
   - bzip2-devel
   - libffi-devel
   - xz-devel
+</pre></code>
+
+### defaults/family-Suse-15.yml
+<pre><code>
+# Supported versions
+python_default: '3.6'
+python_supported:
+      - '3.6'
+      - '3.9'
+      # - '3.10'
+      - '3.11'
+      - '3.12'
 </pre></code>
 
 ### defaults/family-Suse.yml
@@ -496,6 +483,22 @@ python312_packages_optional:
   - python312-devel
 </pre></code>
 
+### defaults/Fedora-40.yml
+<pre><code>
+# Supported versions
+python_default: '3.12'
+python_supported:
+      - '3.12'
+</pre></code>
+
+### defaults/Fedora-41.yml
+<pre><code>
+# Supported versions
+python_default: '3.13'
+python_supported:
+      - '3.13'
+</pre></code>
+
 ### defaults/Fedora.yml
 <pre><code>
 # Python2
@@ -548,79 +551,34 @@ python39_packages:
 python39_packages_optional: []
 </pre></code>
 
-
-### vars/main.yml
+### defaults/Ubuntu2004.yml
 <pre><code>
-python_matrix_os: >-
-  {{ inventory_hostname.split('-')[1] | 
-     regex_replace('^(rocky|alma|oracle)linux', 'rhel') }}
-
-python_support_matrix:
-  ubuntu2404:
-    default: '3.12'
-    supported:
-      - '3.12'
-  ubuntu2204:
-    default: '3.10'
-    supported:
-      - '3.10'
-      - '3.11'
-  ubuntu2004:
-    default: '3.8'
-    supported:
+# Supported versions
+python_default: '3.8'
+python_supported:
       - '3.6'
       - '3.7'
       - '3.8'
       - '3.9'
-  debian12:
-    default: '3.11'
-    supported:
-      - '3.11'
-  debian11:
-    default: '3.9'
-    supported:
-      - '3.9'
-  rhel9:
-    default: '3.9'
-    supported:
-      - '3.9'
-      - '3.11'
-      - '3.12'
-  rhel8:
-    default: '3.6'
-    supported:
-      - '3.6'
-      - '3.8'
-      - '3.9'
-  sles15:
-    default: '3.6'
-    supported:
-      - '3.6'
-      - '3.9'
+</pre></code>
+
+### defaults/Ubuntu2204.yml
+<pre><code>
+# Supported versions
+python_default: '3.10'
+python_supported:
       - '3.10'
       - '3.11'
-      - '3.12'
-  opensuse15:
-    default: '3.6'
-    supported:
-      - '3.6'
-      - '3.9'
-      # - '3.10'
-      - '3.11'
-      - '3.12'
-  fedora40:
-    default: '3.12'
-    supported:
-      - '3.12'
-  fedora41:
-    default: '3.13'
-    supported:
-      - '3.13'
-  alpine3:
-    default: '3.13'
-    supported:
-      - '3.13'
 </pre></code>
+
+### defaults/Ubuntu2404.yml
+<pre><code>
+# Supported versions
+python_default: '3.12'
+python_supported:
+      - '3.12'
+</pre></code>
+
 
 
 
@@ -634,6 +592,12 @@ python_support_matrix:
   hosts: all
   become: 'yes'
   vars:
+    python38: true
+    python39: true
+    python310: true
+    python311: true
+    python312: true
+    python313: true
     python_package_install_optional: true
     python_virtualenv_root: /tmp/venv
     python_virtualenvs:
