@@ -42,9 +42,33 @@ python3_packages_src:
 
 # Python 3.8
 python38: false
+python38_command: /usr/bin/python3.8
+python38_virtualenv: /usr/bin/virtualenv
+python38_packages:
+  - python3.8
+  - python3.8-venv
+python38_packages_optional:
+  - python3.8-dev
 
 # Python 3.9
 python39: false
+python39_command: /usr/bin/python3.9
+python39_virtualenv: /usr/bin/virtualenv
+python39_packages:
+  - python3.9
+  - python3.9-venv
+python39_packages_optional:
+  - python3.9-dev
+
+# Python 3.10
+python310: false
+python310_command: /usr/bin/python3.10
+python310_virtualenv: /usr/bin/virtualenv
+python310_packages:
+  - python3.10
+  - python3.10-venv
+python310_packages_optional:
+  - python3.10-dev
 
 # Python 3.11
 python311: false
@@ -53,6 +77,5 @@ python311_virtualenv: /usr/bin/virtualenv
 python311_packages:
   - python3.11
   - python3.11-venv
-
 python311_packages_optional:
   - python3.11-dev

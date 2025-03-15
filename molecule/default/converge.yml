@@ -8,7 +8,6 @@
   hosts: all
   become: "yes"
   vars:
-    python311: True
     python_package_install_optional: True
     python_virtualenv_root: /tmp/venv
     python_virtualenvs: [{'name': 'sample', 'packages': ['dnspython'], 'packages_rm': ['selinux'], 'python': '/usr/bin/python3', 'recreate': False, 'site_packages': False, 'user': 'sample', 'pip_upgrade': True}]

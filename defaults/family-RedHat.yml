@@ -1,0 +1,73 @@
+---
+
+# Python 3.8
+python38: false
+python38_command: /usr/bin/python3.8
+python38_virtualenv: /usr/bin/virtualenv
+python38_packages:
+  - python38
+  - python38-libs
+  - python38-pip
+  - python3-virtualenv
+python38_packages_optional:
+  - python38-devel
+
+# Python 3.9
+python39: false
+python39_command: /usr/bin/python3.9
+python39_virtualenv: /usr/bin/virtualenv
+python39_packages:
+  - python39
+  - python39-libs
+  - python39-pip
+  - python3-virtualenv
+python39_packages_optional:
+  - python39-devel
+
+# Python 3.10
+python310: false
+python310_command: /usr/bin/python3.10
+python310_virtualenv: /usr/bin/virtualenv
+python310_packages:
+  - python3.10
+  - python3.10-libs
+  - python3.10-pip
+  - python3.10-setuptools
+  - python3-virtualenv
+python310_packages_optional:
+  - python3.10-devel
+
+# Python 3.11
+python311: false
+python311_command: /usr/bin/python3.11
+python311_virtualenv: /usr/bin/virtualenv
+python311_packages:
+  - python3.11
+  - python3.11-libs
+  - python3.11-pip
+  - python3.11-setuptools
+  - python3-virtualenv
+python311_packages_optional:
+  - python3.11-devel
+
+# Python 3.12
+python312: false
+python312_command: /usr/bin/python3.12
+python312_virtualenv: /usr/bin/virtualenv
+python312_packages:
+  - python3.12
+  - python3.12-libs
+  - python3.12-pip
+  - python3.12-setuptools
+  - python3-virtualenv
+python312_packages_optional:
+  - python3.12-devel
+
+# Python from source
+python3_packages_src:
+  - '@Development Tools'
+  - gcc
+  - openssl-devel
+  - bzip2-devel
+  - libffi-devel
+  - xz-devel

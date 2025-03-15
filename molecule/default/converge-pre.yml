@@ -2,7 +2,22 @@
 
 - name: Converge - pre
   hosts: all
+  vars:
+    os: "{{ inventory_hostname.split('-')[1] | regex_replace('^(rocky|alma|oracle)linux', 'rhel') }}"
+  vars_files:
+    - supported.yml
   tasks:
+
+    - name: Get all python versions apart from the default
+      set_fact:
+        python{{ item | regex_replace('\.') }}: true
+      when: item != python3_default
+      loop: "{{ python_support_matrix[os]['supported'] }}"
+      loop_control:
+        label: "python{{ item | regex_replace('\\.') }}"
+      vars:
+        python3_default: "{{ python_support_matrix[os]['default'] }}"
+
     - name: Create user sample
       user:
         name: sample
