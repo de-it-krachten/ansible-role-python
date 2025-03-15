@@ -1,3 +1,10 @@
+## [1.17.2](https://github.com/de-it-krachten/ansible-role-python/compare/v1.17.1...v1.17.2) (2025-03-15)
+
+
+### Bug Fixes
+
+* Add missing support for 3.11 on RHEL8 ([15df175](https://github.com/de-it-krachten/ansible-role-python/commit/15df1752db69eec786df8fc0c08d48aad822b440))
+
 ## [1.17.1](https://github.com/de-it-krachten/ansible-role-python/compare/v1.17.0...v1.17.1) (2025-03-15)
 
 
