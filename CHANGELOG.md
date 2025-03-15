@@ -1,3 +1,10 @@
+## [1.17.1](https://github.com/de-it-krachten/ansible-role-python/compare/v1.17.0...v1.17.1) (2025-03-15)
+
+
+### Bug Fixes
+
+* Restructure variable defaults ([47efe6e](https://github.com/de-it-krachten/ansible-role-python/commit/47efe6e492984d5749f875e43cbe04f4e9d97c1d))
+
 # [1.17.0](https://github.com/de-it-krachten/ansible-role-python/compare/v1.16.0...v1.17.0) (2025-03-14)
 
 
