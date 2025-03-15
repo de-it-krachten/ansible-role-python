@@ -1,5 +1,13 @@
 ---
 
+# Supported versions
+python_default: '3.6'
+python_supported:
+  - '3.6'
+  - '3.8'
+  - '3.9'
+  - '3.11'
+
 # Python3
 python3: true
 python3_command: /usr/bin/python3

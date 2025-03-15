@@ -8,6 +8,12 @@
   hosts: all
   become: "yes"
   vars:
+    python38: True
+    python39: True
+    python310: True
+    python311: True
+    python312: True
+    python313: True
     python_package_install_optional: True
     python_virtualenv_root: /tmp/venv
     python_virtualenvs: [{'name': 'sample', 'packages': ['dnspython'], 'packages_rm': ['selinux'], 'python': '/usr/bin/python3', 'recreate': False, 'site_packages': False, 'user': 'sample', 'pip_upgrade': True}]

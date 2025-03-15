@@ -16,6 +16,12 @@ molecule:
   converge:
     pre: converge-pre.yml
     vars:
+      python38: true
+      python39: true
+      python310: true
+      python311: true
+      python312: true
+      python313: true
       python_package_install_optional: true
       python_virtualenv_root: /tmp/venv
       python_virtualenvs:

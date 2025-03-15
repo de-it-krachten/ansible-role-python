@@ -1,10 +1,5 @@
 ---
 
-- name: Get all python versions supported
-  ansible.builtin.set_fact:
-    python_default: "{{ python_support_matrix[python_matrix_os]['default'] }}"
-    python_supported: "{{ python_support_matrix[python_matrix_os]['supported'] }}"
-
 - name: Show support settings
   ansible.builtin.debug:
     msg:
@@ -35,7 +30,7 @@
     python: python38
   when:
     - python38 is defined and python38 | bool
-    - "'3.8' in python_supported"
+    - "'3.8' in python_supported and '3.8' != python_default"
 
 - name: Including 'python39'
   ansible.builtin.include_tasks: python.yml
@@ -43,7 +38,7 @@
     python: python39
   when:
     - python39 is defined and python39 | bool
-    - "'3.9' in python_supported"
+    - "'3.9' in python_supported and '3.9' != python_default"
 
 - name: Including 'python310'
   ansible.builtin.include_tasks: python.yml
@@ -51,7 +46,7 @@
     python: python310
   when:
     - python310 is defined and python310 | bool
-    - "'3.10' in python_supported"
+    - "'3.10' in python_supported and '3.10' != python_default"
 
 - name: Including 'python311'
   ansible.builtin.include_tasks: python.yml
@@ -59,7 +54,7 @@
     python: python311
   when:
     - python311 is defined and python311 | bool
-    - "'3.11' in python_supported"
+    - "'3.11' in python_supported and '3.11' != python_default"
 
 - name: Including 'python312'
   ansible.builtin.include_tasks: python.yml
@@ -67,7 +62,15 @@
     python: python312
   when:
     - python312 is defined and python312 | bool
-    - "'3.12' in python_supported"
+    - "'3.12' in python_supported and '3.12' != python_default"
+
+- name: Including 'python313'
+  ansible.builtin.include_tasks: python.yml
+  vars:
+    python: python313
+  when:
+    - python313 is defined and python313 | bool
+    - "'3.13' in python_supported and '3.13' != python_default"
 
 - name: Use a custom pip configuration
   ansible.builtin.template:
