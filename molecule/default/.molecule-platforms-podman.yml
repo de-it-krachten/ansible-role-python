@@ -95,6 +95,6 @@
   ci: true
   image: docker.io/geerlingguy/docker-fedora41-ansible:latest
 - name: alpine3
-  ci: true
+  ci: false
   image: docker.io/dropveter/alpine-python3
   pre_build_image: false

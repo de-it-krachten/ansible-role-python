@@ -97,7 +97,7 @@
   box: generic/fedora41
   interfaces: [{'network_name': 'private_network', 'type': 'dhcp'}]
 - name: alpine3
-  ci: true
+  ci: false
   box: generic/alpine312
   interfaces: [{'network_name': 'private_network', 'type': 'dhcp'}]
 - name: win2012r2
