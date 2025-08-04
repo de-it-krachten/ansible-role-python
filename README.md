@@ -139,6 +139,14 @@ python_supported:
   - '3.11'
 </pre></code>
 
+### defaults/Debian-13.yml
+<pre><code>
+# Supported versions
+python_default: '3.13'
+python_supported:
+  - '3.13'
+</pre></code>
+
 ### defaults/family-Alpine.yml
 <pre><code>
 # Python2
@@ -248,6 +256,32 @@ python311_packages:
   - python3.11-venv
 python311_packages_optional:
   - python3.11-dev
+</pre></code>
+
+### defaults/family-RedHat-10.yml
+<pre><code>
+# Supported versions
+python_default: '3.12'
+python_supported:
+  - '3.12'
+
+# Python3
+python3: true
+python3_command: /usr/bin/python3
+python3_virtualenv: /usr/bin/virtualenv
+python3_packages:
+  - python3
+  - python3-libs
+  - python3-pip
+  - python3-virtualenv
+  - python3-setuptools
+  - libselinux-python3
+python3_packages_optional:
+  - gcc
+  - python3-devel
+  - glibc-devel
+  - openssl-devel
+  - libffi-devel
 </pre></code>
 
 ### defaults/family-RedHat-8.yml
