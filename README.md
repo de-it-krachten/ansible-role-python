@@ -21,21 +21,26 @@ Supported platforms
 
 - Red Hat Enterprise Linux 8<sup>1</sup>
 - Red Hat Enterprise Linux 9<sup>1</sup>
+- Red Hat Enterprise Linux 10<sup>1</sup>
 - RockyLinux 8
 - RockyLinux 9
+- RockyLinux 10
 - OracleLinux 8
 - OracleLinux 9
+- OracleLinux 10
 - AlmaLinux 8
 - AlmaLinux 9
+- AlmaLinux 10
 - SUSE Linux Enterprise 15<sup>1</sup>
 - openSUSE Leap 15
 - Debian 11 (Bullseye)
 - Debian 12 (Bookworm)
+- Debian 13 (Trixie)
 - Ubuntu 20.04 LTS
 - Ubuntu 22.04 LTS
 - Ubuntu 24.04 LTS
-- Fedora 40
 - Fedora 41
+- Fedora 42
 - Alpine 3<sup>1</sup>
 
 Note:
@@ -123,7 +128,7 @@ python_url: https://www.python.org/ftp/python/{{ python_version }}/Python-{{ pyt
 # Supported versions
 python_default: '3.9'
 python_supported:
-      - '3.9'
+  - '3.9'
 </pre></code>
 
 ### defaults/Debian-12.yml
@@ -131,7 +136,15 @@ python_supported:
 # Supported versions
 python_default: '3.11'
 python_supported:
-      - '3.11'
+  - '3.11'
+</pre></code>
+
+### defaults/Debian-13.yml
+<pre><code>
+# Supported versions
+python_default: '3.13'
+python_supported:
+  - '3.13'
 </pre></code>
 
 ### defaults/family-Alpine.yml
@@ -245,15 +258,41 @@ python311_packages_optional:
   - python3.11-dev
 </pre></code>
 
+### defaults/family-RedHat-10.yml
+<pre><code>
+# Supported versions
+python_default: '3.12'
+python_supported:
+  - '3.12'
+
+# Python3
+python3: true
+python3_command: /usr/bin/python3
+python3_virtualenv: /usr/bin/virtualenv
+python3_packages:
+  - python3
+  - python3-libs
+  - python3-pip
+  - python3-virtualenv
+  - python3-setuptools
+  - libselinux-python3
+python3_packages_optional:
+  - gcc
+  - python3-devel
+  - glibc-devel
+  - openssl-devel
+  - libffi-devel
+</pre></code>
+
 ### defaults/family-RedHat-8.yml
 <pre><code>
 # Supported versions
 python_default: '3.6'
 python_supported:
-      - '3.6'
-      - '3.8'
-      - '3.9'
-      - '3.11'
+  - '3.6'
+  - '3.8'
+  - '3.9'
+  - '3.11'
 
 # Python3
 python3: true
@@ -279,9 +318,9 @@ python3_packages_optional:
 # Supported versions
 python_default: '3.9'
 python_supported:
-      - '3.9'
-      - '3.11'
-      - '3.12'
+  - '3.9'
+  - '3.11'
+  - '3.12'
 
 # Python3
 python3: true
@@ -382,11 +421,11 @@ python3_packages_src:
 # Supported versions
 python_default: '3.6'
 python_supported:
-      - '3.6'
-      - '3.9'
+  - '3.6'
+  - '3.9'
       # - '3.10'
-      - '3.11'
-      - '3.12'
+  - '3.11'
+  - '3.12'
 </pre></code>
 
 ### defaults/family-Suse.yml
@@ -488,7 +527,7 @@ python312_packages_optional:
 # Supported versions
 python_default: '3.12'
 python_supported:
-      - '3.12'
+  - '3.12'
 </pre></code>
 
 ### defaults/Fedora-41.yml
@@ -496,7 +535,15 @@ python_supported:
 # Supported versions
 python_default: '3.13'
 python_supported:
-      - '3.13'
+  - '3.13'
+</pre></code>
+
+### defaults/Fedora-42.yml
+<pre><code>
+# Supported versions
+python_default: '3.13'
+python_supported:
+  - '3.13'
 </pre></code>
 
 ### defaults/Fedora.yml
@@ -551,32 +598,32 @@ python39_packages:
 python39_packages_optional: []
 </pre></code>
 
-### defaults/Ubuntu2004.yml
+### defaults/Ubuntu-20.yml
 <pre><code>
 # Supported versions
 python_default: '3.8'
 python_supported:
-      - '3.6'
-      - '3.7'
-      - '3.8'
-      - '3.9'
+  - '3.6'
+  - '3.7'
+  - '3.8'
+  - '3.9'
 </pre></code>
 
-### defaults/Ubuntu2204.yml
+### defaults/Ubuntu-22.yml
 <pre><code>
 # Supported versions
 python_default: '3.10'
 python_supported:
-      - '3.10'
-      - '3.11'
+  - '3.10'
+  - '3.11'
 </pre></code>
 
-### defaults/Ubuntu2404.yml
+### defaults/Ubuntu-24.yml
 <pre><code>
 # Supported versions
 python_default: '3.12'
 python_supported:
-      - '3.12'
+  - '3.12'
 </pre></code>
 
 
