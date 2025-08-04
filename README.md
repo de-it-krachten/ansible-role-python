@@ -173,6 +173,11 @@ python3_packages_optional:
   - musl-dev
   - openssl-dev
   - python3-dev
+
+# Supported versions
+python_default: '3.11'
+python_supported:
+  - '3.11'
 </pre></code>
 
 ### defaults/family-Debian.yml
