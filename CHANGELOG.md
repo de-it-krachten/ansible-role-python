@@ -1,3 +1,10 @@
+## [1.18.1](https://github.com/de-it-krachten/ansible-role-python/compare/v1.18.0...v1.18.1) (2025-08-04)
+
+
+### Bug Fixes
+
+* Delete unwanted '.ansible' files making 'ansible-galaxy' fail ([e00b6a5](https://github.com/de-it-krachten/ansible-role-python/commit/e00b6a5a7e3bd9bfa2d63adbb1d5a5723fae6df3))
+
 # [1.18.0](https://github.com/de-it-krachten/ansible-role-python/compare/v1.17.2...v1.18.0) (2025-08-04)
 
 
