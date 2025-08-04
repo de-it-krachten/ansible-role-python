@@ -1,3 +1,10 @@
+## [1.18.2](https://github.com/de-it-krachten/ansible-role-python/compare/v1.18.1...v1.18.2) (2025-08-04)
+
+
+### Bug Fixes
+
+* Add supported Alpine versions ([93e8552](https://github.com/de-it-krachten/ansible-role-python/commit/93e85526ba5d443ea0652c947352396afd49eaa7))
+
 ## [1.18.1](https://github.com/de-it-krachten/ansible-role-python/compare/v1.18.0...v1.18.1) (2025-08-04)
 
 
