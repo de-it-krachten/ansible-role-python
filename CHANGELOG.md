@@ -1,3 +1,14 @@
+# [1.18.0](https://github.com/de-it-krachten/ansible-role-python/compare/v1.17.2...v1.18.0) (2025-08-04)
+
+
+### Features
+
+* Add support for AlmaLinux 10 ([3c4a516](https://github.com/de-it-krachten/ansible-role-python/commit/3c4a516f3b361ca863c13820e4bf619f2b0ec3c6))
+* Add support for Debian 13 (Trixie) ([0ca9528](https://github.com/de-it-krachten/ansible-role-python/commit/0ca95285896a76c014100761a1726b2479644da9))
+* Add support for OracleLinux 10 ([9762bbe](https://github.com/de-it-krachten/ansible-role-python/commit/9762bbe2ccc38734026e69609232d9b7db9f0d62))
+* Add support for Red Hat Enterprise Linux 10 ([11c14e8](https://github.com/de-it-krachten/ansible-role-python/commit/11c14e811171ce2ec61e0e7a6e88d94027ce1d2a))
+* Add support for RockyLinux 10 ([4d07e10](https://github.com/de-it-krachten/ansible-role-python/commit/4d07e108f6c415f7ece6275238881686e537cc91))
+
 ## [1.17.2](https://github.com/de-it-krachten/ansible-role-python/compare/v1.17.1...v1.17.2) (2025-03-15)
 
 
