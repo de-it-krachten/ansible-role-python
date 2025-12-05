@@ -63,6 +63,19 @@ python312_packages:
 python312_packages_optional:
   - python3.12-devel
 
+# Python 3.13
+python313: false
+python313_command: /usr/bin/python3.13
+python313_virtualenv: /usr/bin/virtualenv
+python313_packages:
+  - python3.13
+  - python3.13-libs
+  - python3.13-pip
+  - python3.13-setuptools
+  - python3-virtualenv
+python313_packages_optional:
+  - python3.13-devel
+
 # Python from source
 python3_packages_src:
   - '@Development Tools'
