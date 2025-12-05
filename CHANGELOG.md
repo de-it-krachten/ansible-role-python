@@ -1,3 +1,10 @@
+# [1.19.0](https://github.com/de-it-krachten/ansible-role-python/compare/v1.18.2...v1.19.0) (2025-12-05)
+
+
+### Features
+
+* Add support for Fedora43 ([77fe6c4](https://github.com/de-it-krachten/ansible-role-python/commit/77fe6c4be01250e201fb4a964c26df30792b0730))
+
 ## [1.18.2](https://github.com/de-it-krachten/ansible-role-python/compare/v1.18.1...v1.18.2) (2025-08-04)
 
 
