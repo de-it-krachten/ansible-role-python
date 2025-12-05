@@ -416,6 +416,7 @@ jobs:
       - name: Show component versions
         run: |
           source ~/.venv/bin/activate
+          python3 --version
           ansible --version
           ansible-lint --version
           yamllint --version
