@@ -36,6 +36,7 @@ jobs:
             ansible_lint: "ansible-lint"
 
     steps:
+
       - name: Check out the codebase.
         uses: actions/checkout@v4
         with:
@@ -46,6 +47,14 @@ jobs:
         with:
           python-version: '3.13'
 
+
+      - name: Configure deployment key
+        run: |
+          [[ ! -d ~/.ssh ]] && mkdir -m 700 ~/.ssh
+          echo "$DEPLOYMENT_KEY" | base64 -d > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+        env:
+          DEPLOYMENT_KEY: ${{ secrets.DEPLOYMENT_KEY }}
 
       - name: Show runner info
         run: |
@@ -79,10 +88,17 @@ jobs:
       - name: Retrieve & install wrapper scripts
         run: |
           set -e
-          sudo apt install curl
-          curl -s -o /tmp/install.sh \
-            https://raw.githubusercontent.com/de-it-krachten/ansible-role-molecule/dev/files/install.sh
-          bash /tmp/install.sh
+
+          # Install requirements
+          sudo apt install curl jq -y
+
+          # Get latest release download URL for .deb asset
+          api_url="https://api.github.com/repos/de-it-krachten/cicd-tools/releases/latest"
+          url=$(curl -s $api_url | jq -r '.assets[] | select(.name | endswith(".deb")) | .browser_download_url')
+          file=$(basename $url)
+          curl -s -L -o $file -s $url
+          echo "Install package '$file'"
+          sudo dpkg -i $file
 
       - name: Install required galaxy collections
         run: |
@@ -119,7 +135,7 @@ jobs:
           set -e
           source ~/.venv/bin/activate
           yamllint .
-          ansible-lint.sh
+          /usr/local/bin/ansible-lint.sh -f readable
 
   molecule:
     name: "${{ matrix.name }}"
@@ -142,16 +158,16 @@ jobs:
             runs_on: ubuntu-22.04
             distro: rockylinux9
             playbook: converge.yml
-            ansible: "ansible-core>2.16,<2.17"
-            ansible_lint: "ansible-lint>6,<7"
+            ansible: "ansible-core>2.18,<2.19"
+            ansible_lint: "ansible-lint"
             hetznercloud: True
 
           - name: rockylinux10
             runs_on: ubuntu-22.04
             distro: rockylinux10
             playbook: converge.yml
-            ansible: "ansible-core>2.16,<2.17"
-            ansible_lint: "ansible-lint>6,<7"
+            ansible: "ansible-core>2.18,<2.19"
+            ansible_lint: "ansible-lint"
             hetznercloud: True
 
           - name: oraclelinux8
@@ -166,16 +182,16 @@ jobs:
             runs_on: ubuntu-22.04
             distro: oraclelinux9
             playbook: converge.yml
-            ansible: "ansible-core>2.16,<2.17"
-            ansible_lint: "ansible-lint>6,<7"
+            ansible: "ansible-core>2.18,<2.19"
+            ansible_lint: "ansible-lint"
             hetznercloud: False
 
           - name: oraclelinux10
             runs_on: ubuntu-22.04
             distro: oraclelinux10
             playbook: converge.yml
-            ansible: "ansible-core>2.16,<2.17"
-            ansible_lint: "ansible-lint>6,<7"
+            ansible: "ansible-core>2.18,<2.19"
+            ansible_lint: "ansible-lint"
             hetznercloud: False
 
           - name: almalinux8
@@ -190,16 +206,16 @@ jobs:
             runs_on: ubuntu-22.04
             distro: almalinux9
             playbook: converge.yml
-            ansible: "ansible-core>2.16,<2.17"
-            ansible_lint: "ansible-lint>6,<7"
+            ansible: "ansible-core>2.18,<2.19"
+            ansible_lint: "ansible-lint"
             hetznercloud: False
 
           - name: almalinux10
             runs_on: ubuntu-22.04
             distro: almalinux10
             playbook: converge.yml
-            ansible: "ansible-core>2.16,<2.17"
-            ansible_lint: "ansible-lint>6,<7"
+            ansible: "ansible-core>2.18,<2.19"
+            ansible_lint: "ansible-lint"
             hetznercloud: False
 
           - name: opensuse15
@@ -214,64 +230,56 @@ jobs:
             runs_on: ubuntu-22.04
             distro: debian11
             playbook: converge.yml
-            ansible: "ansible-core>2.16,<2.17"
-            ansible_lint: "ansible-lint>6,<7"
+            ansible: "ansible-core>2.18,<2.19"
+            ansible_lint: "ansible-lint"
             hetznercloud: True
 
           - name: debian12
             runs_on: ubuntu-22.04
             distro: debian12
             playbook: converge.yml
-            ansible: "ansible-core>2.16,<2.17"
-            ansible_lint: "ansible-lint>6,<7"
+            ansible: "ansible-core>2.18,<2.19"
+            ansible_lint: "ansible-lint"
             hetznercloud: True
 
           - name: debian13
             runs_on: ubuntu-22.04
             distro: debian13
             playbook: converge.yml
-            ansible: "ansible-core>2.16,<2.17"
-            ansible_lint: "ansible-lint>6,<7"
-            hetznercloud: True
-
-          - name: ubuntu2004
-            runs_on: ubuntu-22.04
-            distro: ubuntu2004
-            playbook: converge.yml
-            ansible: "ansible-core>2.16,<2.17"
-            ansible_lint: "ansible-lint>6,<7"
+            ansible: "ansible-core>2.18,<2.19"
+            ansible_lint: "ansible-lint"
             hetznercloud: True
 
           - name: ubuntu2204
             runs_on: ubuntu-22.04
             distro: ubuntu2204
             playbook: converge.yml
-            ansible: "ansible-core>2.16,<2.17"
-            ansible_lint: "ansible-lint>6,<7"
+            ansible: "ansible-core>2.18,<2.19"
+            ansible_lint: "ansible-lint"
             hetznercloud: True
 
           - name: ubuntu2404
             runs_on: ubuntu-22.04
             distro: ubuntu2404
             playbook: converge.yml
-            ansible: "ansible-core>2.16,<2.17"
-            ansible_lint: "ansible-lint>6,<7"
-            hetznercloud: True
-
-          - name: fedora41
-            runs_on: ubuntu-22.04
-            distro: fedora41
-            playbook: converge.yml
-            ansible: "ansible-core>2.16,<2.17"
-            ansible_lint: "ansible-lint>6,<7"
+            ansible: "ansible-core>2.18,<2.19"
+            ansible_lint: "ansible-lint"
             hetznercloud: True
 
           - name: fedora42
             runs_on: ubuntu-22.04
             distro: fedora42
             playbook: converge.yml
-            ansible: "ansible-core>2.16,<2.17"
-            ansible_lint: "ansible-lint>6,<7"
+            ansible: "ansible-core>2.18,<2.19"
+            ansible_lint: "ansible-lint"
+            hetznercloud: True
+
+          - name: fedora43
+            runs_on: ubuntu-22.04
+            distro: fedora43
+            playbook: converge.yml
+            ansible: "ansible-core>2.18,<2.19"
+            ansible_lint: "ansible-lint"
             hetznercloud: True
 
 
@@ -337,7 +345,6 @@ jobs:
           fi
 
           pip3 install "requests<2.29" "urllib3<2"
-
           pip3 list
         env:
           MOLECULE_DRIVER: ${{ vars.MOLECULE_DRIVER }}
@@ -345,15 +352,23 @@ jobs:
       - name: Retrieve & install wrapper scripts
         run: |
           set -e
-          sudo apt install curl
-          curl -s -o /tmp/install.sh \
-            https://raw.githubusercontent.com/de-it-krachten/ansible-role-molecule/dev/files/install.sh
-          bash /tmp/install.sh
+
+          # Install requirements
+          sudo apt install curl jq -y
+
+          # Get latest release download URL for .deb asset
+          api_url="https://api.github.com/repos/de-it-krachten/cicd-tools/releases/latest"
+          url=$(curl -s $api_url | jq -r '.assets[] | select(.name | endswith(".deb")) | .browser_download_url')
+          file=$(basename $url)
+          curl -s -L -o $file -s $url
+          echo "Install package '$file'"
+          sudo dpkg -i $file
 
       - name: Install required galaxy collections
         run: |
           source ~/.venv/bin/activate
           /usr/local/bin/ansible-collections.sh
+
 
       - name: For ansible 2.9, we need to perform some tweaking
         run: |
@@ -388,7 +403,7 @@ jobs:
       - name: Run Molecule tests.
         run: |
           source ~/.venv/bin/activate
-          molecule-test.sh -A
+          /usr/local/bin/molecule-test.sh -A
         env:
           PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'

@@ -1,0 +1,6 @@
+---
+
+# Supported versions
+python_default: '3.14'
+python_supported:
+  - '3.14'

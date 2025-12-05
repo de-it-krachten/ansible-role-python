@@ -36,11 +36,10 @@ Supported platforms
 - Debian 11 (Bullseye)
 - Debian 12 (Bookworm)
 - Debian 13 (Trixie)
-- Ubuntu 20.04 LTS
 - Ubuntu 22.04 LTS
 - Ubuntu 24.04 LTS
-- Fedora 41
 - Fedora 42
+- Fedora 43
 - Alpine 3<sup>1</sup>
 
 Note:
@@ -411,6 +410,19 @@ python312_packages:
 python312_packages_optional:
   - python3.12-devel
 
+# Python 3.13
+python313: false
+python313_command: /usr/bin/python3.13
+python313_virtualenv: /usr/bin/virtualenv
+python313_packages:
+  - python3.13
+  - python3.13-libs
+  - python3.13-pip
+  - python3.13-setuptools
+  - python3-virtualenv
+python313_packages_optional:
+  - python3.13-devel
+
 # Python from source
 python3_packages_src:
   - '@Development Tools'
@@ -551,6 +563,14 @@ python_supported:
   - '3.13'
 </pre></code>
 
+### defaults/Fedora-43.yml
+<pre><code>
+# Supported versions
+python_default: '3.14'
+python_supported:
+  - '3.14'
+</pre></code>
+
 ### defaults/Fedora.yml
 <pre><code>
 # Python2
@@ -644,6 +664,7 @@ python_supported:
   hosts: all
   become: 'yes'
   vars:
+    molecule_driver: '{{ lookup(''env'', ''MOLECULE_DRIVER_NAME'') }}'
     python38: true
     python39: true
     python310: true
