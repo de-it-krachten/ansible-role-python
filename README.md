@@ -32,7 +32,9 @@ Supported platforms
 - AlmaLinux 9
 - AlmaLinux 10
 - SUSE Linux Enterprise 15<sup>1</sup>
+- SUSE Linux Enterprise 16<sup>1</sup>
 - openSUSE Leap 15
+- openSUSE Leap 16
 - Debian 11 (Bullseye)
 - Debian 12 (Bookworm)
 - Debian 13 (Trixie)
@@ -44,6 +46,7 @@ Supported platforms
 
 Note:
 <sup>1</sup> : no automated testing is performed on these platforms
+
 
 ## Role Variables
 ### defaults/main.yml
@@ -297,6 +300,7 @@ python_supported:
   - '3.8'
   - '3.9'
   - '3.11'
+  - '3.12'
 
 # Python3
 python3: true
@@ -548,14 +552,6 @@ python_supported:
 </pre></code>
 
 ### defaults/Fedora-41.yml
-<pre><code>
-# Supported versions
-python_default: '3.13'
-python_supported:
-  - '3.13'
-</pre></code>
-
-### defaults/Fedora-42.yml
 <pre><code>
 # Supported versions
 python_default: '3.13'
