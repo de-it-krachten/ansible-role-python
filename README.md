@@ -449,6 +449,14 @@ python_supported:
   - '3.12'
 </pre></code>
 
+### defaults/family-Suse-16.yml
+<pre><code>
+# Supported versions
+python_default: '3.13'
+python_supported:
+  - '3.13'
+</pre></code>
+
 ### defaults/family-Suse.yml
 <pre><code>
 # Python2
@@ -541,6 +549,18 @@ python312_packages:
   - python3-virtualenv
 python312_packages_optional:
   - python312-devel
+
+# Python 3.13
+python313: false
+python313_command: /usr/bin/python3.13
+python313_virtualenv: '/usr/bin/python3.13 -m venv'
+python313_packages:
+  - python313
+  - python313-pip
+  - python313-setuptools
+  - python3-virtualenv
+python313_packages_optional:
+  - python313-devel
 </pre></code>
 
 ### defaults/Fedora-40.yml
