@@ -7,6 +7,7 @@ python_supported:
   - '3.8'
   - '3.9'
   - '3.11'
+  - '3.12'
 
 # Python3
 python3: true
