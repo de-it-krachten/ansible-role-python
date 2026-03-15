@@ -1,3 +1,11 @@
+# [1.21.0](https://github.com/de-it-krachten/ansible-role-python/compare/v1.20.0...v1.21.0) (2026-03-15)
+
+
+### Features
+
+* Drop support for openSUSE Leap 15 ([3e9fa9c](https://github.com/de-it-krachten/ansible-role-python/commit/3e9fa9c73f7bb24d931156e5d526397672fb1f77))
+* Drop support for SUSE Linux Enterprise 15 ([77b2eb3](https://github.com/de-it-krachten/ansible-role-python/commit/77b2eb31dfb845482138aa4dd87897200f884815))
+
 # [1.20.0](https://github.com/de-it-krachten/ansible-role-python/compare/v1.19.0...v1.20.0) (2026-03-14)
 
 
