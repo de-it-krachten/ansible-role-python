@@ -1,3 +1,18 @@
+# [1.20.0](https://github.com/de-it-krachten/ansible-role-python/compare/v1.19.0...v1.20.0) (2026-03-14)
+
+
+### Features
+
+* Added support for openSUSE Leap 16 ([ff0b84b](https://github.com/de-it-krachten/ansible-role-python/commit/ff0b84bdc1e0931cc984cd99e038fb67465123d3))
+* Added support for SUSE Linux Enterprise 16 ([cea935a](https://github.com/de-it-krachten/ansible-role-python/commit/cea935a116b103ad29d2944761ada8ce73ca58f8))
+
+# [1.19.0](https://github.com/de-it-krachten/ansible-role-python/compare/v1.18.2...v1.19.0) (2025-12-05)
+
+
+### Features
+
+* Add support for Fedora43 ([77fe6c4](https://github.com/de-it-krachten/ansible-role-python/commit/77fe6c4be01250e201fb4a964c26df30792b0730))
+
 ## [1.18.2](https://github.com/de-it-krachten/ansible-role-python/compare/v1.18.1...v1.18.2) (2025-08-04)
 
 
