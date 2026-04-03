@@ -1,3 +1,11 @@
+# [1.22.0](https://github.com/de-it-krachten/ansible-role-python/compare/v1.21.0...v1.22.0) (2026-04-03)
+
+
+### Features
+
+* Add support for Python from PPA/deadsnakes on Ubuntu ([898f843](https://github.com/de-it-krachten/ansible-role-python/commit/898f843217da4db472f47a422247972c93a11b94))
+* Added support for Ubuntu 26.04 LTS ([b54b2f9](https://github.com/de-it-krachten/ansible-role-python/commit/b54b2f9185080d91d60fd6c62553438e83e383dd))
+
 # [1.21.0](https://github.com/de-it-krachten/ansible-role-python/compare/v1.20.0...v1.21.0) (2026-03-15)
 
 
