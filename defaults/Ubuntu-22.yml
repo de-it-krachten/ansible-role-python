@@ -5,3 +5,7 @@ python_default: '3.10'
 python_supported:
   - '3.10'
   - '3.11'
+python_supported_deadsnakes:
+  - '3.9'
+  - '3.11'
+  - '3.13'

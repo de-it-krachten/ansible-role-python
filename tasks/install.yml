@@ -12,6 +12,30 @@
     - python_virtualenv_data is defined
     - python_virtualenv_data | length > 0
 
+- name: Add deadsnakes PPA
+  when:
+    - ansible_distribution == 'Ubuntu'
+    - python_deadsnakes | bool
+  block:
+
+    - name: Install prerequisites for PPA management
+      ansible.builtin.apt:
+        name: software-properties-common
+        state: present
+        update_cache: yes
+
+    - name: Add PPA repository
+      ansible.builtin.apt_repository:
+        repo: ppa:deadsnakes/ppa
+        state: present
+        update_cache: true
+
+    - name: Mark deadsnakes version as OK
+      ansible.builtin.set_fact:
+        python_supported: >-
+          {{ (python_supported + python_supported_deadsnakes | default([]))
+           | sort | unique }}
+
 - name: Including 'python2'
   ansible.builtin.include_tasks: python.yml
   vars:
@@ -71,6 +95,14 @@
   when:
     - python313 is defined and python313 | bool
     - "'3.13' in python_supported and '3.13' != python_default"
+
+- name: Including 'python314'
+  ansible.builtin.include_tasks: python.yml
+  vars:
+    python: python314
+  when:
+    - python314 is defined and python314 | bool
+    - "'3.14' in python_supported and '3.14' != python_default"
 
 - name: Use a custom pip configuration
   ansible.builtin.template:
