@@ -13,6 +13,9 @@ python_package_install: true
 # Install additional python packages (might be required when compilation is required)
 python_package_install_optional: false
 
+# Allow python installed from deadsnakes (Ubuntu only)
+python_deadsnakes: false
+
 # List of pypi packages that should exist in the virtualenv
 python_virtualenv_packages:
   - pip

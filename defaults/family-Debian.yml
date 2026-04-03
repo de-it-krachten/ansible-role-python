@@ -79,3 +79,33 @@ python311_packages:
   - python3.11-venv
 python311_packages_optional:
   - python3.11-dev
+
+# Python 3.12
+python312: false
+python312_command: /usr/bin/python3.12
+python312_virtualenv: /usr/bin/virtualenv
+python312_packages:
+  - python3.12
+  - python3.12-venv
+python312_packages_optional:
+  - python3.12-dev
+
+# Python 3.13
+python313: false
+python313_command: /usr/bin/python3.13
+python313_virtualenv: /usr/bin/virtualenv
+python313_packages:
+  - python3.13
+  - python3.13-venv
+python313_packages_optional:
+  - python3.13-dev
+
+# Python 3.14
+python314: false
+python314_command: /usr/bin/python3.14
+python314_virtualenv: /usr/bin/virtualenv
+python314_packages:
+  - python3.14
+  - python3.14-venv
+python314_packages_optional:
+  - python3.14-dev

@@ -102,3 +102,15 @@ python313_packages:
   - python3-virtualenv
 python313_packages_optional:
   - python313-devel
+
+# Python 3.14
+python314: false
+python314_command: /usr/bin/python3.14
+python314_virtualenv: '/usr/bin/python3.14 -m venv'
+python314_packages:
+  - python314
+  - python314-pip
+  - python314-setuptools
+  - python3-virtualenv
+python314_packages_optional:
+  - python314-devel

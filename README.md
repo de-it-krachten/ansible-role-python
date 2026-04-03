@@ -36,6 +36,7 @@ Supported platforms
 - Debian 13 (Trixie)
 - Ubuntu 22.04 LTS
 - Ubuntu 24.04 LTS
+- Ubuntu 26.04 LTS
 - Fedora 42
 - Fedora 43
 - Alpine 3<sup>1</sup>
@@ -59,6 +60,9 @@ python_package_install: true
 
 # Install additional python packages (might be required when compilation is required)
 python_package_install_optional: false
+
+# Allow python installed from deadsnakes (Ubuntu only)
+python_deadsnakes: false
 
 # List of pypi packages that should exist in the virtualenv
 python_virtualenv_packages:
@@ -259,6 +263,36 @@ python311_packages:
   - python3.11-venv
 python311_packages_optional:
   - python3.11-dev
+
+# Python 3.12
+python312: false
+python312_command: /usr/bin/python3.12
+python312_virtualenv: /usr/bin/virtualenv
+python312_packages:
+  - python3.12
+  - python3.12-venv
+python312_packages_optional:
+  - python3.12-dev
+
+# Python 3.13
+python313: false
+python313_command: /usr/bin/python3.13
+python313_virtualenv: /usr/bin/virtualenv
+python313_packages:
+  - python3.13
+  - python3.13-venv
+python313_packages_optional:
+  - python3.13-dev
+
+# Python 3.14
+python314: false
+python314_command: /usr/bin/python3.14
+python314_virtualenv: /usr/bin/virtualenv
+python314_packages:
+  - python3.14
+  - python3.14-venv
+python314_packages_optional:
+  - python3.14-dev
 </pre></code>
 
 ### defaults/family-RedHat-10.yml
@@ -423,6 +457,19 @@ python313_packages:
 python313_packages_optional:
   - python3.13-devel
 
+# Python 3.14
+python314: false
+python314_command: /usr/bin/python3.14
+python314_virtualenv: /usr/bin/virtualenv
+python314_packages:
+  - python3.14
+  - python3.14-libs
+  - python3.14-pip
+  - python3.14-setuptools
+  - python3-virtualenv
+python314_packages_optional:
+  - python3.14-devel
+
 # Python from source
 python3_packages_src:
   - '@Development Tools'
@@ -557,6 +604,18 @@ python313_packages:
   - python3-virtualenv
 python313_packages_optional:
   - python313-devel
+
+# Python 3.14
+python314: false
+python314_command: /usr/bin/python3.14
+python314_virtualenv: '/usr/bin/python3.14 -m venv'
+python314_packages:
+  - python314
+  - python314-pip
+  - python314-setuptools
+  - python3-virtualenv
+python314_packages_optional:
+  - python314-devel
 </pre></code>
 
 ### defaults/Fedora-40.yml
@@ -653,6 +712,10 @@ python_default: '3.10'
 python_supported:
   - '3.10'
   - '3.11'
+python_supported_deadsnakes:
+  - '3.9'
+  - '3.11'
+  - '3.13'
 </pre></code>
 
 ### defaults/Ubuntu-24.yml
@@ -661,6 +724,17 @@ python_supported:
 python_default: '3.12'
 python_supported:
   - '3.12'
+python_supported_deadsnakes:
+  - '3.11'
+  - '3.13'
+</pre></code>
+
+### defaults/Ubuntu-26.yml
+<pre><code>
+# Supported versions
+python_default: '3.14'
+python_supported:
+  - '3.14'
 </pre></code>
 
 
