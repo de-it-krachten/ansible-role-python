@@ -36,6 +36,7 @@ Supported platforms
 - Debian 13 (Trixie)
 - Ubuntu 22.04 LTS
 - Ubuntu 24.04 LTS
+- Ubuntu 26.04 LTS
 - Fedora 42
 - Fedora 43
 - Alpine 3<sup>1</sup>
@@ -661,6 +662,14 @@ python_supported:
 python_default: '3.12'
 python_supported:
   - '3.12'
+</pre></code>
+
+### defaults/Ubuntu-26.yml
+<pre><code>
+# Supported versions
+python_default: '3.14'
+python_supported:
+  - '3.14'
 </pre></code>
 
 
