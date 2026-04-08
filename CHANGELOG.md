@@ -1,3 +1,10 @@
+## [1.22.1](https://github.com/de-it-krachten/ansible-role-python/compare/v1.22.0...v1.22.1) (2026-04-08)
+
+
+### Bug Fixes
+
+* Add support for python 3.10 on Ubuntu 24.04 ([21d60c4](https://github.com/de-it-krachten/ansible-role-python/commit/21d60c4e75138825340e080e3357bed1e0330782))
+
 # [1.22.0](https://github.com/de-it-krachten/ansible-role-python/compare/v1.21.0...v1.22.0) (2026-04-03)
 
 
