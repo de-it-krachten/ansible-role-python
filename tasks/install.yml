@@ -14,7 +14,7 @@
 
 - name: Add deadsnakes PPA
   when:
-    - ansible_distribution == 'Ubuntu'
+    - ansible_facts.distribution == 'Ubuntu'
     - python_deadsnakes | bool
   block:
 
@@ -121,8 +121,8 @@
 
 - name: Backward compatibility for RedHat/CentOS 7
   when:
-    - ansible_os_family == 'RedHat'
-    - ansible_distribution_major_version == '7'
+    - ansible_facts.os_family == 'RedHat'
+    - ansible_facts.distribution_major_version == '7'
   block:
 
     - name: Check if /usr/bin/virtualenv exists

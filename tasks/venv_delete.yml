@@ -2,12 +2,10 @@
 
 - name: Define virtual environment full path  # noqa jinja[spacing]
   ansible.builtin.set_fact:
-    _virtualenv_path: >-
-      {%- if virtualenv_path is search('^/') -%}
-      {{ virtualenv_path }}
-      {%- else -%}
-      {{ python_virtualenv_root + '/' + virtualenv_path }}
-      {%- endif -%}
+    _virtualenv_path: >
+      {{ virtualenv_path if virtualenv_path is search('^/') else relpath }}
+  vars:
+    relpath: "{{ python_virtualenv_root + '/' + virtualenv_path }}"
 
 - name: Show virtual environment path to be deleted
   ansible.builtin.debug:
