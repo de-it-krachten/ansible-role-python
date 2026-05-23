@@ -118,7 +118,7 @@
       block:
 
         - name: Set autologin for vagrant
-          community.windows.win_auto_logon:
+          ansible.windows.win_auto_logon:
             username: vagrant
             password: vagrant
           register: _win_autologin
@@ -386,6 +386,7 @@
               - gnupg2
               - policycoreutils
               - policycoreutils-python-utils
+              - python3-packaging
             state: present
 
         - name: Activate epel repository
