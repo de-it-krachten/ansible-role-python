@@ -1,6 +1,3 @@
 ---
 collections:
   - name: community.general
-  - name: https://github.com/de-it-krachten/ansible-collection-utils.git
-    type: git
-    version: "v1.0.0"

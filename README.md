@@ -53,7 +53,7 @@ python2: false
 python3: true
 
 # Default root-directory for virtual environments
-python_virtualenv_root: "{{ ansible_env['HOME'] }}/.virtualenv"
+python_virtualenv_root: "{{ ansible_facts.env['HOME'] }}/.virtualenv"
 
 # Install default python packages
 python_package_install: true
