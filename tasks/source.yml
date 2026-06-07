@@ -7,7 +7,7 @@
   failed_when: no
   check_mode: no
   environment:
-    PATH: /usr/local/bin:{{ ansible_env.PATH }}
+    PATH: /usr/local/bin:{{ ansible_facts.env.PATH }}
 
 - name: Set python version installed
   ansible.builtin.set_fact:

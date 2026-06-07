@@ -37,8 +37,8 @@ Supported platforms
 - Ubuntu 22.04 LTS
 - Ubuntu 24.04 LTS
 - Ubuntu 26.04 LTS
-- Fedora 42
 - Fedora 43
+- Fedora 44<sup>1</sup>
 - Alpine 3<sup>1</sup>
 
 Note:
@@ -53,7 +53,7 @@ python2: false
 python3: true
 
 # Default root-directory for virtual environments
-python_virtualenv_root: "{{ ansible_env['HOME'] }}/.virtualenv"
+python_virtualenv_root: "{{ ansible_facts.env['HOME'] }}/.virtualenv"
 
 # Install default python packages
 python_package_install: true
@@ -725,6 +725,7 @@ python_default: '3.12'
 python_supported:
   - '3.12'
 python_supported_deadsnakes:
+  - '3.10'
   - '3.11'
   - '3.13'
 </pre></code>
