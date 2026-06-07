@@ -1,3 +1,17 @@
+# [1.23.0](https://github.com/de-it-krachten/ansible-role-python/compare/v1.22.1...v1.23.0) (2026-06-07)
+
+
+### Bug Fixes
+
+* Standarize vars.yml ([52768f2](https://github.com/de-it-krachten/ansible-role-python/commit/52768f202c5f719877b51ad05aad908d1d26b19d))
+
+
+### Features
+
+* Add support for ansible 2.20 ([dc5501e](https://github.com/de-it-krachten/ansible-role-python/commit/dc5501e03cd70e118c1cca49e34ea8efd5456f1d))
+* Added support for Fedora 44 ([7b616f0](https://github.com/de-it-krachten/ansible-role-python/commit/7b616f05db33c0d79b9a60b0b22f9503ed6b5ea9))
+* Drop support for Fedora 42 ([08b379b](https://github.com/de-it-krachten/ansible-role-python/commit/08b379bb9d521d7a7e3c57ba987aa14aafc9d7e7))
+
 ## [1.22.1](https://github.com/de-it-krachten/ansible-role-python/compare/v1.22.0...v1.22.1) (2026-04-08)
 
 
