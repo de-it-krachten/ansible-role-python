@@ -91,6 +91,7 @@
     HTTPS_PROXY: "{{ python_https_proxy | default('') }}"
   become: yes
   become_user: "{{ virtualenv_user }}"
+  when: virtualenv_packages | length > 0
 
 - name: Update specific packages
   ansible.builtin.pip:
@@ -102,6 +103,7 @@
     HTTPS_PROXY: "{{ python_https_proxy | default('') }}"
   become: yes
   become_user: "{{ virtualenv_user }}"
+  when: virtualenv_packages_update | length > 0
 
 - name: Remove specific packages
   ansible.builtin.pip:
@@ -114,6 +116,7 @@
     HTTPS_PROXY: "{{ python_https_proxy | default('') }}"
   become: yes
   become_user: "{{ virtualenv_user }}"
+  when: virtualenv_packages_remove | length > 0
 
 - name: Create symlink to virtualenv
   ansible.builtin.file:
