@@ -1,3 +1,10 @@
+## [1.23.1](https://github.com/de-it-krachten/ansible-role-python/compare/v1.23.0...v1.23.1) (2026-06-09)
+
+
+### Bug Fixes
+
+* Fix deprecation warnings ([4618c9e](https://github.com/de-it-krachten/ansible-role-python/commit/4618c9e55a732927f394a06fe12b893cd51310f5))
+
 # [1.23.0](https://github.com/de-it-krachten/ansible-role-python/compare/v1.22.1...v1.23.0) (2026-06-07)
 
 
