@@ -736,6 +736,14 @@ python_supported_deadsnakes:
 python_default: '3.14'
 python_supported:
   - '3.14'
+python_supported_deadsnakes:
+  - '3.7'
+  - '3.8'
+  - '3.9'
+  - '3.10'
+  - '3.11'
+  - '3.12'
+  - '3.13'
 </pre></code>
 
 
