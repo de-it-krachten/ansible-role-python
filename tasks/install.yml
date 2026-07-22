@@ -29,6 +29,25 @@
         repo: ppa:deadsnakes/ppa
         state: present
         update_cache: true
+        allow_insecure: true
+      when: ansible_facts.distribution_release != 'resolute'
+
+    - name: Add Deadsnakes PPA manually (DEB822 format)
+      ansible.builtin.copy:
+        dest: /etc/apt/sources.list.d/deadsnakes-ubuntu-ppa.sources
+        content: |
+          Types: deb
+          URIs: https://ppa.launchpadcontent.net/deadsnakes/ppa/ubuntu/
+          Suites: {{ ansible_facts.distribution_release }}
+          Components: main
+          Trusted: yes
+        mode: '0644'
+      when: ansible_facts.distribution_release == 'resolute'
+
+    - name: Update apt cache
+      ansible.builtin.apt:
+        update_cache: yes
+        cache_valid_time: 3600
 
     - name: Mark deadsnakes version as OK
       ansible.builtin.set_fact:
