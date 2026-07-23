@@ -28,19 +28,6 @@
     - _virtualenv_path is not defined
     - pip_version.stdout is version('19.0.0', '<')
 
-- name: Upgrade setuptools (virtualenv) to latest version  # noqa package-latest
-  ansible.builtin.pip:
-    name: setuptools
-    state: latest
-    virtualenv: "{{ _virtualenv_path }}"
-    extra_args: --upgrade
-  environment:
-    HTTP_PROXY: "{{ python_http_proxy | default('') }}"
-    HTTPS_PROXY: "{{ python_https_proxy | default('') }}"
-  when:
-    - _virtualenv_path is defined
-    - virtualenv_pip_upgrade is defined and virtualenv_pip_upgrade | bool
-
 - name: Upgrade pip (virtualenv) to latest version  # noqa package-latest
   ansible.builtin.pip:
     name: pip
@@ -52,7 +39,20 @@
     HTTPS_PROXY: "{{ python_https_proxy | default('') }}"
   when:
     - _virtualenv_path is defined
-    - virtualenv_pip_upgrade is defined and virtualenv_pip_upgrade | bool
+    - virtualenv_pip_upgrade | default(false) | bool
+
+- name: Upgrade setuptools (virtualenv) to latest version  # noqa package-latest
+  ansible.builtin.pip:
+    name: setuptools
+    state: latest
+    virtualenv: "{{ _virtualenv_path }}"
+    extra_args: --upgrade
+  environment:
+    HTTP_PROXY: "{{ python_http_proxy | default('') }}"
+    HTTPS_PROXY: "{{ python_https_proxy | default('') }}"
+  when:
+    - _virtualenv_path is defined
+    - virtualenv_pip_upgrade | default(false) | bool
 
 - name: Get list of all installed pip packages
   community.general.pip_package_info:

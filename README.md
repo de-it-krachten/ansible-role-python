@@ -713,8 +713,10 @@ python_supported:
   - '3.10'
   - '3.11'
 python_supported_deadsnakes:
+  - '3.8'
   - '3.9'
   - '3.11'
+  - '3.12'
   - '3.13'
 </pre></code>
 
@@ -725,6 +727,8 @@ python_default: '3.12'
 python_supported:
   - '3.12'
 python_supported_deadsnakes:
+  - '3.8'
+  - '3.9'
   - '3.10'
   - '3.11'
   - '3.13'
@@ -737,7 +741,6 @@ python_default: '3.14'
 python_supported:
   - '3.14'
 python_supported_deadsnakes:
-  - '3.7'
   - '3.8'
   - '3.9'
   - '3.10'
@@ -760,12 +763,14 @@ python_supported_deadsnakes:
   become: 'yes'
   vars:
     molecule_driver: '{{ lookup(''env'', ''MOLECULE_DRIVER_NAME'') }}'
+    ansible_python_interpreter: /usr/bin/python3
     python38: true
     python39: true
     python310: true
     python311: true
     python312: true
     python313: true
+    python_deadsnakes: true
     python_package_install_optional: true
     python_virtualenv_root: /tmp/venv
     python_virtualenvs:
