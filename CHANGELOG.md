@@ -1,3 +1,15 @@
+# [1.24.0](https://github.com/de-it-krachten/ansible-role-python/compare/v1.23.1...v1.24.0) (2026-07-24)
+
+
+### Bug Fixes
+
+* Fix Deadsnakes PPA for Ubuntu ([8927ddb](https://github.com/de-it-krachten/ansible-role-python/commit/8927ddb85b7b3c81fb27fd8e8b2f5ccb46545e76))
+
+
+### Features
+
+* Add deadsnake support for Ubuntun 26.04 ([33e6dd4](https://github.com/de-it-krachten/ansible-role-python/commit/33e6dd4206e3076236882eff6b14708f2667addb))
+
 ## [1.23.1](https://github.com/de-it-krachten/ansible-role-python/compare/v1.23.0...v1.23.1) (2026-06-09)
 
 
