@@ -28,59 +28,12 @@
         packages:
           - software-properties-common
 
-    - name: PPA Deadsnakes < 24
-      when: ansible_facts.distribution_major_version | int < 24
-      block:
-
-        - name: Add Deadsnakes PPA repository
-          ansible.builtin.apt_repository:
-            repo: ppa:deadsnakes/ppa
-            state: present
-            update_cache: true
-            # allow_insecure: true
-
-    # Ubuntu >= 26
-    - name: PPA Deadsnakes >= 24
-      when: ansible_facts.distribution_major_version | int >= 24
-      block:
-
-        - name: Download DeadSnakes GPG key
-          ansible.builtin.get_url:
-            url: https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xBA6932366A755776
-            dest: /tmp/deadsnakes.gpg.asc
-            mode: "0644"
-          changed_when: false
-
-        - name: Convert GPG key to binary format
-          ansible.builtin.shell:
-            cmd: |
-              rm -f /tmp/deadsnakes.gpg
-              gpg --batch --no-tty --dearmor -o /tmp/deadsnakes.gpg /tmp/deadsnakes.gpg.asc
-          changed_when: false
-
-        - name: Copy GPG key to final location
-          ansible.builtin.copy:
-            src: /tmp/deadsnakes.gpg
-            dest: /usr/share/keyrings/deadsnakes.gpg
-            mode: "0644"
-            remote_src: true
-
-        - name: Add Deadsnakes PPA (DEB822 format)
-          ansible.builtin.copy:
-            dest: /etc/apt/sources.list.d/deadsnakes-ppa.sources
-            content: |
-              Types: deb
-              URIs: https://ppa.launchpadcontent.net/deadsnakes/ppa/ubuntu/
-              Suites: {{ ansible_facts.distribution_release }}
-              Components: main
-              Signed-By: /usr/share/keyrings/deadsnakes.gpg
-            mode: '0644'
-
-    - name: Update apt cache
-      ansible.builtin.apt:
-        update_cache: yes
-        cache_valid_time: 0
-      tags: molecule-idempotence-notest
+    - name: Setup APT repo for Debian (deratrives)
+      ansible.builtin.include_tasks: apt.yml
+      vars:
+        apt_repo_name: deadsnakes
+        apt_repo_url: https://ppa.launchpadcontent.net/deadsnakes/ppa/ubuntu/
+        apt_gpg_fingerprint: '0xBA6932366A755776'
 
     - name: Mark deadsnakes version as OK
       ansible.builtin.set_fact:

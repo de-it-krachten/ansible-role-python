@@ -1,0 +1,112 @@
+---
+
+# apt_repo_name
+# apt_repo_url
+# apt_repo_components
+
+# apt_gpg_url or apt_gpg_fingerprint
+
+- name: Download APT GPG key (by fingerprint)
+  when: apt_gpg_fingerprint is defined
+  environment:
+    https_proxy: "{{ https_proxy | default('') }}"
+    http_proxy: "{{ http_proxy | default('') }}"
+  vars:
+    apt_gpg_keyserver: >-
+      {%- if ansible_facts.distribution == "Ubuntu" -%}
+      keyserver.ubuntu.com
+      {%- else -%}
+      keyring.debian.org
+      {%- endif -%}
+
+  block:
+
+    - name: Get GPG key using fingerprint
+      ansible.builtin.get_url:
+        url: "https://{{ apt_gpg_keyserver }}/pks/lookup?op=get&search={{ apt_gpg_fingerprint }}"
+        dest: /tmp/{{ apt_repo_name }}.gpg.asc
+        mode: "0644"
+      changed_when: false
+      check_mode: no
+
+- name: Download APT GPG key (by url)
+  when: apt_gpg_url is defined
+  environment:
+    https_proxy: "{{ https_proxy | default('') }}"
+    http_proxy: "{{ http_proxy | default('') }}"
+  block:
+
+    - name: Get GPG key
+      ansible.builtin.get_url:
+        url: "{{ apt_gpg_url }}"
+        dest: /tmp/{{ apt_repo_name }}.gpg.asc
+        validate_certs: false
+        mode: "0644"
+      check_mode: no
+
+    - name: Retrieve fingerprint from key
+      ansible.builtin.shell: |
+        set -o pipefail
+        gpg --with-colons /tmp/{{ apt_repo_name }}.gpg.asc | \
+        awk -F: '/^pub:/ {print $5}'
+      args:
+        executable: /bin/bash
+      changed_when: false
+      check_mode: no
+      register: __gpg_fpr
+
+    - name: Set fingerprint as fact
+      ansible.builtin.set_fact:
+        apt_gpg_fingerprint: >-
+          0x{{ __gpg_fpr.stdout }}
+
+- name: Delete APT signing key from legacy location
+  ansible.builtin.command:
+    cmd: >-
+      gpg
+      --no-default-keyring
+      --keyring /etc/apt/trusted.gpg
+      --batch
+      --yes
+      --delete-key {{ apt_gpg_fingerprint | regex_replace('^0x') }}
+  become: true
+  register: gpg_remove_result
+  changed_when: "'key' in gpg_remove_result.stdout or 'removed' in gpg_remove_result.stdout"
+  failed_when: false
+
+- name: Convert GPG key to binary format
+  ansible.builtin.shell:
+    cmd: |
+      rm -f /tmp/{{ apt_repo_name }}.gpg
+      gpg --batch --no-tty --dearmor \
+      -o /tmp/{{ apt_repo_name }}.gpg /tmp/{{ apt_repo_name }}.gpg.asc
+  changed_when: false
+
+- name: Copy GPG key to final location
+  ansible.builtin.copy:
+    src: /tmp/{{ apt_repo_name }}.gpg
+    dest: /etc/apt/keyrings/{{ apt_repo_name }}.gpg
+    mode: "0644"
+    remote_src: true
+
+- name: Add APT repo
+  ansible.builtin.copy:
+    dest: /etc/apt/sources.list.d/{{ apt_repo_name }}.sources
+    content: |
+      Types: deb
+      URIs: {{ apt_repo_url }}
+      Suites: {{ ansible_facts.distribution_release }}
+      Components: {{ apt_repo_components | default('main') }}
+      Signed-By: /etc/apt/keyrings/{{ apt_repo_name }}.gpg
+    mode: '0644'
+
+- name: Delete obsolete repository file
+  ansible.builtin.file:
+    path: /etc/apt/sources.list.d/{{ apt_repo_name }}.list
+    state: absent
+
+- name: Update apt cache
+  ansible.builtin.apt:
+    update_cache: yes
+    cache_valid_time: 0
+  tags: molecule-idempotence-notest
