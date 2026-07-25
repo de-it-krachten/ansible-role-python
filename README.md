@@ -699,8 +699,6 @@ python39_packages_optional: []
 # Supported versions
 python_default: '3.8'
 python_supported:
-  - '3.6'
-  - '3.7'
   - '3.8'
   - '3.9'
 </pre></code>

@@ -6,6 +6,14 @@
 
 # apt_gpg_url or apt_gpg_fingerprint
 
+- name: Create /etc/apt/keyrings directory
+  ansible.builtin.file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: '0755'
+    owner: root
+    group: root
+
 - name: Download APT GPG key (by fingerprint)
   when: apt_gpg_fingerprint is defined
   environment:
