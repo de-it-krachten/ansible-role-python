@@ -3,4 +3,10 @@
 # Supported versions
 python_default: '3.14'
 python_supported:
+  - '3.6'
+  - '3.9'
+  - '3.10'
+  - '3.11'
+  - '3.12'
+  - '3.13'
   - '3.14'
