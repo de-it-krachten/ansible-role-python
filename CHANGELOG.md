@@ -1,3 +1,17 @@
+# [1.25.0](https://github.com/de-it-krachten/ansible-role-python/compare/v1.24.0...v1.25.0) (2026-10-10)
+
+
+### Bug Fixes
+
+* Add alternative versions for Fedora ([33919b7](https://github.com/de-it-krachten/ansible-role-python/commit/33919b7570be3369632388350833df8267881692))
+* Move Ubuntu APT repo to DEB822 ([f8a46fc](https://github.com/de-it-krachten/ansible-role-python/commit/f8a46fc52a6fe3f028fe7217fc3eab6233232113))
+* Remove obsolete Ubuntu 20.04 versions ([094dc99](https://github.com/de-it-krachten/ansible-role-python/commit/094dc99ff5815a67086894113dca7ab22620c812))
+
+
+### Features
+
+* Drop support for Debian 11 (Bullseye) ([c4710fb](https://github.com/de-it-krachten/ansible-role-python/commit/c4710fba1627a016f83a90af000b67be9a419038))
+
 # [1.24.0](https://github.com/de-it-krachten/ansible-role-python/compare/v1.23.1...v1.24.0) (2026-07-24)
 
 
