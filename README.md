@@ -31,7 +31,6 @@ Supported platforms
 - AlmaLinux 8
 - AlmaLinux 9
 - AlmaLinux 10
-- Debian 11 (Bullseye)
 - Debian 12 (Bookworm)
 - Debian 13 (Trixie)
 - Ubuntu 22.04 LTS
@@ -639,6 +638,12 @@ python_supported:
 # Supported versions
 python_default: '3.14'
 python_supported:
+  - '3.6'
+  - '3.9'
+  - '3.10'
+  - '3.11'
+  - '3.12'
+  - '3.13'
   - '3.14'
 </pre></code>
 
@@ -692,6 +697,46 @@ python39_virtualenv: /usr/bin/virtualenv
 python39_packages:
   - python3.9
 python39_packages_optional: []
+
+# Python 3.10
+python310: false
+python310_command: /usr/bin/python3.10
+python310_virtualenv: /usr/bin/virtualenv
+python310_packages:
+  - python3.10
+python310_packages_optional: []
+
+# Python 3.11
+python311: false
+python311_command: /usr/bin/python3.11
+python311_virtualenv: /usr/bin/virtualenv
+python311_packages:
+  - python3.11
+python311_packages_optional: []
+
+# Python 3.12
+python312: false
+python312_command: /usr/bin/python3.12
+python312_virtualenv: /usr/bin/virtualenv
+python312_packages:
+  - python3.12
+python312_packages_optional: []
+
+# Python 3.13
+python313: false
+python313_command: /usr/bin/python3.13
+python313_virtualenv: /usr/bin/virtualenv
+python313_packages:
+  - python3.13
+python313_packages_optional: []
+
+# Python 3.14
+python314: false
+python314_command: /usr/bin/python3.14
+python314_virtualenv: /usr/bin/virtualenv
+python314_packages:
+  - python3.14
+python314_packages_optional: []
 </pre></code>
 
 ### defaults/Ubuntu-20.yml
@@ -699,8 +744,6 @@ python39_packages_optional: []
 # Supported versions
 python_default: '3.8'
 python_supported:
-  - '3.6'
-  - '3.7'
   - '3.8'
   - '3.9'
 </pre></code>
